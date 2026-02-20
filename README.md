@@ -4,7 +4,7 @@
 
 ### 從零開始的 AI 作曲完整教學｜Lyria 3
 
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-線上簡報-blue?style=for-the-badge&logo=github)](https://chatgpt3a01.github.io/Gemini-Music-Generation-Tutorial/簡報/index.html)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-線上簡報-blue?style=for-the-badge&logo=github)](https://chatgpt3a01.github.io/Gemini-Music-Generation-Tutorial/%E7%B0%A1%E5%A0%B1/index.html)
 [![License](https://img.shields.io/badge/授權-阿亮老師課程專用-red?style=for-the-badge)](LICENSE)
 
 <img src="https://img.shields.io/badge/Google-Gemini-4285F4?style=flat-square&logo=google&logoColor=white" />
