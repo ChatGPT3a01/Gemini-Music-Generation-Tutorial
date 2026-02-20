@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 6 - 提示詞攻略大全</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft JhengHei', 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* 導航列 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            height: 60px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        .navbar .nav-title {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .navbar .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .navbar .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.4rem 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: background 0.3s;
+        }
+        .navbar .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* 簡報容器 */
+        .slides-container {
+            padding-top: 80px;
+            padding-bottom: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+        .slide {
+            display: none;
+            background: #fff;
+            max-width: 1400px;
+            width: 95%;
+            margin: 0 auto;
+            border-radius: 20px;
+            padding: 3rem 3.5rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            animation: fadeIn 0.5s ease;
+        }
+        .slide.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 標題 */
+        h1 { color: #7c3aed; font-size: 2.4rem; margin-bottom: 1rem; }
+        h2 {
+            color: #7c3aed;
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #7c3aed;
+        }
+        h3 { color: #7c3aed; font-size: 1.3rem; margin: 1rem 0 0.5rem; }
+
+        /* 段落與列表 */
+        p { line-height: 1.8; margin-bottom: 0.8rem; font-size: 1.05rem; }
+        ul, ol { margin: 0.8rem 0 0.8rem 1.5rem; line-height: 2; }
+        li { margin-bottom: 0.3rem; }
+
+        /* 程式碼 */
+        code {
+            background: #f0f2f5;
+            color: #d63384;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+        pre {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 1.2rem 1.5rem;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        pre code { background: none; color: #abb2bf; padding: 0; }
+
+        /* Box 提示框 */
+        .box {
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+        .box.info { background: #eff6ff; border-left: 5px solid #3b82f6; }
+        .box.warning { background: #fffbeb; border-left: 5px solid #f59e0b; }
+        .box.success { background: #f0fdf4; border-left: 5px solid #22c55e; }
+
+        /* Concept Grid */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .concept-grid .card {
+            background: #faf5ff;
+            border-radius: 14px;
+            padding: 1.5rem;
+            border: 1px solid #e9d5ff;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .concept-grid .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(124,58,237,0.12);
+        }
+        .concept-grid .card h3 { margin-top: 0; }
+
+        /* Highlight */
+        .highlight {
+            display: inline-block;
+            background: linear-gradient(120deg, #c084fc, #f472b6);
+            color: #fff;
+            padding: 0.2rem 0.8rem;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        /* 表格 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 1rem;
+        }
+        th, td {
+            padding: 0.8rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        th {
+            background: #7c3aed;
+            color: #fff;
+            font-weight: 600;
+        }
+        tr:nth-child(even) { background: #faf5ff; }
+        tr:hover { background: #f3e8ff; }
+
+        /* 封面特殊樣式 */
+        .cover-slide {
+            text-align: center;
+            padding: 4rem 3rem;
+        }
+        .cover-slide .subtitle {
+            font-size: 1.3rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+        }
+        .cover-slide .tags { margin-top: 2rem; }
+        .cover-slide .tags .highlight { margin: 0.3rem; font-size: 1.1rem; }
+
+        /* 左右箭頭 */
+        .arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 999;
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(8px);
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        .arrow:hover { background: rgba(255,255,255,0.45); }
+        .arrow-left { left: 1rem; }
+        .arrow-right { right: 1rem; }
+
+        /* 頁碼 */
+        .page-indicator {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px);
+            color: #fff;
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            z-index: 999;
+        }
+
+        /* 等級區塊 */
+        .level-block {
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            line-height: 1.8;
+        }
+        .level-block.bad { background: #fef2f2; border-left: 5px solid #ef4444; }
+        .level-block.meh { background: #fffbeb; border-left: 5px solid #f59e0b; }
+        .level-block.good { background: #f0fdf4; border-left: 5px solid #22c55e; }
+        .level-block.great { background: #eff6ff; border-left: 5px solid #3b82f6; }
+        .level-block .level-title { font-weight: bold; font-size: 1.1rem; margin-bottom: 0.3rem; }
+        .level-block pre { margin-top: 0.5rem; }
+
+        /* 大表格滾動 */
+        .table-scroll { overflow-x: auto; }
+
+        /* RWD */
+        @media (max-width: 768px) {
+            .navbar { padding: 0 1rem; }
+            .navbar .nav-title { font-size: 0.95rem; }
+            .navbar .nav-links a { font-size: 0.8rem; padding: 0.3rem 0.6rem; }
+            .slide { padding: 2rem 1.5rem; width: 98%; }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.4rem; }
+            .concept-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 導航列 -->
+<nav class="navbar">
+    <div class="nav-title">🎵 Part 6 - 提示詞攻略大全</div>
+    <div class="nav-links">
+        <a href="index.html">🏠 首頁</a>
+        <a href="#" onclick="toggleFullscreen()">⛶ 全螢幕</a>
+        <a href="https://www.facebook.com/?locale=zh_TW" target="_blank">FB</a>
+        <a href="https://www.youtube.com/@Liang-yt02" target="_blank">YT</a>
+    </div>
+</nav>
+
+<!-- 左右箭頭 -->
+<button class="arrow arrow-left" onclick="changeSlide(-1)">&#10094;</button>
+<button class="arrow arrow-right" onclick="changeSlide(1)">&#10095;</button>
+
+<!-- 頁碼 -->
+<div class="page-indicator" id="pageIndicator">1 / 6</div>
+
+<!-- 簡報內容 -->
+<div class="slides-container">
+
+    <!-- Slide 1: 封面 -->
+    <div class="slide active cover-slide">
+        <h1 style="font-size: 2.8rem;">Part 6</h1>
+        <h2 style="border: none; text-align: center;">Prompt Mastery</h2>
+        <p class="subtitle">提示詞攻略大全</p>
+        <p style="font-size: 1.3rem; color: #6b7280; margin-bottom: 2rem;">好的提示詞 = 好的音樂</p>
+        <div class="tags">
+            <span class="highlight">MIDST</span>
+            <span class="highlight">風格</span>
+            <span class="highlight">樂器</span>
+            <span class="highlight">進化</span>
+        </div>
+    </div>
+
+    <!-- Slide 2: MIDST 公式 -->
+    <div class="slide">
+        <h1>🎯 MIDST 公式</h1>
+        <h2>五大核心要素</h2>
+        <p>撰寫音樂提示詞時，只要掌握 <span class="highlight">MIDST</span> 五大核心要素，就能精準描述你想要的音樂。</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>字母</th>
+                    <th>要素</th>
+                    <th>中文</th>
+                    <th>說明</th>
+                    <th>範例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>M</strong></td>
+                    <td>Mood</td>
+                    <td>情緒</td>
+                    <td>音樂的整體情感氛圍</td>
+                    <td>Happy, Melancholic, Energetic, Peaceful, Epic</td>
+                </tr>
+                <tr>
+                    <td><strong>I</strong></td>
+                    <td>Instrument</td>
+                    <td>樂器</td>
+                    <td>使用的主要樂器</td>
+                    <td>Acoustic Guitar, Piano, Synth, Violin, Drums</td>
+                </tr>
+                <tr>
+                    <td><strong>D</strong></td>
+                    <td>Dynamic</td>
+                    <td>動態</td>
+                    <td>音量與力度的變化</td>
+                    <td>Soft to loud build-up, Gentle, Powerful, Crescendo</td>
+                </tr>
+                <tr>
+                    <td><strong>S</strong></td>
+                    <td>Style</td>
+                    <td>風格</td>
+                    <td>音樂的類型與風格</td>
+                    <td>Pop, Jazz, EDM, Classical, Lo-fi, Rock</td>
+                </tr>
+                <tr>
+                    <td><strong>T</strong></td>
+                    <td>Tempo</td>
+                    <td>節奏</td>
+                    <td>速度（BPM）</td>
+                    <td>60 BPM (慢), 90 BPM (中), 120 BPM (快), 140+ BPM (極快)</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="box info">
+            💡 <strong>記憶口訣：</strong>MIDST = 在音樂的「中間」掌握所有細節！
+        </div>
+    </div>
+
+    <!-- Slide 3: 額外可加入的元素 -->
+    <div class="slide">
+        <h1>➕ 額外可加入的元素</h1>
+        <h2>讓提示詞更完整</h2>
+        <p>除了 MIDST 五大要素，你還可以加入以下元素讓生成的音樂更符合需求：</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>元素</th>
+                    <th>說明</th>
+                    <th>範例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>人聲</strong></td>
+                    <td>指定人聲類型</td>
+                    <td>Male vocals, Female vocals, Choir, No vocals</td>
+                </tr>
+                <tr>
+                    <td><strong>音域</strong></td>
+                    <td>聲音的特質與音域</td>
+                    <td>高亢 (High-pitched), 低沉 (Deep), 沙啞 (Husky/Raspy)</td>
+                </tr>
+                <tr>
+                    <td><strong>歌詞主題</strong></td>
+                    <td>歌詞要表達的內容</td>
+                    <td>About love, About adventure, About heartbreak</td>
+                </tr>
+                <tr>
+                    <td><strong>年代感</strong></td>
+                    <td>模仿特定年代的音樂風格</td>
+                    <td>80s synth-pop, 90s grunge, 2000s R&B, Modern</td>
+                </tr>
+                <tr>
+                    <td><strong>參考情境</strong></td>
+                    <td>音樂使用的場景</td>
+                    <td>For a wedding video, For studying, For workout, For meditation</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="box success">
+            ✅ <strong>小技巧：</strong>不需要每次都用上所有元素，選擇對你的需求最重要的來描述即可。
+        </div>
+    </div>
+
+    <!-- Slide 4: 提示詞進化四等級 -->
+    <div class="slide">
+        <h1>📈 提示詞進化四等級</h1>
+        <h2>從模糊到專業</h2>
+
+        <div class="level-block bad">
+            <div class="level-title">等級 1：太模糊 ❌</div>
+            <pre><code>幫我做一首歌</code></pre>
+            <p>❌ AI 完全不知道你要什麼風格、情緒、樂器...</p>
+        </div>
+
+        <div class="level-block meh">
+            <div class="level-title">等級 2：有方向 △</div>
+            <pre><code>做一首快樂的歌</code></pre>
+            <p>⚠️ 有基本方向，但缺少細節，結果不可預期。</p>
+        </div>
+
+        <div class="level-block good">
+            <div class="level-title">等級 3：具體 ✓</div>
+            <pre><code>Create an upbeat pop song with acoustic guitar and piano, female vocals, about enjoying a sunny day at the beach. 120 BPM.</code></pre>
+            <p>✅ 包含風格、樂器、人聲、主題、節奏，結果明確。</p>
+        </div>
+
+        <div class="level-block great">
+            <div class="level-title">等級 4：專業 ✓✓</div>
+            <pre><code>Compose a feel-good indie pop track featuring bright acoustic guitar strumming, layered with soft synth pads and a groovy bass line. Sweet female vocals with airy harmonies singing about spontaneous road trips and summer freedom. Start with a gentle verse, build into an anthemic chorus with hand claps. 120 BPM, key of G major.</code></pre>
+            <p>🌟 完整的音樂藍圖：風格、樂器細節、人聲特質、歌詞主題、曲式結構、速度、調性。</p>
+        </div>
+
+        <div class="box info">
+            💡 <strong>目標：</strong>至少達到等級 3，挑戰等級 4！
+        </div>
+    </div>
+
+    <!-- Slide 5: 音樂風格中英對照表 -->
+    <div class="slide">
+        <h1>🎶 音樂風格中英對照表</h1>
+        <h2>16 種常見風格</h2>
+        <div class="table-scroll">
+            <table>
+                <thead>
+                    <tr>
+                        <th>中文</th>
+                        <th>English</th>
+                        <th>特色描述</th>
+                        <th>代表場景</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>流行</td><td>Pop</td><td>旋律朗朗上口，節奏明快</td><td>日常、Vlog</td></tr>
+                    <tr><td>搖滾</td><td>Rock</td><td>電吉他為主，力量感強</td><td>運動、激勵</td></tr>
+                    <tr><td>嘻哈</td><td>Hip Hop</td><td>節拍感強，Rap 說唱</td><td>街頭、潮流</td></tr>
+                    <tr><td>電子舞曲</td><td>EDM</td><td>合成器與電子節拍</td><td>派對、健身</td></tr>
+                    <tr><td>爵士</td><td>Jazz</td><td>即興演奏，和弦豐富</td><td>咖啡廳、晚餐</td></tr>
+                    <tr><td>古典</td><td>Classical</td><td>管弦樂器，結構嚴謹</td><td>正式場合、閱讀</td></tr>
+                    <tr><td>節奏藍調</td><td>R&B</td><td>靈魂唱腔，節奏柔和</td><td>浪漫、夜晚</td></tr>
+                    <tr><td>鄉村</td><td>Country</td><td>木吉他與口琴，溫暖質樸</td><td>公路旅行</td></tr>
+                    <tr><td>雷鬼</td><td>Reggae</td><td>輕鬆律動，Island 風情</td><td>度假、放鬆</td></tr>
+                    <tr><td>低傳真</td><td>Lo-fi</td><td>復古質感，舒適慵懶</td><td>讀書、工作</td></tr>
+                    <tr><td>巴薩諾瓦</td><td>Bossa Nova</td><td>巴西風情，浪漫輕柔</td><td>咖啡、午後</td></tr>
+                    <tr><td>民謠</td><td>Folk</td><td>木吉他為主，敘事感強</td><td>旅行、自然</td></tr>
+                    <tr><td>金屬</td><td>Metal</td><td>重型失真吉他，激烈</td><td>極限運動</td></tr>
+                    <tr><td>環境音樂</td><td>Ambient</td><td>氛圍營造，空靈飄渺</td><td>冥想、睡眠</td></tr>
+                    <tr><td>放克</td><td>Funk</td><td>強烈節拍，貝斯突出</td><td>跳舞、派對</td></tr>
+                    <tr><td>藍調</td><td>Blues</td><td>情感深沉，即興為主</td><td>酒吧、深夜</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box info">
+            💡 <strong>提示：</strong>可以混搭風格，例如「Jazz Pop」、「Lo-fi Hip Hop」、「Indie Folk」等！
+        </div>
+    </div>
+
+    <!-- Slide 6: 常用樂器中英對照表 -->
+    <div class="slide">
+        <h1>🎸 常用樂器中英對照表</h1>
+        <h2>14 種常見樂器</h2>
+        <div class="table-scroll">
+            <table>
+                <thead>
+                    <tr>
+                        <th>中文</th>
+                        <th>English</th>
+                        <th>音色特點</th>
+                        <th>常見搭配風格</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>鋼琴</td><td>Piano</td><td>溫暖、優雅、表現力強</td><td>古典、流行、爵士</td></tr>
+                    <tr><td>木吉他</td><td>Acoustic Guitar</td><td>溫暖、自然、清新</td><td>民謠、鄉村、流行</td></tr>
+                    <tr><td>電吉他</td><td>Electric Guitar</td><td>力量感、多變、失真效果</td><td>搖滾、藍調、金屬</td></tr>
+                    <tr><td>貝斯</td><td>Bass</td><td>低沉、節奏骨幹</td><td>放克、搖滾、嘻哈</td></tr>
+                    <tr><td>鼓組</td><td>Drums</td><td>節奏核心、力度控制</td><td>所有風格</td></tr>
+                    <tr><td>小提琴</td><td>Violin</td><td>高亢、情感豐富</td><td>古典、電影配樂</td></tr>
+                    <tr><td>大提琴</td><td>Cello</td><td>深沉、渾厚、感性</td><td>古典、環境音樂</td></tr>
+                    <tr><td>薩克斯風</td><td>Saxophone</td><td>性感、爵士感</td><td>爵士、R&B、藍調</td></tr>
+                    <tr><td>長笛</td><td>Flute</td><td>輕盈、空靈、通透</td><td>古典、新世紀</td></tr>
+                    <tr><td>小號</td><td>Trumpet</td><td>明亮、嘹亮、振奮</td><td>爵士、古典、拉丁</td></tr>
+                    <tr><td>合成器</td><td>Synthesizer</td><td>電子音色、無限可能</td><td>EDM、流行、環境</td></tr>
+                    <tr><td>烏克麗麗</td><td>Ukulele</td><td>可愛、輕快、夏日感</td><td>流行、夏威夷</td></tr>
+                    <tr><td>口琴</td><td>Harmonica</td><td>質樸、懷舊、藍調感</td><td>藍調、鄉村、民謠</td></tr>
+                    <tr><td>豎琴</td><td>Harp</td><td>夢幻、優雅、天使感</td><td>古典、新世紀、電影</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box success">
+            ✅ <strong>組合建議：</strong>Piano + Strings = 電影感 ｜ Acoustic Guitar + Ukulele = 夏日感 ｜ Synth + Drums = 電子感
+        </div>
+    </div>
+
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+
+    function showSlide(index) {
+        slides.forEach(s => s.classList.remove('active'));
+        if (index < 0) index = totalSlides - 1;
+        if (index >= totalSlides) index = 0;
+        currentSlide = index;
+        slides[currentSlide].classList.add('active');
+        document.getElementById('pageIndicator').textContent = (currentSlide + 1) + ' / ' + totalSlides;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function changeSlide(direction) {
+        showSlide(currentSlide + direction);
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') changeSlide(-1);
+        if (e.key === 'ArrowRight') changeSlide(1);
+    });
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
+</script>
+
+</body>
+</html>

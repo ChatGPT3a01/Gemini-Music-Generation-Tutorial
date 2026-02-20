@@ -1,0 +1,4 @@
+.claude/
+output_music.wav
+*.wav
+__pycache__/

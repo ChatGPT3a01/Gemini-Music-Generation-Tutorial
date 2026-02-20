@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Part 3 - 圖片生成音樂</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Microsoft JhengHei', 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* 導航列 */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; height: 56px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+.navbar .nav-title { color: #fff; font-size: 1.15rem; font-weight: 700; white-space: nowrap; }
+.navbar .nav-links { display: flex; gap: 10px; align-items: center; }
+.navbar .nav-links a, .navbar .nav-links button {
+  color: #fff; text-decoration: none; font-size: 0.92rem;
+  background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 8px; padding: 6px 14px; cursor: pointer;
+  transition: background 0.2s;
+  font-family: inherit;
+}
+.navbar .nav-links a:hover, .navbar .nav-links button:hover { background: rgba(255,255,255,0.32); }
+
+/* 投影片容器 */
+.slides-wrapper {
+  position: fixed; top: 56px; left: 0; right: 0; bottom: 50px;
+  display: flex; align-items: center; justify-content: center;
+}
+.slide {
+  display: none; width: 100%; height: 100%;
+  align-items: center; justify-content: center;
+  padding: 24px;
+}
+.slide.active { display: flex; }
+
+.content-card {
+  background: #fff; border-radius: 20px;
+  max-width: 1400px; width: 100%;
+  max-height: 100%; overflow-y: auto;
+  padding: 48px 56px; box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+/* 箭頭 */
+.arrow {
+  position: fixed; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.2); border: none; color: #fff;
+  font-size: 2rem; width: 52px; height: 52px; border-radius: 50%;
+  cursor: pointer; z-index: 500; display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.arrow:hover { background: rgba(255,255,255,0.4); }
+.arrow.left { left: 18px; }
+.arrow.right { right: 18px; }
+
+/* 頁碼指示器 */
+.page-indicator {
+  position: fixed; bottom: 0; left: 0; right: 0; height: 50px;
+  display: flex; align-items: center; justify-content: center; gap: 10px; z-index: 500;
+}
+.dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: rgba(255,255,255,0.35); cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+.dot.active { background: #fff; transform: scale(1.3); }
+
+/* 排版 */
+h1 { color: #7c3aed; font-size: 2.4rem; margin-bottom: 16px; }
+h2 { color: #7c3aed; font-size: 1.7rem; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 3px solid #7c3aed; }
+h3 { color: #4c1d95; font-size: 1.25rem; margin-bottom: 8px; }
+p, li { font-size: 1.08rem; line-height: 1.8; color: #374151; }
+ul, ol { padding-left: 1.5em; margin-bottom: 12px; }
+li { margin-bottom: 4px; }
+
+code {
+  background: #f0f2f5; color: #d63384; padding: 2px 8px;
+  border-radius: 4px; font-size: 0.97em;
+}
+pre {
+  background: #282c34; color: #abb2bf; padding: 20px 24px;
+  border-radius: 12px; overflow-x: auto; font-size: 1rem;
+  line-height: 1.7; margin: 12px 0; white-space: pre-wrap;
+}
+
+/* Box 樣式 */
+.box {
+  border-radius: 12px; padding: 18px 22px; margin: 16px 0;
+  font-size: 1.05rem; line-height: 1.7;
+}
+.box.info { background: #eff6ff; border-left: 5px solid #3b82f6; color: #1e40af; }
+.box.warning { background: #fffbeb; border-left: 5px solid #f59e0b; color: #92400e; }
+.box.success { background: #ecfdf5; border-left: 5px solid #10b981; color: #065f46; }
+
+/* Concept Grid */
+.concept-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px; margin: 20px 0;
+}
+.concept-card {
+  background: #f8f7ff; border-radius: 14px; padding: 24px;
+  border: 1px solid #e5e2ff; transition: transform 0.2s, box-shadow 0.2s;
+}
+.concept-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(124,58,237,0.12); }
+.concept-card .icon { font-size: 2rem; margin-bottom: 10px; }
+.concept-card h3 { color: #7c3aed; margin-bottom: 6px; }
+.concept-card p { font-size: 0.98rem; color: #6b7280; }
+
+/* Highlight 標籤 */
+.highlight {
+  display: inline-block;
+  background: linear-gradient(120deg, #c084fc 0%, #f472b6 100%);
+  color: #fff; padding: 5px 16px; border-radius: 20px;
+  font-size: 0.95rem; font-weight: 600; margin: 4px;
+}
+
+/* 表格 */
+table {
+  width: 100%; border-collapse: collapse; margin: 16px 0;
+  font-size: 1.02rem;
+}
+th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+th { background: #f3f0ff; color: #7c3aed; font-weight: 700; }
+tr:hover { background: #faf8ff; }
+
+/* 封面 */
+.cover { text-align: center; padding: 60px 20px; }
+.cover .subtitle { color: #a78bfa; font-size: 1.1rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+.cover h1 { font-size: 3rem; margin-bottom: 16px; }
+.cover .desc { font-size: 1.2rem; color: #6b7280; margin-bottom: 28px; }
+.cover .tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+
+.screenshot-hint {
+  background: #fef3c7; color: #92400e; padding: 10px 16px;
+  border-radius: 8px; margin: 12px 0; font-size: 0.97rem;
+  display: inline-block;
+}
+
+.step-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff; font-weight: 700; font-size: 0.95rem; margin-right: 8px;
+}
+</style>
+</head>
+<body>
+
+<!-- 導航列 -->
+<nav class="navbar">
+  <div class="nav-title">&#127925; Part 3 - 圖片生成音樂</div>
+  <div class="nav-links">
+    <a href="index.html">&#127968; 首頁</a>
+    <button onclick="toggleFullscreen()">&#9974; 全螢幕</button>
+    <a href="https://www.facebook.com/?locale=zh_TW" target="_blank">FB</a>
+    <a href="https://www.youtube.com/@Liang-yt02" target="_blank">YT</a>
+  </div>
+</nav>
+
+<!-- 左右箭頭 -->
+<button class="arrow left" onclick="changeSlide(-1)">&#10094;</button>
+<button class="arrow right" onclick="changeSlide(1)">&#10095;</button>
+
+<!-- 投影片 -->
+<div class="slides-wrapper">
+
+  <!-- Slide 1 封面 -->
+  <div class="slide active">
+    <div class="content-card cover">
+      <div class="subtitle">Part 3 Image to Music</div>
+      <h1>圖片生成音樂</h1>
+      <p class="desc">Lyria 3 最令人驚豔的功能——看圖作曲</p>
+      <div class="tags">
+        <span class="highlight">視覺分析</span>
+        <span class="highlight">情緒感知</span>
+        <span class="highlight">自動配樂</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 2 運作原理 -->
+  <div class="slide">
+    <div class="content-card">
+      <h2>運作原理</h2>
+      <p style="margin-bottom:16px;">Gemini 會從三個面向分析你上傳的圖片，然後自動生成與圖片情緒相符的 <strong>30 秒音樂</strong>。</p>
+      <div class="concept-grid">
+        <div class="concept-card">
+          <div class="icon">&#128065;&#65039;</div>
+          <h3>視覺元素</h3>
+          <p>辨識圖片中的物體、場景、人物，例如海灘、森林、城市、動物等。</p>
+        </div>
+        <div class="concept-card">
+          <div class="icon">&#127912;</div>
+          <h3>色彩氛圍</h3>
+          <p>分析色調與光線——暖色調傾向歡快，冷色調傾向沉靜，高對比則偏向戲劇性。</p>
+        </div>
+        <div class="concept-card">
+          <div class="icon">&#128156;</div>
+          <h3>情緒感受</h3>
+          <p>綜合判斷圖片傳達的情緒：寧靜、興奮、浪漫、神秘、壯闊等，以此決定曲風與節奏。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3 操作步驟 -->
+  <div class="slide">
+    <div class="content-card">
+      <h2>操作步驟</h2>
+      <ul style="margin-top:12px; list-style: none; padding-left: 0;">
+        <li style="margin-bottom:14px;">
+          <span class="step-num">1</span><strong>準備圖片</strong>
+          <p style="margin-left:40px;">風景照、旅遊照、寵物照、藝術作品皆可</p>
+        </li>
+        <li style="margin-bottom:14px;">
+          <span class="step-num">2</span><strong>上傳到 Gemini</strong>
+          <p style="margin-left:40px;">在聊天框點擊附件按鈕，選擇圖片上傳</p>
+        </li>
+        <li style="margin-bottom:14px;">
+          <span class="step-num">3</span><strong>加上音樂指令</strong>
+          <p style="margin-left:40px;">上傳圖片後，搭配文字指令一起送出</p>
+        </li>
+      </ul>
+      <h3 style="margin-top:16px;">中文提示</h3>
+      <pre>根據這張圖片的氛圍，幫我創作一首配樂</pre>
+      <h3>英文提示（推薦）</h3>
+      <pre>Look at this photo and create a music track that captures its mood and atmosphere</pre>
+      <div class="screenshot-hint">&#128248;【截圖 07-09】上傳圖片與生成結果畫面</div>
+    </div>
+  </div>
+
+  <!-- Slide 4 情境對照表 -->
+  <div class="slide">
+    <div class="content-card">
+      <h2>圖片配樂情境對照表</h2>
+      <p style="margin-bottom:12px;">不同類型的圖片，Gemini 會自動匹配不同的音樂風格：</p>
+      <table>
+        <thead>
+          <tr><th>圖片類型</th><th>可能生成的音樂風格</th><th>典型樂器</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>&#127749; 海邊夕陽</td><td>環境音樂 (Ambient)</td><td>合成器、海浪音效、輕柔鋼琴</td></tr>
+          <tr><td>&#127874; 生日派對</td><td>流行舞曲 (Pop/Dance)</td><td>電子鼓、合成器、歡快人聲</td></tr>
+          <tr><td>&#127794; 森林小徑</td><td>民謠吉他 (Folk)</td><td>木吉他、口琴、自然音效</td></tr>
+          <tr><td>&#127747; 城市夜景</td><td>電子爵士 (Electro Jazz)</td><td>薩克斯風、電子節拍、貝斯</td></tr>
+          <tr><td>&#127956;&#65039; 雪山壯景</td><td>管弦樂 (Orchestral)</td><td>弦樂、銅管、定音鼓</td></tr>
+          <tr><td>&#128054; 可愛寵物</td><td>小品音樂 (Light Music)</td><td>烏克麗麗、木琴、口哨</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Slide 5 進階技巧 -->
+  <div class="slide">
+    <div class="content-card">
+      <h2>進階技巧：圖片 + 文字混合</h2>
+      <p style="margin-bottom:12px;">除了單純上傳圖片，你還可以<strong>同時加上詳細的文字描述</strong>，讓生成結果更符合你的需求。</p>
+      <h3>範例指令</h3>
+      <pre>根據這張秋天楓葉的照片，創作一首帶有鋼琴和大提琴的輕柔古典風配樂，速度慢一些，情緒偏向溫暖懷舊</pre>
+      <div class="box info">
+        &#128161; 圖片 + 文字混合模式下，Gemini 會同時參考圖片的視覺情緒和你的文字描述，結果更精準！
+      </div>
+      <h3 style="margin-top:20px;">混合提示的建議結構</h3>
+      <div class="concept-grid">
+        <div class="concept-card">
+          <div class="icon">&#128247;</div>
+          <h3>圖片提供</h3>
+          <p>場景氛圍、色彩基調、情緒方向</p>
+        </div>
+        <div class="concept-card">
+          <div class="icon">&#9997;&#65039;</div>
+          <h3>文字補充</h3>
+          <p>指定曲風、樂器、速度、人聲偏好</p>
+        </div>
+        <div class="concept-card">
+          <div class="icon">&#127929;</div>
+          <h3>結果產出</h3>
+          <p>AI 綜合兩者資訊，產出更精確的 30 秒音樂</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- 頁碼指示器 -->
+<div class="page-indicator" id="pageIndicator"></div>
+
+<script>
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+
+function buildDots() {
+  const indicator = document.getElementById('pageIndicator');
+  indicator.innerHTML = '';
+  for (let i = 0; i < total; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === current ? ' active' : '');
+    dot.onclick = () => goToSlide(i);
+    indicator.appendChild(dot);
+  }
+}
+
+function goToSlide(index) {
+  slides[current].classList.remove('active');
+  current = index;
+  slides[current].classList.add('active');
+  buildDots();
+}
+
+function changeSlide(dir) {
+  let next = current + dir;
+  if (next < 0) next = total - 1;
+  if (next >= total) next = 0;
+  goToSlide(next);
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft') changeSlide(-1);
+  if (e.key === 'ArrowRight') changeSlide(1);
+});
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
+}
+
+buildDots();
+</script>
+</body>
+</html>

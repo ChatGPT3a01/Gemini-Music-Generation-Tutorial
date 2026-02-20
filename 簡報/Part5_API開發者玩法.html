@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Part 5 - API 開發者進階玩法</title>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Microsoft JhengHei', 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+  min-height: 100vh;
+  overflow: hidden;
+  color: #333;
+}
+
+/* 導航列 */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 56px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.navbar-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.navbar-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.18);
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.navbar-links a:hover {
+  background: rgba(255,255,255,0.32);
+}
+
+/* 投影片容器 */
+.slides-wrapper {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  bottom: 50px;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 32px 24px;
+  overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 白色卡片 */
+.content-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 48px 56px;
+  max-width: 1400px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+/* 標題 */
+h1 { color: #7c3aed; font-size: 2.4em; margin-bottom: 16px; }
+h2 { color: #7c3aed; font-size: 1.7em; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 3px solid #7c3aed; }
+h3 { color: #4c1d95; font-size: 1.25em; margin: 18px 0 10px; }
+
+p { line-height: 1.8; margin-bottom: 12px; font-size: 1.05em; }
+
+/* 封面特殊 */
+.cover { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; }
+.cover .subtitle { font-size: 1.1em; color: #a78bfa; font-weight: 600; letter-spacing: 2px; margin-bottom: 12px; }
+.cover h1 { font-size: 3em; margin-bottom: 20px; }
+.cover .desc { font-size: 1.2em; color: #555; max-width: 700px; margin-bottom: 28px; }
+
+/* highlight 標籤 */
+.highlight {
+  display: inline-block;
+  background: linear-gradient(120deg, #c084fc 0%, #f472b6 100%);
+  color: #fff;
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-size: 0.95em;
+  font-weight: 600;
+  margin: 4px;
+}
+
+/* code / pre */
+code {
+  background: #f0f2f5;
+  color: #d63384;
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-size: 0.92em;
+  font-family: 'Consolas', 'Courier New', monospace;
+}
+
+pre {
+  background: #282c34;
+  color: #abb2bf;
+  padding: 24px;
+  border-radius: 12px;
+  overflow-x: auto;
+  font-size: 0.92em;
+  line-height: 1.7;
+  margin: 16px 0;
+  font-family: 'Consolas', 'Courier New', monospace;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+pre .comment { color: #5c6370; font-style: italic; }
+pre .keyword { color: #c678dd; }
+pre .string { color: #98c379; }
+pre .function { color: #61afef; }
+pre .number { color: #d19a66; }
+
+/* box */
+.box {
+  padding: 18px 24px;
+  border-radius: 12px;
+  margin: 18px 0;
+  font-size: 1em;
+  line-height: 1.7;
+}
+
+.box.info {
+  background: #eff6ff;
+  border-left: 5px solid #3b82f6;
+  color: #1e40af;
+}
+
+.box.warning {
+  background: #fffbeb;
+  border-left: 5px solid #f59e0b;
+  color: #92400e;
+}
+
+.box.success {
+  background: #f0fdf4;
+  border-left: 5px solid #22c55e;
+  color: #166534;
+}
+
+/* concept-grid */
+.concept-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin: 24px 0;
+}
+
+.concept-grid .card {
+  background: linear-gradient(135deg, #f5f3ff 0%, #fdf2f8 100%);
+  border-radius: 16px;
+  padding: 28px 24px;
+  border: 1px solid #e9d5ff;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.concept-grid .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(124,58,237,0.12);
+}
+
+.concept-grid .card .icon {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.concept-grid .card h3 {
+  margin: 0 0 8px;
+  font-size: 1.15em;
+  color: #7c3aed;
+}
+
+.concept-grid .card p {
+  font-size: 0.95em;
+  color: #555;
+  margin: 0;
+}
+
+.concept-grid .card a {
+  color: #7c3aed;
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+/* 步驟 */
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.step-num {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.15em;
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-content h3 {
+  margin: 0 0 6px;
+}
+
+/* 流程圖 */
+.flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 28px 0;
+}
+
+.flow-item {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 0.95em;
+  text-align: center;
+  min-width: 100px;
+}
+
+.flow-arrow {
+  font-size: 1.6em;
+  color: #a855f7;
+  font-weight: 700;
+}
+
+/* 截圖提示 */
+.screenshot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fef3c7;
+  color: #92400e;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.9em;
+  margin: 6px 4px;
+}
+
+/* 表格 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0;
+}
+
+th, td {
+  padding: 14px 20px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 0.98em;
+}
+
+th {
+  background: #f5f3ff;
+  color: #7c3aed;
+  font-weight: 700;
+}
+
+tr:hover { background: #faf5ff; }
+
+/* 底部頁碼 */
+.page-indicator {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(0,0,0,0.15);
+  backdrop-filter: blur(8px);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.dot.active {
+  background: #fff;
+  transform: scale(1.3);
+}
+
+.page-text {
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+  margin-left: 14px;
+}
+
+/* 左右箭頭 */
+.arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 500;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(255,255,255,0.35);
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.arrow:hover { background: rgba(255,255,255,0.4); }
+.arrow.left { left: 18px; }
+.arrow.right { right: 18px; }
+
+/* 列表 */
+ul, ol {
+  margin: 10px 0 10px 24px;
+  line-height: 1.8;
+}
+
+li { margin-bottom: 4px; }
+
+@media (max-width: 768px) {
+  .content-card { padding: 28px 20px; }
+  h1 { font-size: 1.7em; }
+  .cover h1 { font-size: 2em; }
+  .navbar-title { font-size: 14px; }
+  .concept-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- 導航列 -->
+<nav class="navbar">
+  <div class="navbar-title">&#127925; Part 5 - API 開發者進階玩法</div>
+  <div class="navbar-links">
+    <a href="index.html">&#127968; 首頁</a>
+    <a href="#" onclick="toggleFullscreen()">&#9974; 全螢幕</a>
+    <a href="https://www.facebook.com/?locale=zh_TW" target="_blank">FB</a>
+    <a href="https://www.youtube.com/@Liang-yt02" target="_blank">YT</a>
+  </div>
+</nav>
+
+<!-- Slide 1: 封面 -->
+<div class="slides-wrapper">
+  <div class="slide active" data-index="0">
+    <div class="content-card cover">
+      <div class="subtitle">Part 5 Lyria RealTime API</div>
+      <h1>API 開發者進階玩法</h1>
+      <p class="desc">用程式碼打造互動式音樂生成器</p>
+      <div>
+        <span class="highlight">Python</span>
+        <span class="highlight">WebSocket</span>
+        <span class="highlight">即時串流</span>
+        <span class="highlight">MIDST 互動</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 2: Lyria RealTime 是什麼？ -->
+  <div class="slide" data-index="1">
+    <div class="content-card">
+      <h2>Lyria RealTime 是什麼？</h2>
+      <p>Google 提供的即時音樂生成 API，透過 WebSocket 連線實現低延遲的串流音樂輸出。</p>
+      <table>
+        <thead>
+          <tr><th>項目</th><th>規格</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>模型名稱</strong></td><td><code>models/lyria-realtime-exp</code></td></tr>
+          <tr><td><strong>連線方式</strong></td><td>WebSocket（雙向即時通訊）</td></tr>
+          <tr><td><strong>輸出格式</strong></td><td>16-bit PCM, 48kHz 立體聲</td></tr>
+          <tr><td><strong>延遲</strong></td><td>最多 2 秒</td></tr>
+          <tr><td><strong>音樂類型</strong></td><td>以純器樂為主</td></tr>
+        </tbody>
+      </table>
+      <div class="box info">
+        &#128161; <strong>適用場景：</strong>遊戲配樂（根據玩家行為即時變換）、互動裝置（展覽 / 藝術裝置）、即時 DJ 應用（文字操控音樂轉換）。
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3: 取得 API 金鑰 + 安裝套件 -->
+  <div class="slide" data-index="2">
+    <div class="content-card">
+      <h2>取得 API 金鑰 + 安裝套件</h2>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>前往 Google AI Studio 取得金鑰</h3>
+          <p>前往 <a href="https://aistudio.google.com" target="_blank" style="color:#7c3aed;">Google AI Studio</a>，點擊 <strong>Get API Key</strong> 按鈕建立你的 API 金鑰。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>安裝 Python 套件</h3>
+<pre>pip install google-genai</pre>
+        </div>
+      </div>
+
+      <div class="box warning">
+        &#9888;&#65039; <strong>安全提醒：</strong>API 金鑰等於密碼，不要公開分享！截圖時要馬賽克遮住金鑰內容。建議使用環境變數或 <code>.env</code> 檔案管理。
+      </div>
+
+      <div style="margin-top: 12px;">
+        <span class="screenshot">&#128248; 截圖 15</span>
+        <span class="screenshot">&#128248; 截圖 21</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 4: 建立互動式程式（概覽） -->
+  <div class="slide" data-index="3">
+    <div class="content-card">
+      <h2>建立互動式程式（概覽）</h2>
+      <p>我們要建立一個 Python 程式，執行後出現 <strong>MIDST 互動選單</strong>，讓使用者逐步選擇音樂參數，最終自動組合提示詞並呼叫 API 生成音樂。</p>
+
+      <h3>互動流程</h3>
+      <div class="flow">
+        <div class="flow-item">M &#127928;<br>情緒</div>
+        <div class="flow-arrow">&#10132;</div>
+        <div class="flow-item">I &#127929;<br>樂器</div>
+        <div class="flow-arrow">&#10132;</div>
+        <div class="flow-item">V &#127908;<br>人聲</div>
+        <div class="flow-arrow">&#10132;</div>
+        <div class="flow-item">D &#127911;<br>動態</div>
+        <div class="flow-arrow">&#10132;</div>
+        <div class="flow-item">S &#127926;<br>風格</div>
+        <div class="flow-arrow">&#10132;</div>
+        <div class="flow-item">T &#9201;<br>節奏</div>
+        <div class="flow-arrow">&#10132;</div>
+        <div class="flow-item" style="background: linear-gradient(135deg, #22c55e, #16a34a);">&#9989; 確認<br>生成</div>
+      </div>
+
+      <h3>每個步驟的對應選項</h3>
+      <div class="concept-grid">
+        <div class="card">
+          <div class="icon">&#127928;</div>
+          <h3>M - Mood 情緒</h3>
+          <p>8 種情緒選項：快樂、悲傷、活力充沛、平靜放鬆、史詩壯闘、浪漫溫馨、神秘懸疑、憤怒激烈</p>
+        </div>
+        <div class="card">
+          <div class="icon">&#127929;</div>
+          <h3>I - Instrument 樂器</h3>
+          <p>8 種樂器組合：鋼琴、吉他、弦樂、電子合成器、管樂、打擊樂、混合樂團、極簡配置</p>
+        </div>
+        <div class="card">
+          <div class="icon">&#127908;</div>
+          <h3>V - Vocal 人聲</h3>
+          <p>5 種選項：無人聲（純器樂）、男聲、女聲、合唱團、哼唱</p>
+        </div>
+        <div class="card">
+          <div class="icon">&#127911;</div>
+          <h3>D - Dynamic 動態</h3>
+          <p>5 種動態：漸強、漸弱、穩定、起伏交替、爆發</p>
+        </div>
+        <div class="card">
+          <div class="icon">&#127926;</div>
+          <h3>S - Style 風格</h3>
+          <p>10 種風格：流行、搖滾、爵士、古典、電子、R&amp;B、嘻哈、民謠、電影配樂、Lo-fi</p>
+        </div>
+        <div class="card">
+          <div class="icon">&#9201;</div>
+          <h3>T - Tempo 節奏</h3>
+          <p>自訂 BPM (40-200) + 6 種預設：很慢60、慢速80、中速100、稍快120、快速140、很快160</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5: 程式碼重點解說 -->
+  <div class="slide" data-index="4">
+    <div class="content-card">
+      <h2>程式碼重點解說</h2>
+
+      <h3>1. 選單資料結構</h3>
+      <p>每個選項是一個 tuple：<code>("顯示名稱", "給 AI 的英文提示詞")</code></p>
+<pre><span class="comment"># 情緒選單範例</span>
+<span class="keyword">MOOD_OPTIONS</span> = [
+    (<span class="string">"快樂歡愉"</span>, <span class="string">"happy, joyful, uplifting"</span>),
+    (<span class="string">"悲傷感性"</span>, <span class="string">"sad, melancholic, emotional"</span>),
+    (<span class="string">"活力充沛"</span>, <span class="string">"energetic, powerful, driving"</span>),
+    (<span class="string">"平靜放鬆"</span>, <span class="string">"calm, relaxing, peaceful"</span>),
+    <span class="comment"># ...</span>
+]</pre>
+
+      <h3>2. WeightedPrompt 權重設定</h3>
+      <p>不同類別的提示詞有不同權重，讓 AI 更精準理解重點：</p>
+<pre><span class="comment"># 各類別權重</span>
+<span class="keyword">weighted_prompts</span> = [
+    WeightedPrompt(text=style_prompt,  weight=<span class="number">1.0</span>),  <span class="comment"># 風格最重要</span>
+    WeightedPrompt(text=vocal_prompt,  weight=<span class="number">0.9</span>),  <span class="comment"># 人聲次之</span>
+    WeightedPrompt(text=mood_prompt,   weight=<span class="number">0.8</span>),  <span class="comment"># 情緒第三</span>
+    WeightedPrompt(text=instr_prompt,  weight=<span class="number">0.6</span>),  <span class="comment"># 樂器輔助</span>
+]</pre>
+
+      <h3>3. 生成參數設定</h3>
+<pre><span class="keyword">config</span> = LiveConnectConfig(
+    response_modalities=[<span class="string">"AUDIO"</span>],
+    output_audio_transcription=AudioTranscriptionConfig(),
+    realtime_input_config=RealtimeInputConfig(
+        automatic_activity_detection=AutomaticActivityDetection(disabled=<span class="keyword">True</span>)
+    ),
+    music_generation_config=MusicGenerationConfig(
+        bpm=user_bpm,              <span class="comment"># 使用者設定的節拍</span>
+        temperature=<span class="number">1.0</span>,           <span class="comment"># 創意度（0-2，越高越有創意）</span>
+        weighted_prompts=prompts   <span class="comment"># 加權提示詞組合</span>
+    )
+)</pre>
+
+      <div class="box info">
+        &#128161; <strong>小知識：</strong><code>temperature</code> 值越高，生成的音樂越有創意和變化；越低則越穩定可預期。建議從 1.0 開始嘗試。
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 6: 執行結果展示 -->
+  <div class="slide" data-index="5">
+    <div class="content-card">
+      <h2>執行結果展示</h2>
+      <p>以下是程式執行的完整互動流程：</p>
+<pre>╔══════════════════════════════════════════════════╗
+║     &#127925; MIDST 互動式 AI 音樂生成器 &#127925;              ║
+║     Powered by Google Lyria RealTime API        ║
+╚══════════════════════════════════════════════════╝
+
+&#127928; 【M - Mood 情緒選擇】
+┌──────────────────────────────┐
+│ 1. 快樂歡愉    5. 史詩壯闘  │
+│ 2. 悲傷感性    6. 浪漫溫馨  │
+│ 3. 活力充沛    7. 神秘懸疑  │
+│ 4. 平靜放鬆    8. 憤怒激烈  │
+└──────────────────────────────┘
+請選擇 (1-8): 4
+&#9989; 已選擇: 平靜放鬆
+
+&#127929; 【I - Instrument 樂器選擇】
+請選擇 (1-8): 1
+&#9989; 已選擇: 鋼琴為主
+
+&#127908; 【V - Vocal 人聲選擇】
+請選擇 (1-5): 1
+&#9989; 已選擇: 無人聲（純器樂）
+
+&#127911; 【D - Dynamic 動態選擇】
+請選擇 (1-5): 3
+&#9989; 已選擇: 穩定平衡
+
+&#127926; 【S - Style 風格選擇】
+請選擇 (1-10): 10
+&#9989; 已選擇: Lo-fi
+
+&#9201; 【T - Tempo 節奏設定】
+請輸入 BPM (40-200) 或選擇預設: 75
+
+═══════════ &#127925; 設定總覽 &#127925; ═══════════
+  情緒: 平靜放鬆
+  樂器: 鋼琴為主
+  人聲: 無人聲
+  動態: 穩定平衡
+  風格: Lo-fi
+  節奏: 75 BPM
+═══════════════════════════════════
+
+確認生成？(y/n): y
+
+&#127925; 正在連線 Lyria RealTime API...
+&#127925; WebSocket 已連線！
+&#127925; 開始生成音樂...
+&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608; 100%
+&#9989; 音樂生成完成！已儲存至: output_lofi_75bpm.wav</pre>
+
+      <div style="margin-top: 12px;">
+        <span class="screenshot">&#128248; 截圖 19</span>
+        <span class="screenshot">&#128248; 截圖 20</span>
+      </div>
+
+      <div class="box success">
+        &#9989; <strong>成功！</strong>程式會自動將音訊串流儲存為 WAV 檔案，你可以直接用任何播放器播放。
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 7: 免費試玩工具 -->
+  <div class="slide" data-index="6">
+    <div class="content-card">
+      <h2>免費試玩工具</h2>
+      <p>除了自己寫程式，Google 也提供了幾個現成的工具讓你體驗 Lyria RealTime 的威力：</p>
+      <div class="concept-grid">
+        <div class="card">
+          <div class="icon">&#127927;</div>
+          <h3>Prompt DJ</h3>
+          <p>AI Studio 網頁版即時 DJ，用文字操控音樂風格轉換，最簡單的入門方式，打開瀏覽器就能玩！</p>
+          <p style="margin-top:12px;"><strong>難度：</strong>&#11088; 最簡單</p>
+          <p><a href="https://aistudio.google.com/apps/bundled/promptdj" target="_blank">aistudio.google.com/apps/bundled/promptdj</a></p>
+        </div>
+        <div class="card">
+          <div class="icon">&#127929;</div>
+          <h3>MIDI DJ</h3>
+          <p>外接 MIDI 控制器，透過 Chrome 瀏覽器的 Web MIDI API 即時操控音樂生成，適合有 MIDI 設備的使用者。</p>
+          <p style="margin-top:12px;"><strong>難度：</strong>&#11088;&#11088; 中等</p>
+          <p><strong>需求：</strong>MIDI 控制器 + Chrome 瀏覽器</p>
+        </div>
+        <div class="card">
+          <div class="icon">&#127911;</div>
+          <h3>The Infinite Crate</h3>
+          <p>免費 VST 外掛，可以直接在 DAW（數位音訊工作站）中使用，適合專業音樂製作人。</p>
+          <p style="margin-top:12px;"><strong>難度：</strong>&#11088;&#11088;&#11088; 進階</p>
+          <p><a href="https://magenta.withgoogle.com/infinite-crate" target="_blank">magenta.withgoogle.com/infinite-crate</a></p>
+        </div>
+      </div>
+      <div class="box info">
+        &#128161; <strong>建議路線：</strong>先玩 Prompt DJ 體驗即時操控的感覺 &#10132; 再嘗試寫 Python 程式自訂更多參數 &#10132; 最後用 Infinite Crate 整合到你的音樂製作流程中。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 左右箭頭 -->
+<button class="arrow left" onclick="changeSlide(-1)">&#10094;</button>
+<button class="arrow right" onclick="changeSlide(1)">&#10095;</button>
+
+<!-- 底部頁碼 -->
+<div class="page-indicator" id="pageIndicator"></div>
+
+<script>
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const totalSlides = slides.length;
+
+function buildIndicator() {
+  const indicator = document.getElementById('pageIndicator');
+  indicator.innerHTML = '';
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === currentSlide ? ' active' : '');
+    dot.onclick = () => goToSlide(i);
+    indicator.appendChild(dot);
+  }
+  const text = document.createElement('span');
+  text.className = 'page-text';
+  text.textContent = (currentSlide + 1) + ' / ' + totalSlides;
+  indicator.appendChild(text);
+}
+
+function goToSlide(index) {
+  slides[currentSlide].classList.remove('active');
+  currentSlide = index;
+  slides[currentSlide].classList.add('active');
+  buildIndicator();
+}
+
+function changeSlide(dir) {
+  let next = currentSlide + dir;
+  if (next < 0) next = 0;
+  if (next >= totalSlides) next = totalSlides - 1;
+  goToSlide(next);
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft') changeSlide(-1);
+  if (e.key === 'ArrowRight') changeSlide(1);
+});
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
+}
+
+buildIndicator();
+</script>
+</body>
+</html>

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 7 - 實戰與 FAQ</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft JhengHei', 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* 導航列 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            height: 60px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        .navbar .nav-title {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .navbar .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .navbar .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.4rem 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: background 0.3s;
+        }
+        .navbar .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* 簡報容器 */
+        .slides-container {
+            padding-top: 80px;
+            padding-bottom: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+        .slide {
+            display: none;
+            background: #fff;
+            max-width: 1400px;
+            width: 95%;
+            margin: 0 auto;
+            border-radius: 20px;
+            padding: 3rem 3.5rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            animation: fadeIn 0.5s ease;
+        }
+        .slide.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 標題 */
+        h1 { color: #7c3aed; font-size: 2.4rem; margin-bottom: 1rem; }
+        h2 {
+            color: #7c3aed;
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #7c3aed;
+        }
+        h3 { color: #7c3aed; font-size: 1.3rem; margin: 1rem 0 0.5rem; }
+
+        /* 段落與列表 */
+        p { line-height: 1.8; margin-bottom: 0.8rem; font-size: 1.05rem; }
+        ul, ol { margin: 0.8rem 0 0.8rem 1.5rem; line-height: 2; }
+        li { margin-bottom: 0.3rem; }
+
+        /* 程式碼 */
+        code {
+            background: #f0f2f5;
+            color: #d63384;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+        pre {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 1.2rem 1.5rem;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        pre code { background: none; color: #abb2bf; padding: 0; }
+
+        /* Box 提示框 */
+        .box {
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+        .box.info { background: #eff6ff; border-left: 5px solid #3b82f6; }
+        .box.warning { background: #fffbeb; border-left: 5px solid #f59e0b; }
+        .box.success { background: #f0fdf4; border-left: 5px solid #22c55e; }
+
+        /* Concept Grid */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .concept-grid .card {
+            background: #faf5ff;
+            border-radius: 14px;
+            padding: 1.5rem;
+            border: 1px solid #e9d5ff;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .concept-grid .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(124,58,237,0.12);
+        }
+        .concept-grid .card h3 { margin-top: 0; }
+
+        /* Highlight */
+        .highlight {
+            display: inline-block;
+            background: linear-gradient(120deg, #c084fc, #f472b6);
+            color: #fff;
+            padding: 0.2rem 0.8rem;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        /* 表格 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 1rem;
+        }
+        th, td {
+            padding: 0.8rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        th {
+            background: #7c3aed;
+            color: #fff;
+            font-weight: 600;
+        }
+        tr:nth-child(even) { background: #faf5ff; }
+        tr:hover { background: #f3e8ff; }
+
+        /* 封面特殊樣式 */
+        .cover-slide {
+            text-align: center;
+            padding: 4rem 3rem;
+        }
+        .cover-slide .subtitle {
+            font-size: 1.3rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+        }
+        .cover-slide .tags { margin-top: 2rem; }
+        .cover-slide .tags .highlight { margin: 0.3rem; font-size: 1.1rem; }
+
+        /* 左右箭頭 */
+        .arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 999;
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(8px);
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        .arrow:hover { background: rgba(255,255,255,0.45); }
+        .arrow-left { left: 1rem; }
+        .arrow-right { right: 1rem; }
+
+        /* 頁碼 */
+        .page-indicator {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px);
+            color: #fff;
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            z-index: 999;
+        }
+
+        /* FAQ 樣式 */
+        .faq-item {
+            margin-bottom: 1.5rem;
+            padding: 1.2rem 1.5rem;
+            background: #faf5ff;
+            border-radius: 12px;
+            border: 1px solid #e9d5ff;
+        }
+        .faq-item .question {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #7c3aed;
+            margin-bottom: 0.5rem;
+        }
+        .faq-item .answer {
+            line-height: 1.8;
+            color: #4b5563;
+        }
+
+        /* 流程步驟 */
+        .flow-steps {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+        .flow-step {
+            background: #eff6ff;
+            padding: 0.8rem 1.2rem;
+            border-radius: 10px;
+            font-weight: bold;
+            color: #3b82f6;
+            border: 1px solid #bfdbfe;
+        }
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: #7c3aed;
+        }
+
+        /* RWD */
+        @media (max-width: 768px) {
+            .navbar { padding: 0 1rem; }
+            .navbar .nav-title { font-size: 0.95rem; }
+            .navbar .nav-links a { font-size: 0.8rem; padding: 0.3rem 0.6rem; }
+            .slide { padding: 2rem 1.5rem; width: 98%; }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.4rem; }
+            .concept-grid { grid-template-columns: 1fr; }
+            .flow-steps { flex-direction: column; }
+            .flow-arrow { transform: rotate(90deg); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 導航列 -->
+<nav class="navbar">
+    <div class="nav-title">🎵 Part 7 - 實戰與 FAQ</div>
+    <div class="nav-links">
+        <a href="index.html">🏠 首頁</a>
+        <a href="#" onclick="toggleFullscreen()">⛶ 全螢幕</a>
+        <a href="https://www.facebook.com/?locale=zh_TW" target="_blank">FB</a>
+        <a href="https://www.youtube.com/@Liang-yt02" target="_blank">YT</a>
+    </div>
+</nav>
+
+<!-- 左右箭頭 -->
+<button class="arrow arrow-left" onclick="changeSlide(-1)">&#10094;</button>
+<button class="arrow arrow-right" onclick="changeSlide(1)">&#10095;</button>
+
+<!-- 頁碼 -->
+<div class="page-indicator" id="pageIndicator">1 / 6</div>
+
+<!-- 簡報內容 -->
+<div class="slides-container">
+
+    <!-- Slide 1: 封面 -->
+    <div class="slide active cover-slide">
+        <h1 style="font-size: 2.8rem;">Part 7</h1>
+        <h2 style="border: none; text-align: center;">Practice & FAQ</h2>
+        <p class="subtitle">SynthID、實戰範例與 FAQ</p>
+        <p style="font-size: 1.3rem; color: #6b7280; margin-bottom: 2rem;">從理論到實踐，解答所有疑問</p>
+        <div class="tags">
+            <span class="highlight">浮水印</span>
+            <span class="highlight">五種情境</span>
+            <span class="highlight">商用</span>
+            <span class="highlight">版權</span>
+        </div>
+    </div>
+
+    <!-- Slide 2: SynthID 浮水印 -->
+    <div class="slide">
+        <h1>🔒 SynthID 浮水印</h1>
+        <h2>Google DeepMind 的數位浮水印技術</h2>
+        <p>SynthID 是由 Google DeepMind 開發的 AI 內容識別技術，能在 AI 生成的音樂中嵌入人耳無法察覺的數位浮水印，用於標記 AI 生成內容的來源。</p>
+
+        <h3>運作原理</h3>
+        <div class="flow-steps">
+            <div class="flow-step">🎵 音訊波形</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-step">📊 頻譜圖</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-step">🔐 嵌入浮水印</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-step">🎶 轉回波形</div>
+        </div>
+
+        <h3>核心特性</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>特性</th>
+                    <th>說明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>🔇 不可聽</strong></td>
+                    <td>浮水印嵌入在頻譜層面，人耳完全無法察覺，不影響聆聽體驗</td>
+                </tr>
+                <tr>
+                    <td><strong>💪 高韌性</strong></td>
+                    <td>即使經過壓縮、剪輯、格式轉換、加速/減速等處理，浮水印仍可被偵測</td>
+                </tr>
+                <tr>
+                    <td><strong>⚡ 強制性</strong></td>
+                    <td>所有透過 Gemini / Lyria 生成的音樂，都會自動嵌入 SynthID，無法關閉</td>
+                </tr>
+                <tr>
+                    <td><strong>🔍 可驗證</strong></td>
+                    <td>可透過專用工具或 API 驗證音訊是否包含 SynthID 浮水印</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="box warning">
+            ⚠️ <strong>注意：</strong>SynthID 標記的是「AI 生成」的身份，這意味著你的作品會被標記為 AI 內容。在某些平台上傳時需留意相關規範。
+        </div>
+    </div>
+
+    <!-- Slide 3: 實戰情境 1-3 -->
+    <div class="slide">
+        <h1>🎬 實戰情境 1-3</h1>
+        <h2>常見使用場景</h2>
+        <div class="concept-grid">
+            <div class="card">
+                <h3>🎥 情境 1：YouTube Vlog 配樂</h3>
+                <p>為旅遊 Vlog 製作輕快的背景音樂</p>
+                <pre><code>Create a cheerful and inspiring travel vlog background music. Acoustic guitar with light percussion. No vocals. 120 BPM.</code></pre>
+                <div class="box success" style="margin-top: 0.8rem;">
+                    ✅ 重點：指定 No vocals，避免人聲干擾旁白
+                </div>
+            </div>
+            <div class="card">
+                <h3>🎙️ 情境 2：Podcast 開場</h3>
+                <p>製作科技類 Podcast 的開場音效</p>
+                <pre><code>Short tech podcast intro jingle. Modern electronic beat with futuristic synth sounds. 100 BPM.</code></pre>
+                <div class="box success" style="margin-top: 0.8rem;">
+                    ✅ 重點：用 Short 和 jingle 暗示要簡短的片段
+                </div>
+            </div>
+            <div class="card">
+                <h3>📊 情境 3：簡報背景音樂</h3>
+                <p>為企業簡報製作優雅的背景配樂</p>
+                <pre><code>Corporate presentation background music. Gentle piano with soft strings. 90 BPM. No vocals.</code></pre>
+                <div class="box success" style="margin-top: 0.8rem;">
+                    ✅ 重點：Corporate 風格 + 慢節奏，營造專業感
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: 實戰情境 4-5 -->
+    <div class="slide">
+        <h1>🎬 實戰情境 4-5</h1>
+        <h2>進階應用場景</h2>
+        <div class="concept-grid">
+            <div class="card">
+                <h3>📱 情境 4：社群短影音</h3>
+                <p>為 TikTok / Reels / Shorts 製作洗腦配樂</p>
+                <pre><code>Trendy social media short video music. Catchy beat with bass and trap hi-hats. 130 BPM.</code></pre>
+                <div class="box success" style="margin-top: 0.8rem;">
+                    ✅ 重點：Catchy + Trendy，打造容易上癮的節奏
+                </div>
+            </div>
+            <div class="card">
+                <h3>📸 情境 5：旅遊照片配樂</h3>
+                <p>上傳旅遊照片，讓 AI 感知情境自動配樂</p>
+                <pre><code>Look at this travel photo and compose a nostalgic, warm soundtrack. Use acoustic instruments. Bittersweet and beautiful.</code></pre>
+                <div class="box info" style="margin-top: 0.8rem;">
+                    💡 重點：這是 Part 3 的圖片生成音樂功能，搭配文字提示效果更好
+                </div>
+            </div>
+        </div>
+        <div class="box warning" style="margin-top: 1.5rem;">
+            ⚠️ <strong>提醒：</strong>目前每次生成約 30 秒。若需要更長的音樂，可以多段串接，或使用 Lyria RealTime API 即時生成。
+        </div>
+    </div>
+
+    <!-- Slide 5: FAQ 常見問題 -->
+    <div class="slide">
+        <h1>❓ FAQ 常見問題</h1>
+        <h2>你可能想問的問題</h2>
+
+        <div class="faq-item">
+            <div class="question">Q1：只有 30 秒怎麼辦？</div>
+            <div class="answer">
+                <strong>A：</strong>目前 Gemini App 每次生成約 30 秒。解決方案：<br>
+                ① 多段串接：生成多段後用 Audacity 等工具剪輯拼接<br>
+                ② 使用 <code>Lyria RealTime API</code>，可以透過程式控制生成更長的音樂片段
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Q2：可以商用嗎？</div>
+            <div class="answer">
+                <strong>A：</strong>Google 尚未明確公佈 Lyria 3 生成音樂的完整商用授權條款。建議持續關注 <a href="https://ai.google.dev/" target="_blank" style="color: #7c3aed;">Google AI 官方網站</a> 的最新公告與服務條款更新。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Q3：可以指定歌手聲音嗎？</div>
+            <div class="answer">
+                <strong>A：</strong>不行。Lyria 3 不支援模仿特定歌手的聲音，這是為了保護藝人的聲音權益。系統鼓勵用戶創造原創的音樂風格，而非複製他人聲音。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Q4：中文提示效果好嗎？</div>
+            <div class="answer">
+                <strong>A：</strong>建議使用英文提示詞，效果最佳。如果不擅長英文，可以搭配 Part 4 的 <code>Gem 機器人</code> 來翻譯與優化你的中文描述。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Q5：會侵權嗎？</div>
+            <div class="answer">
+                <strong>A：</strong>Google 有內建過濾系統，會盡量避免生成與現有歌曲過於相似的內容。但此系統並非 100% 完美，建議重要作品發布前自行檢查。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Q6：手機可以用嗎？</div>
+            <div class="answer">
+                <strong>A：</strong>目前建議優先使用桌面版 Gemini App（網頁版），功能最完整。手機版 Gemini App 的音樂生成功能會隨後推出。
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: 延伸資源 -->
+    <div class="slide">
+        <h1>🔗 延伸資源</h1>
+        <h2>官方資源</h2>
+        <div class="concept-grid">
+            <div class="card">
+                <h3>🌐 Gemini App</h3>
+                <p>Google 的 AI 助手，整合 Lyria 3 音樂生成功能。</p>
+                <p><a href="https://gemini.google.com/" target="_blank" style="color: #7c3aed;">gemini.google.com</a></p>
+            </div>
+            <div class="card">
+                <h3>🛠️ Google AI Studio</h3>
+                <p>開發者工具，可測試 Gemini API 與 Lyria RealTime API。</p>
+                <p><a href="https://aistudio.google.com/" target="_blank" style="color: #7c3aed;">aistudio.google.com</a></p>
+            </div>
+            <div class="card">
+                <h3>📖 Lyria RealTime API 文件</h3>
+                <p>官方 API 文件，適合開發者深入研究。</p>
+                <p><a href="https://ai.google.dev/" target="_blank" style="color: #7c3aed;">ai.google.dev</a></p>
+            </div>
+            <div class="card">
+                <h3>🎵 DeepMind Lyria 3</h3>
+                <p>Google DeepMind 的音樂生成模型技術介紹。</p>
+                <p><a href="https://deepmind.google/" target="_blank" style="color: #7c3aed;">deepmind.google</a></p>
+            </div>
+            <div class="card">
+                <h3>🔒 SynthID</h3>
+                <p>Google DeepMind 的 AI 內容浮水印技術。</p>
+                <p><a href="https://deepmind.google/technologies/synthid/" target="_blank" style="color: #7c3aed;">SynthID 官方頁面</a></p>
+            </div>
+        </div>
+
+        <h2>搭配工具推薦</h2>
+        <div class="concept-grid">
+            <div class="card">
+                <h3>🎧 Audacity</h3>
+                <p>免費開源的音訊編輯軟體，適合剪輯、拼接 AI 生成的音樂片段。</p>
+                <p><a href="https://www.audacityteam.org/" target="_blank" style="color: #7c3aed;">audacityteam.org</a></p>
+            </div>
+            <div class="card">
+                <h3>🎬 CapCut</h3>
+                <p>免費影片剪輯工具，可將 AI 音樂搭配影片使用。</p>
+                <p><a href="https://www.capcut.com/" target="_blank" style="color: #7c3aed;">capcut.com</a></p>
+            </div>
+            <div class="card">
+                <h3>🎨 Canva</h3>
+                <p>線上設計工具，適合製作搭配音樂的社群圖文內容。</p>
+                <p><a href="https://www.canva.com/" target="_blank" style="color: #7c3aed;">canva.com</a></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+
+    function showSlide(index) {
+        slides.forEach(s => s.classList.remove('active'));
+        if (index < 0) index = totalSlides - 1;
+        if (index >= totalSlides) index = 0;
+        currentSlide = index;
+        slides[currentSlide].classList.add('active');
+        document.getElementById('pageIndicator').textContent = (currentSlide + 1) + ' / ' + totalSlides;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function changeSlide(direction) {
+        showSlide(currentSlide + direction);
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') changeSlide(-1);
+        if (e.key === 'ArrowRight') changeSlide(1);
+    });
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
+</script>
+
+</body>
+</html>
