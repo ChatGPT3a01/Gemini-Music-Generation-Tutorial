@@ -450,45 +450,45 @@ tr:hover { background: #faf8ff; }
     </div>
   </div>
 
-  <!-- Slide 2 測驗說明 -->
-  <div class="slide">
-    <div class="content-card">
-      <h2>測驗說明</h2>
-      <p style="margin-bottom: 20px;">從題庫中隨機抽取 <strong>10 題</strong>四選一選擇題，每題 10 分，滿分 100 分。</p>
-      <p style="margin-bottom: 20px;">達 <strong>80 分</strong>即通過認證，可填寫資料取得證書。</p>
-      <div class="box info">
-        &#128161; 題目涵蓋 Part 1 ~ Part 7 所有章節，請確認已完成全部課程內容後再進行測驗。
-      </div>
-      <div style="text-align: center; margin-top: 30px;">
-        <button class="quiz-btn" onclick="goToSlide(2)">&#128640; 開始測驗</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Slide 3 測驗頁 -->
+  <!-- Slide 2 測驗頁（說明 + 題目合併） -->
   <div class="slide">
     <div class="content-card quiz-card">
-      <h1>&#128221; 課程認證測驗</h1>
-      <p style="text-align: center; margin-bottom: 10px;">本次測驗從題庫中隨機抽取 10 題，每題 10 分，滿分 100 分。<br>達 80 分即取得課程認證通過證書！</p>
-      <p class="quiz-info-text" style="text-align: center; margin-bottom: 15px;" id="quizTimer"></p>
-
-      <div id="quizContainer" class="quiz-container"></div>
-
-      <div id="quizResult" class="quiz-result hidden">
-        <h2>測驗結果</h2>
-        <div class="quiz-score" id="scoreDisplay">0</div>
-        <div id="resultMessage"></div>
+      <!-- 開始前：顯示說明 -->
+      <div id="quizIntro">
+        <h2>測驗說明</h2>
+        <p style="margin-bottom: 20px;">從題庫中隨機抽取 <strong>10 題</strong>四選一選擇題，每題 10 分，滿分 100 分。</p>
+        <p style="margin-bottom: 20px;">達 <strong>80 分</strong>即通過認證，可填寫資料取得證書。</p>
+        <div class="box info">
+          &#128161; 題目涵蓋 Part 1 ~ Part 7 所有章節，請確認已完成全部課程內容後再進行測驗。
+        </div>
+        <div style="text-align: center; margin-top: 30px;">
+          <button class="quiz-btn" onclick="startQuiz()">&#128640; 開始測驗</button>
+        </div>
       </div>
 
-      <div style="text-align: center; margin-top: 20px;">
-        <button id="submitQuizBtn" class="quiz-btn" onclick="submitQuiz()">&#128228; 送出答案</button>
-        <button id="retryQuizBtn" class="quiz-btn hidden" onclick="resetQuiz()">&#128260; 重新測驗</button>
-        <button id="getCertBtn" class="quiz-btn hidden" onclick="goToSlide(3)">&#127942; 取得證書</button>
+      <!-- 開始後：顯示題目 -->
+      <div id="quizArea" class="hidden">
+        <h1>&#128221; 課程認證測驗</h1>
+        <p class="quiz-info-text" style="text-align: center; margin-bottom: 15px;" id="quizTimer"></p>
+
+        <div id="quizContainer" class="quiz-container"></div>
+
+        <div id="quizResult" class="quiz-result hidden">
+          <h2>測驗結果</h2>
+          <div class="quiz-score" id="scoreDisplay">0</div>
+          <div id="resultMessage"></div>
+        </div>
+
+        <div style="text-align: center; margin-top: 20px;">
+          <button id="submitQuizBtn" class="quiz-btn" onclick="submitQuiz()">&#128228; 送出答案</button>
+          <button id="retryQuizBtn" class="quiz-btn hidden" onclick="resetQuiz()">&#128260; 重新測驗</button>
+          <button id="getCertBtn" class="quiz-btn hidden" onclick="goToSlide(2)">&#127942; 取得證書</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Slide 4 證書頁 -->
+  <!-- Slide 3 證書頁 -->
   <div class="slide">
     <div class="content-card certificate-card">
       <!-- 輸入表單 -->
@@ -550,7 +550,7 @@ tr:hover { background: #faf8ff; }
         </div>
         <div style="margin-top: 30px; text-align: center;">
           <button class="download-btn" onclick="downloadCertificate()">&#128229; 下載證書（PNG）</button>
-          <button class="download-btn" style="background: linear-gradient(90deg, #6366f1, #a855f7);" onclick="goToSlide(2); resetQuiz();">&#128260; 再測一次</button>
+          <button class="download-btn" style="background: linear-gradient(90deg, #6366f1, #a855f7);" onclick="goToSlide(1); resetQuiz();">&#128260; 再測一次</button>
         </div>
       </div>
     </div>
@@ -859,13 +859,14 @@ function submitQuiz() {
   document.getElementById('quizResult').scrollIntoView({ behavior: 'smooth' });
 }
 
-// 重新測驗
+// 重新測驗：回到說明畫面
 function resetQuiz() {
+  document.getElementById('quizArea').classList.add('hidden');
+  document.getElementById('quizIntro').classList.remove('hidden');
   document.getElementById('quizResult').classList.add('hidden');
   document.getElementById('submitQuizBtn').classList.remove('hidden');
   document.getElementById('retryQuizBtn').classList.add('hidden');
   document.getElementById('getCertBtn').classList.add('hidden');
-  initQuiz();
   // 捲動回頂部
   document.getElementById('quizContainer').scrollTop = 0;
 }
@@ -911,8 +912,14 @@ function captureAndDownload(element) {
   });
 }
 
-// 頁面載入時初始化
-document.addEventListener('DOMContentLoaded', () => setTimeout(initQuiz, 200));
+// 按下「開始測驗」：隱藏說明、顯示題目
+function startQuiz() {
+  document.getElementById('quizIntro').classList.add('hidden');
+  document.getElementById('quizArea').classList.remove('hidden');
+  initQuiz();
+}
+
+// 頁面載入時不自動初始化題目
 </script>
 </body>
 </html>
