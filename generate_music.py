@@ -16,7 +16,7 @@ from google.genai import types
 
 # ==================================================
 # >>> 把 YOUR_API_KEY 替換成你自己的金鑰 <<<
-API_KEY = "YOUR_API_KEY"
+API_KEY = "AIzaSyCghYLNRjHoK4EGHC9oHN-fSeI6Un7WB7E"
 # ==================================================
 
 
