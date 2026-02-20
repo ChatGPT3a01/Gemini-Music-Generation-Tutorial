@@ -443,7 +443,6 @@ tr:hover { background: #faf8ff; }
       <h1>課程認證測驗</h1>
       <p class="desc">通過測驗，取得「Gemini音樂生成技術專班」認證證書</p>
       <div class="tags">
-        <span class="highlight">20 題題庫</span>
         <span class="highlight">隨機抽 10 題</span>
         <span class="highlight">80 分通過</span>
         <span class="highlight">證書下載</span>
@@ -480,7 +479,7 @@ tr:hover { background: #faf8ff; }
           <tr><th>項目</th><th>說明</th></tr>
         </thead>
         <tbody>
-          <tr><td><strong>題目數量</strong></td><td>從 20 題題庫中隨機抽取 <strong>10 題</strong></td></tr>
+          <tr><td><strong>題目數量</strong></td><td>從題庫中隨機抽取 <strong>10 題</strong></td></tr>
           <tr><td><strong>題型</strong></td><td>四選一選擇題</td></tr>
           <tr><td><strong>每題分數</strong></td><td>每題 10 分，滿分 100 分</td></tr>
           <tr><td><strong>通過門檻</strong></td><td><strong>80 分</strong>（答對 8 題以上）</td></tr>
@@ -643,7 +642,7 @@ function toggleFullscreen() {
 buildDots();
 
 
-// ==================== 題目資料（20 題題庫）====================
+// ==================== 題目資料 ====================
 const allQuestions = [
   // Part 1 — 前言與事前準備
   {
@@ -791,7 +790,7 @@ function shuffle(arr) {
   return a;
 }
 
-// 從 20 題中隨機抽 10 題
+// 從題庫中隨機抽 10 題
 function pickQuestions() {
   const shuffled = shuffle(allQuestions.map((q, i) => ({ ...q, originalIndex: i })));
   return shuffled.slice(0, 10);
