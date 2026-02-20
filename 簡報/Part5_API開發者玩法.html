@@ -418,63 +418,128 @@ li { margin-bottom: 4px; }
     </div>
   </div>
 
-  <!-- Slide 2: Lyria RealTime 是什麼？ -->
+  <!-- Slide 2: Lyria RealTime 完整規格 -->
   <div class="slide" data-index="1">
     <div class="content-card">
-      <h2>Lyria RealTime 是什麼？</h2>
-      <p>Google 提供的即時音樂生成 API，透過 WebSocket 連線實現低延遲的串流音樂輸出。</p>
+      <h2>Lyria RealTime 完整規格</h2>
+      <p>Google 提供的即時音樂生成 API，透過 WebSocket 連線實現低延遲的串流音樂輸出，專為開發者打造的互動式音樂引擎。</p>
       <table>
         <thead>
-          <tr><th>項目</th><th>規格</th></tr>
+          <tr><th>項目</th><th>規格</th><th>備註</th></tr>
         </thead>
         <tbody>
-          <tr><td><strong>模型名稱</strong></td><td><code>models/lyria-realtime-exp</code></td></tr>
-          <tr><td><strong>連線方式</strong></td><td>WebSocket（雙向即時通訊）</td></tr>
-          <tr><td><strong>輸出格式</strong></td><td>16-bit PCM, 48kHz 立體聲</td></tr>
-          <tr><td><strong>延遲</strong></td><td>最多 2 秒</td></tr>
-          <tr><td><strong>音樂類型</strong></td><td>以純器樂為主</td></tr>
+          <tr><td><strong>模型名稱</strong></td><td><code>models/lyria-realtime-exp</code></td><td>實驗版（exp = experimental）</td></tr>
+          <tr><td><strong>連線方式</strong></td><td>WebSocket 雙向即時通訊</td><td>低延遲、持續串流</td></tr>
+          <tr><td><strong>輸出格式</strong></td><td>原始 16-bit PCM</td><td>無壓縮，最高品質</td></tr>
+          <tr><td><strong>取樣率</strong></td><td>48,000 Hz（48kHz）</td><td>CD 音質為 44.1kHz</td></tr>
+          <tr><td><strong>聲道</strong></td><td>立體聲（Stereo）</td><td>左右雙聲道</td></tr>
+          <tr><td><strong>延遲</strong></td><td>控制變更到效果 &#8804; 2 秒</td><td>近乎即時反應</td></tr>
+          <tr><td><strong>音樂類型</strong></td><td>以純器樂為主</td><td>可選人聲哼唱模式</td></tr>
+          <tr><td><strong>最長串流</strong></td><td>持續生成（無硬性上限）</td><td>免費工具限 10 分鐘</td></tr>
         </tbody>
       </table>
       <div class="box info">
-        &#128161; <strong>適用場景：</strong>遊戲配樂（根據玩家行為即時變換）、互動裝置（展覽 / 藝術裝置）、即時 DJ 應用（文字操控音樂轉換）。
+        &#128161; <strong>適用場景：</strong>遊戲配樂（根據玩家行為即時變換）、互動裝置（展覽/藝術裝置）、即時 DJ 應用（文字操控音樂轉換）、直播背景音樂即時調整。
       </div>
     </div>
   </div>
 
-  <!-- Slide 3: 取得 API 金鑰 + 安裝套件 -->
+  <!-- Slide 3: 取得 API 金鑰（詳細步驟） -->
   <div class="slide" data-index="2">
     <div class="content-card">
-      <h2>取得 API 金鑰 + 安裝套件</h2>
+      <h2>取得 API 金鑰</h2>
+      <p>要使用 Lyria RealTime API，你需要先取得一組 API 金鑰。以下是詳細步驟：</p>
 
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-content">
-          <h3>前往 Google AI Studio 取得金鑰</h3>
-          <p>前往 <a href="https://aistudio.google.com" target="_blank" style="color:#7c3aed;">Google AI Studio</a>，點擊 <strong>Get API Key</strong> 按鈕建立你的 API 金鑰。</p>
-          <img src="../images/img15.jpg" alt="截圖 15" class="screenshot-img">
+          <h3>前往 Google AI Studio</h3>
+          <p>用瀏覽器打開 <a href="https://aistudio.google.com" target="_blank" style="color:#7c3aed;">aistudio.google.com</a>，使用你的 Google 帳號登入。</p>
         </div>
       </div>
 
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-content">
-          <h3>安裝 Python 套件</h3>
-<pre>pip install google-genai</pre>
-          <img src="../images/img21.jpg" alt="截圖 21" class="screenshot-img">
+          <h3>點擊「Get API Key」</h3>
+          <p>在左側選單或頁面頂部找到「Get API Key」按鈕，點擊進入金鑰管理頁面。</p>
         </div>
       </div>
 
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>建立新金鑰</h3>
+          <p>點擊「Create API Key」，選擇一個 Google Cloud 專案（或建立新專案），系統會自動產生一組金鑰。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>複製並安全保存</h3>
+          <p>金鑰格式類似：<code>AIzaSyB1234567890abcdefg</code>。請立即複製並保存到安全的地方。</p>
+        </div>
+      </div>
+
+      <img src="../images/img15.jpg" alt="Google AI Studio 取得 API Key 的頁面" class="screenshot-img">
+
       <div class="box warning">
-        &#9888;&#65039; <strong>安全提醒：</strong>API 金鑰等於密碼，不要公開分享！截圖時要馬賽克遮住金鑰內容。建議使用環境變數或 <code>.env</code> 檔案管理。
+        &#9888;&#65039; <strong>安全提醒：</strong>API 金鑰等同密碼，絕對不要公開分享！截圖時記得馬賽克遮住。建議使用環境變數或 <code>.env</code> 檔案管理金鑰。
       </div>
     </div>
   </div>
 
-  <!-- Slide 4: 建立互動式程式（概覽） -->
+  <!-- Slide 4: 環境設定（pip install） -->
   <div class="slide" data-index="3">
     <div class="content-card">
-      <h2>建立互動式程式（概覽）</h2>
-      <p>我們要建立一個 Python 程式，執行後出現 <strong>MIDST 互動選單</strong>，讓使用者逐步選擇音樂參數，最終自動組合提示詞並呼叫 API 生成音樂。</p>
+      <h2>環境設定：安裝 Python 套件</h2>
+      <p>在寫程式之前，需要先安裝 Google 提供的 <strong>GenAI Python SDK</strong>。這個套件就像一座橋樑，讓你的 Python 程式可以跟 Lyria RealTime 模型溝通。</p>
+
+      <h3>安裝指令</h3>
+      <p>打開終端機（命令提示字元 / Terminal），輸入以下指令：</p>
+<pre>pip install google-genai</pre>
+
+      <p>看到以下訊息代表安裝成功：</p>
+<pre>Successfully installed google-genai-x.x.x</pre>
+
+      <img src="../images/img21.jpg" alt="終端機中 pip install google-genai 安裝成功畫面" class="screenshot-img">
+
+      <h3>常見安裝問題</h3>
+      <table>
+        <thead>
+          <tr><th>錯誤訊息</th><th>原因</th><th>解決方法</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>pip 不是內部或外部命令</code></td>
+            <td>尚未安裝 Python</td>
+            <td>到 <a href="https://www.python.org/downloads/" target="_blank" style="color:#7c3aed;">python.org</a> 下載安裝，記得勾選「Add to PATH」</td>
+          </tr>
+          <tr>
+            <td><code>Permission denied</code></td>
+            <td>權限不足</td>
+            <td>改用 <code>pip install --user google-genai</code></td>
+          </tr>
+          <tr>
+            <td><code>Could not find a version</code></td>
+            <td>pip 版本過舊</td>
+            <td>先執行 <code>pip install --upgrade pip</code></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="box info">
+        &#128161; <strong>建議：</strong>如果你有使用虛擬環境（venv），建議在虛擬環境中安裝，避免與其他專案衝突。
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5: 程式碼結構概覽 -->
+  <div class="slide" data-index="4">
+    <div class="content-card">
+      <h2>程式碼結構概覽</h2>
+      <p>我們要建立的 Python 程式 <code>generate_music.py</code>，執行後會出現 <strong>MIDST 互動選單</strong>，讓使用者逐步選擇音樂參數，最終自動組合提示詞並呼叫 API 生成音樂。</p>
 
       <h3>互動流程</h3>
       <div class="flow">
@@ -493,191 +558,372 @@ li { margin-bottom: 4px; }
         <div class="flow-item" style="background: linear-gradient(135deg, #22c55e, #16a34a);">&#9989; 確認<br>生成</div>
       </div>
 
-      <h3>每個步驟的對應選項</h3>
+      <h3>每個步驟的選項數量</h3>
       <div class="concept-grid">
         <div class="card">
           <div class="icon">&#127928;</div>
           <h3>M - Mood 情緒</h3>
-          <p>8 種情緒選項：快樂、悲傷、活力充沛、平靜放鬆、史詩壯闘、浪漫溫馨、神秘懸疑、憤怒激烈</p>
+          <p><strong>8 種選項：</strong>歡樂、憂傷、放鬆、激昂、浪漫、史詩、神秘、懷舊</p>
         </div>
         <div class="card">
           <div class="icon">&#127929;</div>
           <h3>I - Instrument 樂器</h3>
-          <p>8 種樂器組合：鋼琴、吉他、弦樂、電子合成器、管樂、打擊樂、混合樂團、極簡配置</p>
+          <p><strong>10 種選項（可多選）：</strong>鋼琴、木吉他、電吉他、弦樂、薩克斯風、合成器、鼓組、貝斯、長笛、烏克麗麗</p>
         </div>
         <div class="card">
           <div class="icon">&#127908;</div>
           <h3>V - Vocal 人聲</h3>
-          <p>5 種選項：無人聲（純器樂）、男聲、女聲、合唱團、哼唱</p>
+          <p><strong>10 種選項：</strong>純器樂、男低音、男中音、男高音、沙啞男聲、女低音、女中音、女高音、氣息感女聲、合唱團</p>
         </div>
         <div class="card">
           <div class="icon">&#127911;</div>
           <h3>D - Dynamic 動態</h3>
-          <p>5 種動態：漸強、漸弱、穩定、起伏交替、爆發</p>
+          <p><strong>4 種選項：</strong>保守（0.5）、適中（1.0）、大膽（1.5）、瘋狂（2.5）</p>
         </div>
         <div class="card">
           <div class="icon">&#127926;</div>
           <h3>S - Style 風格</h3>
-          <p>10 種風格：流行、搖滾、爵士、古典、電子、R&amp;B、嘻哈、民謠、電影配樂、Lo-fi</p>
+          <p><strong>10 種選項：</strong>流行、搖滾、爵士、EDM、古典、Lo-fi、嘻哈、R&amp;B、民謠、環境音樂</p>
         </div>
         <div class="card">
           <div class="icon">&#9201;</div>
           <h3>T - Tempo 節奏</h3>
-          <p>自訂 BPM (40-200) + 6 種預設：很慢60、慢速80、中速100、稍快120、快速140、很快160</p>
+          <p><strong>7 種預設 + 自訂：</strong>60/75/90/110/120/140/170 BPM，或自訂 60-200 之間</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Slide 5: 程式碼重點解說 -->
-  <div class="slide" data-index="4">
+  <!-- Slide 6: WeightedPrompt 權重設定 -->
+  <div class="slide" data-index="5">
     <div class="content-card">
-      <h2>程式碼重點解說</h2>
+      <h2>WeightedPrompt 權重設定</h2>
+      <p>Lyria RealTime API 的核心特色之一是<strong>加權提示詞（WeightedPrompt）</strong>，可以為不同類別的提示詞分別設定權重，讓 AI 更精準地理解你想要的音樂重點。</p>
 
-      <h3>1. 選單資料結構</h3>
-      <p>每個選項是一個 tuple：<code>("顯示名稱", "給 AI 的英文提示詞")</code></p>
-<pre><span class="comment"># 情緒選單範例</span>
-<span class="keyword">MOOD_OPTIONS</span> = [
-    (<span class="string">"快樂歡愉"</span>, <span class="string">"happy, joyful, uplifting"</span>),
-    (<span class="string">"悲傷感性"</span>, <span class="string">"sad, melancholic, emotional"</span>),
-    (<span class="string">"活力充沛"</span>, <span class="string">"energetic, powerful, driving"</span>),
-    (<span class="string">"平靜放鬆"</span>, <span class="string">"calm, relaxing, peaceful"</span>),
-    <span class="comment"># ...</span>
-]</pre>
+      <h3>權重設定原理</h3>
+      <p>每個 <code>WeightedPrompt</code> 包含兩個值：<code>text</code>（提示文字）和 <code>weight</code>（權重 0.0 ~ 1.0）。權重越高，AI 越重視該提示。</p>
 
-      <h3>2. WeightedPrompt 權重設定</h3>
-      <p>不同類別的提示詞有不同權重，讓 AI 更精準理解重點：</p>
-<pre><span class="comment"># 各類別權重</span>
-<span class="keyword">weighted_prompts</span> = [
-    WeightedPrompt(text=style_prompt,  weight=<span class="number">1.0</span>),  <span class="comment"># 風格最重要</span>
-    WeightedPrompt(text=vocal_prompt,  weight=<span class="number">0.9</span>),  <span class="comment"># 人聲次之</span>
-    WeightedPrompt(text=mood_prompt,   weight=<span class="number">0.8</span>),  <span class="comment"># 情緒第三</span>
-    WeightedPrompt(text=instr_prompt,  weight=<span class="number">0.6</span>),  <span class="comment"># 樂器輔助</span>
-]</pre>
+<pre><span class="comment"># 建立加權提示詞組合</span>
+<span class="keyword">prompts</span> = [
+    types.WeightedPrompt(text=<span class="string">"jazz"</span>,                    weight=<span class="number">1.0</span>),  <span class="comment"># 風格 - 最高權重</span>
+    types.WeightedPrompt(text=<span class="string">"relaxed calm peaceful"</span>,  weight=<span class="number">0.8</span>),  <span class="comment"># 情緒 - 第二優先</span>
+    types.WeightedPrompt(text=<span class="string">"piano"</span>,                  weight=<span class="number">0.6</span>),  <span class="comment"># 樂器 1</span>
+    types.WeightedPrompt(text=<span class="string">"saxophone"</span>,              weight=<span class="number">0.6</span>),  <span class="comment"># 樂器 2</span>
+]
 
-      <h3>3. 生成參數設定</h3>
-<pre><span class="keyword">config</span> = LiveConnectConfig(
-    response_modalities=[<span class="string">"AUDIO"</span>],
-    output_audio_transcription=AudioTranscriptionConfig(),
-    realtime_input_config=RealtimeInputConfig(
-        automatic_activity_detection=AutomaticActivityDetection(disabled=<span class="keyword">True</span>)
-    ),
-    music_generation_config=MusicGenerationConfig(
-        bpm=user_bpm,              <span class="comment"># 使用者設定的節拍</span>
-        temperature=<span class="number">1.0</span>,           <span class="comment"># 創意度（0-2，越高越有創意）</span>
-        weighted_prompts=prompts   <span class="comment"># 加權提示詞組合</span>
+<span class="comment"># 送出給 API</span>
+<span class="keyword">await</span> session.set_weighted_prompts(prompts=prompts)</pre>
+
+      <h3>建議的權重分配策略</h3>
+      <table>
+        <thead>
+          <tr><th>類別</th><th>建議權重</th><th>說明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Style 風格</strong></td><td><code>1.0</code></td><td>最重要，決定音樂的整體方向</td></tr>
+          <tr><td><strong>Vocal 人聲</strong></td><td><code>0.9</code></td><td>有無人聲影響很大，給予高權重</td></tr>
+          <tr><td><strong>Mood 情緒</strong></td><td><code>0.8</code></td><td>情緒氛圍是次要核心</td></tr>
+          <tr><td><strong>Instrument 樂器</strong></td><td><code>0.6</code></td><td>輔助角色，微調音色搭配</td></tr>
+        </tbody>
+      </table>
+
+      <div class="box info">
+        &#128161; <strong>進階技巧：</strong>你可以在音樂播放過程中動態修改權重，例如慢慢把 <code>"electronic ambient"</code> 的權重從 0 增加到 0.5，音樂會平滑過渡到新風格！
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 7: 可調整參數一覽表 -->
+  <div class="slide" data-index="6">
+    <div class="content-card">
+      <h2>可調整參數一覽表</h2>
+      <p>除了提示詞之外，Lyria RealTime API 還提供多個可即時調整的參數，讓你精細控制音樂生成的結果。</p>
+
+      <table>
+        <thead>
+          <tr><th>參數</th><th>範圍</th><th>預設值</th><th>說明</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>bpm</code></td>
+            <td>60 - 200</td>
+            <td>120</td>
+            <td>每分鐘節拍數，決定音樂速度</td>
+          </tr>
+          <tr>
+            <td><code>temperature</code></td>
+            <td>0.0 - 3.0</td>
+            <td>1.0</td>
+            <td>創意多樣性，越高越隨機、越有驚喜</td>
+          </tr>
+          <tr>
+            <td><code>guidance</code></td>
+            <td>0.0 - 6.0</td>
+            <td>3.0</td>
+            <td>提示遵從度，越高越嚴格遵循你的提示詞</td>
+          </tr>
+          <tr>
+            <td><code>density</code></td>
+            <td>0.0 - 1.0</td>
+            <td>0.5</td>
+            <td>音符密度，0 = 稀疏簡約，1 = 密集豐富</td>
+          </tr>
+          <tr>
+            <td><code>brightness</code></td>
+            <td>0.0 - 1.0</td>
+            <td>0.5</td>
+            <td>音色明亮度，0 = 暗沉溫暖，1 = 明亮清脆</td>
+          </tr>
+          <tr>
+            <td><code>scale</code></td>
+            <td>列舉值</td>
+            <td>自動</td>
+            <td>音階/調性（如 C major、A minor）</td>
+          </tr>
+          <tr>
+            <td><code>mute_bass</code></td>
+            <td>True / False</td>
+            <td>False</td>
+            <td>靜音貝斯聲部</td>
+          </tr>
+          <tr>
+            <td><code>mute_drums</code></td>
+            <td>True / False</td>
+            <td>False</td>
+            <td>靜音鼓組聲部</td>
+          </tr>
+        </tbody>
+      </table>
+
+<pre><span class="comment"># 設定生成參數範例</span>
+<span class="keyword">await</span> session.set_music_generation_config(
+    config=types.LiveMusicGenerationConfig(
+        bpm=<span class="number">90</span>,               <span class="comment"># 節奏：中慢速</span>
+        temperature=<span class="number">1.0</span>,       <span class="comment"># 創意度：適中</span>
+        guidance=<span class="number">3.5</span>,          <span class="comment"># 提示遵從度：中高</span>
+        density=<span class="number">0.4</span>,           <span class="comment"># 音符密度：偏稀疏</span>
+        brightness=<span class="number">0.6</span>,        <span class="comment"># 明亮度：略亮</span>
     )
 )</pre>
 
-      <div class="box info">
-        &#128161; <strong>小知識：</strong><code>temperature</code> 值越高，生成的音樂越有創意和變化；越低則越穩定可預期。建議從 1.0 開始嘗試。
+      <div class="box success">
+        &#9989; <strong>小技巧：</strong>這些參數都可以在音樂播放過程中即時調整，效果會在 2 秒內反映到音樂上，非常適合做 Live DJ 演出！
       </div>
     </div>
   </div>
 
-  <!-- Slide 6: 執行結果展示 -->
-  <div class="slide" data-index="5">
+  <!-- Slide 8: 進階玩法：混合風格 + 執行結果 -->
+  <div class="slide" data-index="7">
     <div class="content-card">
-      <h2>執行結果展示</h2>
-      <p>以下是程式執行的完整互動流程：</p>
-<pre>╔══════════════════════════════════════════════════╗
-║     &#127925; MIDST 互動式 AI 音樂生成器 &#127925;              ║
-║     Powered by Google Lyria RealTime API        ║
-╚══════════════════════════════════════════════════╝
+      <h2>進階玩法：混合風格</h2>
+      <p>WeightedPrompt 最強大的用法是<strong>混合多種風格</strong>，透過不同權重比例創造獨特的音樂融合效果。</p>
 
-&#127928; 【M - Mood 情緒選擇】
-┌──────────────────────────────┐
-│ 1. 快樂歡愉    5. 史詩壯闘  │
-│ 2. 悲傷感性    6. 浪漫溫馨  │
-│ 3. 活力充沛    7. 神秘懸疑  │
-│ 4. 平靜放鬆    8. 憤怒激烈  │
-└──────────────────────────────┘
-請選擇 (1-8): 4
-&#9989; 已選擇: 平靜放鬆
+<pre><span class="comment"># 範例 1：爵士 + 電子環境音樂融合</span>
+<span class="keyword">await</span> session.set_weighted_prompts(prompts=[
+    types.WeightedPrompt(text=<span class="string">'jazz piano trio'</span>,      weight=<span class="number">1.0</span>),
+    types.WeightedPrompt(text=<span class="string">'electronic ambient'</span>,   weight=<span class="number">0.3</span>),
+])
 
-&#127929; 【I - Instrument 樂器選擇】
-請選擇 (1-8): 1
-&#9989; 已選擇: 鋼琴為主
+<span class="comment"># 範例 2：古典 + Lo-fi 跨界混搭</span>
+<span class="keyword">await</span> session.set_weighted_prompts(prompts=[
+    types.WeightedPrompt(text=<span class="string">'classical strings orchestra'</span>, weight=<span class="number">0.7</span>),
+    types.WeightedPrompt(text=<span class="string">'lo-fi chill beats vinyl'</span>,    weight=<span class="number">0.5</span>),
+])
 
-&#127908; 【V - Vocal 人聲選擇】
-請選擇 (1-5): 1
-&#9989; 已選擇: 無人聲（純器樂）
+<span class="comment"># 範例 3：動態漸變（播放中修改權重）</span>
+<span class="comment"># 第 0 秒：純爵士</span>
+<span class="keyword">await</span> session.set_weighted_prompts(prompts=[
+    types.WeightedPrompt(text=<span class="string">'smooth jazz'</span>, weight=<span class="number">1.0</span>),
+    types.WeightedPrompt(text=<span class="string">'EDM drop'</span>,    weight=<span class="number">0.0</span>),
+])
+<span class="comment"># 第 15 秒：逐漸混入 EDM 元素</span>
+<span class="keyword">await</span> session.set_weighted_prompts(prompts=[
+    types.WeightedPrompt(text=<span class="string">'smooth jazz'</span>, weight=<span class="number">0.5</span>),
+    types.WeightedPrompt(text=<span class="string">'EDM drop'</span>,    weight=<span class="number">0.8</span>),
+])</pre>
 
-&#127911; 【D - Dynamic 動態選擇】
-請選擇 (1-5): 3
-&#9989; 已選擇: 穩定平衡
+      <h3>執行結果展示</h3>
+      <div style="margin-top: 12px;">
+        <img src="../images/img19.jpg" alt="程式執行後的 MIDST 互動選單畫面" class="screenshot-img">
+        <img src="../images/img20.jpg" alt="設定總覽確認畫面" class="screenshot-img">
+      </div>
 
-&#127926; 【S - Style 風格選擇】
-請選擇 (1-10): 10
-&#9989; 已選擇: Lo-fi
+      <div class="box info">
+        &#128161; <strong>創意小提示：</strong>嘗試將看似不相容的風格混搭（如 Metal + Bossa Nova），有時會產生意想不到的驚喜效果！
+      </div>
+    </div>
+  </div>
 
-&#9201; 【T - Tempo 節奏設定】
-請輸入 BPM (40-200) 或選擇預設: 75
+  <!-- Slide 9: 執行結果 + 生成完成 -->
+  <div class="slide" data-index="8">
+    <div class="content-card">
+      <h2>完整執行流程展示</h2>
+      <p>以下是程式從選單到生成完成的完整互動過程：</p>
+<pre>*********************************************
+*                                           *
+*     Gemini Lyria RealTime 音樂生成器      *
+*     依照 MIDST 公式，一步步設定你的音樂   *
+*                                           *
+*********************************************
 
-═══════════ &#127925; 設定總覽 &#127925; ═══════════
-  情緒: 平靜放鬆
-  樂器: 鋼琴為主
-  人聲: 無人聲
-  動態: 穩定平衡
-  風格: Lo-fi
-  節奏: 75 BPM
-═══════════════════════════════════
+==================================================
+  M -- Mood 情緒：你想要什麼感覺？
+==================================================
+  [ 1] Happy 歡樂
+  [ 2] Sad 憂傷
+  [ 3] Relaxed 放鬆
+  [ 4] Energetic 激昂
+  ...
+  請輸入編號：3
 
-確認生成？(y/n): y
+==================================================
+  I -- Instrument 樂器：用什麼樂器？
+==================================================
+  (可多選，用逗號分隔，例如：1,3,5)
+  請輸入編號：1,5
 
-&#127925; 正在連線 Lyria RealTime API...
-&#127925; WebSocket 已連線！
-&#127925; 開始生成音樂...
-&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608; 100%
-&#9989; 音樂生成完成！已儲存至: output_lofi_75bpm.wav</pre>
+==================================================
+  你的音樂設定總覽
+==================================================
+  M 情緒：Relaxed 放鬆
+  I 樂器：Piano 鋼琴, Saxophone 薩克斯風
+  D 動態：創意程度 1.0
+  S 風格：Jazz 爵士
+  T 節奏：90 BPM
+  長  度：30 秒
+==================================================
+
+  確認以上設定，開始生成？(y/n)：y
+  正在連接 Lyria RealTime...
+  開始生成音樂，請稍候...
+  生成進度：#################### 100%
+  生成完成！
+  音樂已儲存為：output_music.wav
+  長度：30 秒 / 格式：WAV 48kHz 立體聲</pre>
 
       <div style="margin-top: 12px;">
-        <img src="../images/img19.jpg" alt="截圖 19" class="screenshot-img">
-        <img src="../images/img20.jpg" alt="截圖 20" class="screenshot-img">
-        <img src="../images/img21a.jpg" alt="截圖 21a" class="screenshot-img">
-        <img src="../images/img21b.jpg" alt="截圖 21b" class="screenshot-img">
-        <img src="../images/img21c.jpg" alt="截圖 21c" class="screenshot-img">
+        <img src="../images/img21a.jpg" alt="音樂生成過程" class="screenshot-img">
+        <img src="../images/img21b.jpg" alt="音樂生成過程" class="screenshot-img">
+        <img src="../images/img21c.jpg" alt="音樂生成完成" class="screenshot-img">
       </div>
 
       <div class="box success">
-        &#9989; <strong>成功！</strong>程式會自動將音訊串流儲存為 WAV 檔案，你可以直接用任何播放器播放。
+        &#9989; <strong>成功！</strong>程式會自動將音訊串流儲存為 WAV 檔案（48kHz 立體聲），你可以直接用任何播放器播放，或匯入 DAW 進行後製。
       </div>
     </div>
   </div>
 
-  <!-- Slide 7: 免費試玩工具 -->
-  <div class="slide" data-index="6">
+  <!-- Slide 10: Prompt DJ -->
+  <div class="slide" data-index="9">
     <div class="content-card">
-      <h2>免費試玩工具</h2>
-      <p>除了自己寫程式，Google 也提供了幾個現成的工具讓你體驗 Lyria RealTime 的威力：</p>
-      <div class="concept-grid">
+      <h2>免費工具 A：Prompt DJ</h2>
+      <p>最簡單的入門方式！打開網頁就能即時操控音樂生成，像 DJ 一樣混音。</p>
+
+      <div class="concept-grid" style="grid-template-columns: 1fr 1fr;">
         <div class="card">
-          <div class="icon">&#127927;</div>
-          <h3>Prompt DJ</h3>
-          <p>AI Studio 網頁版即時 DJ，用文字操控音樂風格轉換，最簡單的入門方式，打開瀏覽器就能玩！</p>
-          <p style="margin-top:12px;"><strong>難度：</strong>&#11088; 最簡單</p>
-          <p><a href="https://aistudio.google.com/apps/bundled/promptdj" target="_blank">aistudio.google.com/apps/bundled/promptdj</a></p>
-          <img src="../images/img16.jpg" alt="截圖 16" class="screenshot-img">
-          <img src="../images/img16a.jpg" alt="截圖 16a" class="screenshot-img">
+          <h3>基本資訊</h3>
+          <ul>
+            <li><strong>難度：</strong>&#11088; 最簡單（零門檻）</li>
+            <li><strong>需求：</strong>瀏覽器 + Google 帳號</li>
+            <li><strong>連結：</strong><a href="https://aistudio.google.com/apps/bundled/promptdj" target="_blank">aistudio.google.com/.../promptdj</a></li>
+          </ul>
         </div>
         <div class="card">
-          <div class="icon">&#127929;</div>
-          <h3>MIDI DJ</h3>
-          <p>外接 MIDI 控制器，透過 Chrome 瀏覽器的 Web MIDI API 即時操控音樂生成，適合有 MIDI 設備的使用者。</p>
-          <p style="margin-top:12px;"><strong>難度：</strong>&#11088;&#11088; 中等</p>
-          <p><strong>需求：</strong>MIDI 控制器 + Chrome 瀏覽器</p>
-          <img src="../images/img16b.jpg" alt="截圖 16b" class="screenshot-img">
-        </div>
-        <div class="card">
-          <div class="icon">&#127911;</div>
-          <h3>The Infinite Crate</h3>
-          <p>免費 VST 外掛，可以直接在 DAW（數位音訊工作站）中使用，適合專業音樂製作人。</p>
-          <p style="margin-top:12px;"><strong>難度：</strong>&#11088;&#11088;&#11088; 進階</p>
-          <p><a href="https://magenta.withgoogle.com/infinite-crate" target="_blank">magenta.withgoogle.com/infinite-crate</a></p>
+          <h3>操作步驟</h3>
+          <ol>
+            <li>用 Google 帳號登入</li>
+            <li>貼上你的 API 金鑰</li>
+            <li>在提示欄輸入風格，如 <code>jazz piano, relaxed</code></li>
+            <li>按下 <strong>Play</strong> 開始播放</li>
+            <li>邊播邊改提示詞，音樂會平滑過渡</li>
+            <li>用 BPM / Temperature 滑桿微調</li>
+          </ol>
         </div>
       </div>
+
+      <img src="../images/img16.jpg" alt="Prompt DJ 介面" class="screenshot-img">
+      <img src="../images/img16a.jpg" alt="Prompt DJ 操作畫面" class="screenshot-img">
+
       <div class="box info">
-        &#128161; <strong>建議路線：</strong>先玩 Prompt DJ 體驗即時操控的感覺 &#10132; 再嘗試寫 Python 程式自訂更多參數 &#10132; 最後用 Infinite Crate 整合到你的音樂製作流程中。
+        &#128161; <strong>小技巧：</strong>不要一次大改提示詞，而是慢慢加入或替換關鍵字（例如先加 <code>saxophone</code>，再把 <code>piano</code> 換成 <code>guitar</code>），音樂轉場會更自然。
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 11: MIDI DJ -->
+  <div class="slide" data-index="10">
+    <div class="content-card">
+      <h2>免費工具 B：MIDI DJ</h2>
+      <p>跟 Prompt DJ 功能相同，但額外支援用<strong>實體 MIDI 控制器</strong>操控參數，適合有硬體設備的使用者。</p>
+
+      <div class="concept-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="card">
+          <h3>基本資訊</h3>
+          <ul>
+            <li><strong>難度：</strong>&#11088;&#11088; 中等</li>
+            <li><strong>需求：</strong>MIDI 控制器 + Chrome 瀏覽器（支援 Web MIDI API）</li>
+            <li><strong>連結：</strong><a href="https://aistudio.google.com/apps/bundled/promptdj-midi" target="_blank">aistudio.google.com/.../promptdj-midi</a></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>操作步驟</h3>
+          <ol>
+            <li>用 USB 連接 MIDI 控制器到電腦</li>
+            <li>用 <strong>Chrome 瀏覽器</strong>打開連結</li>
+            <li>允許瀏覽器存取 MIDI 裝置</li>
+            <li>輸入音樂風格，按 Play 播放</li>
+            <li>用旋鈕即時調整 BPM、風格混合比例</li>
+            <li>用按鍵觸發風格切換或靜音樂器</li>
+          </ol>
+        </div>
+      </div>
+
+      <img src="../images/img16b.jpg" alt="MIDI DJ 介面" class="screenshot-img">
+
+      <div class="box warning">
+        &#9888;&#65039; <strong>沒有 MIDI 控制器？</strong>直接用工具 A（Prompt DJ）就好，功能幾乎完全一樣，差別只是操控方式不同。
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 12: The Infinite Crate -->
+  <div class="slide" data-index="11">
+    <div class="content-card">
+      <h2>免費工具 C：The Infinite Crate</h2>
+      <p>Google Magenta 團隊推出的<strong>免費 DAW 外掛</strong>，可在 Ableton Live、Logic Pro 等音樂製作軟體中直接使用 Lyria RealTime。</p>
+
+      <div class="concept-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="card">
+          <h3>基本資訊</h3>
+          <ul>
+            <li><strong>難度：</strong>&#11088;&#11088;&#11088; 進階</li>
+            <li><strong>下載：</strong><a href="https://magenta.withgoogle.com/infinite-crate" target="_blank">magenta.withgoogle.com/infinite-crate</a></li>
+          </ul>
+          <h3 style="margin-top:14px;">支援平台</h3>
+          <table>
+            <tr><td><strong>Windows</strong></td><td>VST3 外掛 / 獨立應用程式</td></tr>
+            <tr><td><strong>Mac</strong></td><td>AU / VST3 外掛 / 獨立應用程式</td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <h3>操作步驟</h3>
+          <ol>
+            <li>下載並安裝對應系統的版本</li>
+            <li>在 DAW 中搜尋並載入外掛</li>
+            <li>第一次開啟時貼上 API 金鑰</li>
+            <li>在提示欄輸入風格，按 Play 生成</li>
+            <li>BPM 設為 <code>SYNC</code> 可同步 DAW 速度</li>
+            <li>在 DAW 中直接錄製生成的音訊</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="box warning">
+        &#9888;&#65039; <strong>限制：</strong>每次最多連續生成 <strong>10 分鐘</strong>，時間到了按 Reset 重新開始。沒有 DAW 的話，可選「獨立應用程式（Standalone）」模式單獨使用。
+      </div>
+
+      <div class="box success">
+        &#9989; <strong>建議學習路線：</strong>先玩 Prompt DJ 體驗即時操控 &#10132; 再嘗試寫 Python 程式自訂更多參數 &#10132; 最後用 Infinite Crate 整合到音樂製作流程中。
       </div>
     </div>
   </div>

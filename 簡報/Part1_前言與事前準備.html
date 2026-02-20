@@ -146,6 +146,14 @@ tr:hover { background: #faf8ff; }
   max-width: 100%; border-radius: 12px; margin: 12px 0;
   box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
+
+/* 步驟編號圓形 */
+.step-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff; font-weight: 700; font-size: 0.95rem; margin-right: 8px;
+}
 </style>
 </head>
 <body>
@@ -179,76 +187,226 @@ tr:hover { background: #faf8ff; }
         <span class="highlight">文字生成</span>
         <span class="highlight">圖片生成</span>
         <span class="highlight">人聲演唱</span>
+        <span class="highlight">免費可用</span>
       </div>
     </div>
   </div>
 
-  <!-- Slide 2 -->
+  <!-- Slide 2：AI 也能作曲了？ -->
   <div class="slide">
     <div class="content-card">
       <h2>AI 也能作曲了？</h2>
-      <p style="margin-bottom:12px;">2026 年 2 月，Google 在 <strong>Gemini App</strong> 推出 <code>Lyria 3</code> 音樂生成模型。</p>
-      <p style="margin-bottom:20px;">一句話、一張圖就能創作 <strong>30 秒完整音樂</strong>（含旋律、編曲、人聲與歌詞）。</p>
-      <h3>三大亮點</h3>
-      <div class="concept-grid">
-        <div class="concept-card">
+      <p style="margin-bottom:12px;">Google 在 <strong>Gemini App</strong> 正式推出 <code>Lyria 3</code> 音樂生成模型——由 <strong>Google DeepMind</strong> 打造的最新一代 AI 音樂引擎。</p>
+      <p style="margin-bottom:20px;">從此，只要一句話、一張圖片，甚至一段影片，Gemini 就能在幾秒鐘內為你創作一段 <strong>30 秒的完整音樂</strong>——包含旋律、編曲、人聲與歌詞。</p>
+
+      <div class="concept-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+        <div class="concept-card" style="text-align:center;">
           <div class="icon">&#9997;&#65039;</div>
           <h3>文字轉音樂</h3>
-          <p>用自然語言描述風格、情緒、樂器，即可生成完整音樂作品。</p>
+          <p>用自然語言描述你想要的音樂，AI 即時創作完整作品</p>
         </div>
-        <div class="concept-card">
+        <div class="concept-card" style="text-align:center;">
           <div class="icon">&#128247;</div>
-          <h3>圖片／影片轉音樂</h3>
-          <p>上傳照片或影片，AI 自動分析視覺氛圍，創作相襯的配樂。</p>
+          <h3>圖片/影片轉音樂</h3>
+          <p>上傳照片或影片，AI 自動感知情緒並配樂</p>
         </div>
-        <div class="concept-card">
+        <div class="concept-card" style="text-align:center;">
           <div class="icon">&#127908;</div>
           <h3>高保真人聲</h3>
-          <p>生成的音樂包含真實感十足的人聲演唱與歌詞，品質令人驚豔。</p>
+          <p>不只純器樂，還能生成帶有歌詞的人聲演唱</p>
         </div>
       </div>
+
       <div class="box info">
-        &#128161; 你完全不需要懂樂理，只需要會「說話」就能作曲！
+        &#128161; <strong>你完全不需要懂樂理、不需要會任何樂器，只需要會「說話」就能作曲！</strong>
       </div>
     </div>
   </div>
 
-  <!-- Slide 3 -->
+  <!-- Slide 3：Lyria 3 詳細功能介紹 -->
+  <div class="slide">
+    <div class="content-card">
+      <h2>Lyria 3 功能深度解析</h2>
+      <p style="margin-bottom:16px;">Lyria 3 不只是簡單的「文字轉音樂」，它擁有多項令人驚豔的進階能力：</p>
+
+      <div class="concept-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="concept-card">
+          <div class="icon">&#127911;</div>
+          <h3>完整音樂製作</h3>
+          <p>一次生成包含<strong>旋律、和弦、編曲、鼓組節奏</strong>的完整音樂，不是單一音軌而是混音後的成品。</p>
+        </div>
+        <div class="concept-card">
+          <div class="icon">&#127908;</div>
+          <h3>真實人聲演唱</h3>
+          <p>能生成高品質的人聲，支援<strong>男聲、女聲、合唱</strong>等多種類型，自動創作歌詞並演唱。</p>
+        </div>
+        <div class="concept-card">
+          <div class="icon">&#127912;</div>
+          <h3>AI 封面藝術</h3>
+          <p>每首音樂自動搭配由 <strong>Nano Banana 技術</strong>生成的專屬封面圖片，視覺與聽覺一體化。</p>
+        </div>
+        <div class="concept-card">
+          <div class="icon">&#128274;</div>
+          <h3>SynthID 數位浮水印</h3>
+          <p>所有生成音樂自動嵌入<strong>不可聽的數位浮水印</strong>，可驗證是否為 AI 生成，確保透明度。</p>
+        </div>
+        <div class="concept-card">
+          <div class="icon">&#128483;&#65039;</div>
+          <h3>多語言理解</h3>
+          <p>官方支援 <strong>8 種語言</strong>輸入（英、日、韓、德、西、法、印地、葡），中文也能理解。</p>
+        </div>
+        <div class="concept-card">
+          <div class="icon">&#128257;</div>
+          <h3>對話式追加修改</h3>
+          <p>不滿意？直接在對話中要求調整——<strong>改節奏、換樂器、加人聲</strong>，AI 即時重新生成。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 4：你需要什麼？ -->
   <div class="slide">
     <div class="content-card">
       <h2>你需要什麼？</h2>
       <p style="margin-bottom:16px;">只需要三樣東西，就能開始 AI 作曲之旅：</p>
       <table>
         <thead>
-          <tr><th>項目</th><th>說明</th></tr>
+          <tr><th>項目</th><th>說明</th><th>備註</th></tr>
         </thead>
         <tbody>
-          <tr><td><strong>Google 帳號</strong></td><td>需年滿 18 歲以上的帳號</td></tr>
-          <tr><td><strong>瀏覽器</strong></td><td>Chrome、Edge、Safari 等現代瀏覽器皆可</td></tr>
-          <tr><td><strong>Gemini App</strong></td><td>網址：<code>https://gemini.google.com</code></td></tr>
+          <tr>
+            <td><strong>Google 帳號</strong></td>
+            <td>需年滿 <strong>18 歲</strong>以上的帳號</td>
+            <td>免費帳號即可使用</td>
+          </tr>
+          <tr>
+            <td><strong>瀏覽器</strong></td>
+            <td>Chrome、Edge、Firefox 等現代瀏覽器</td>
+            <td>建議使用 Chrome 體驗最佳</td>
+          </tr>
+          <tr>
+            <td><strong>Gemini App</strong></td>
+            <td>網址：<code>gemini.google.com</code></td>
+            <td>桌面版優先，手機版隨後跟進</td>
+          </tr>
         </tbody>
       </table>
-<img src="../images/img01.jpg" alt="截圖 01" class="screenshot-img">
+
+      <div class="box success">
+        &#127881; <strong>不需要安裝任何軟體！</strong>打開瀏覽器、登入 Google 帳號，就能立即開始。
+      </div>
     </div>
   </div>
 
-  <!-- Slide 4 -->
+  <!-- Slide 5：開啟 Gemini App -->
+  <div class="slide">
+    <div class="content-card">
+      <h2>開啟 Gemini App</h2>
+      <p style="margin-bottom:16px;">按照以下步驟，進入 Gemini 開始你的 AI 音樂創作：</p>
+
+      <div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:20px;">
+        <div style="flex:1; min-width:280px;">
+          <h3><span class="step-num">1</span> 打開瀏覽器</h3>
+          <p style="margin-bottom:12px;">開啟 Chrome 或其他現代瀏覽器。</p>
+
+          <h3><span class="step-num">2</span> 前往 Gemini 網站</h3>
+          <p style="margin-bottom:12px;">在網址列輸入 <code>gemini.google.com</code> 並按下 Enter。</p>
+
+          <h3><span class="step-num">3</span> 登入 Google 帳號</h3>
+          <p style="margin-bottom:12px;">如果尚未登入，系統會引導你登入 Google 帳號。</p>
+
+          <h3><span class="step-num">4</span> 確認進入 Gemini 首頁</h3>
+          <p>看到 Gemini 的對話介面，代表你已經準備好了！</p>
+        </div>
+        <div style="flex:1; min-width:280px;">
+          <img src="../images/img01.jpg" alt="Gemini 首頁畫面" class="screenshot-img">
+        </div>
+      </div>
+
+      <div class="box warning">
+        &#9888;&#65039; <strong>注意：</strong>音樂生成功能優先在桌面版推出，如果你在手機上看不到此功能，請切換到電腦版使用。
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 6：訂閱方案比較 -->
   <div class="slide">
     <div class="content-card">
       <h2>訂閱方案比較</h2>
+      <p style="margin-bottom:16px;">Gemini 提供多種訂閱方案，從免費到專業級都能使用音樂生成功能：</p>
       <table>
         <thead>
-          <tr><th>方案</th><th>價格（月費）</th><th>音樂生成</th><th>特色</th></tr>
+          <tr><th>方案</th><th>月費</th><th>音樂生成</th><th>AI 點數</th><th>適合對象</th></tr>
         </thead>
         <tbody>
-          <tr><td><strong>免費版</strong></td><td>$0</td><td>&#10003;</td><td>基本功能，有使用次數限制</td></tr>
-          <tr><td><strong>AI Plus</strong></td><td>$7.99</td><td>&#10003;</td><td>更多生成次數、進階模型</td></tr>
-          <tr><td><strong>AI Pro</strong></td><td>$19.99</td><td>&#10003;</td><td>最高優先、所有模型完整存取</td></tr>
-          <tr><td><strong>AI Ultra</strong></td><td>$249.99</td><td>&#10003;</td><td>企業級用量、專屬支援</td></tr>
+          <tr>
+            <td><strong>免費版</strong></td>
+            <td>$0</td>
+            <td>&#10003; 可使用</td>
+            <td>—</td>
+            <td>想先體驗看看的新手</td>
+          </tr>
+          <tr>
+            <td><strong>Google AI Plus</strong></td>
+            <td>$7.99/月</td>
+            <td>&#10003; 較多次數</td>
+            <td>—</td>
+            <td>輕度使用者</td>
+          </tr>
+          <tr>
+            <td><strong>Google AI Pro</strong></td>
+            <td>$19.99/月</td>
+            <td>&#10003; 更多次數</td>
+            <td>1,000 點</td>
+            <td>經常使用的創作者</td>
+          </tr>
+          <tr>
+            <td><strong>Google AI Ultra</strong></td>
+            <td>$249.99/月</td>
+            <td>&#10003; 最高次數</td>
+            <td>25,000 點</td>
+            <td>專業工作者、團隊</td>
+          </tr>
         </tbody>
       </table>
+
       <div class="box success">
-        &#127881; 好消息：免費版也能使用音樂生成功能！
+        &#127881; <strong>好消息：免費版也能使用音樂生成功能！</strong>只是在尖峰時段可能會被限制使用次數。
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 7：方案選擇建議 -->
+  <div class="slide">
+    <div class="content-card">
+      <h2>方案選擇建議</h2>
+      <p style="margin-bottom:16px;">不確定該選哪個方案？根據你的使用情境來決定：</p>
+
+      <div class="concept-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="concept-card">
+          <div class="icon">&#128075;</div>
+          <h3>純體驗／偶爾使用</h3>
+          <p>選擇 <strong>免費版</strong> 就足夠了。可以完整體驗文字生成音樂、圖片生成音樂等核心功能，只是尖峰時段可能需要等待。</p>
+        </div>
+        <div class="concept-card">
+          <div class="icon">&#127925;</div>
+          <h3>個人創作愛好者</h3>
+          <p>建議 <strong>AI Plus（$7.99/月）</strong>。享有較多的生成次數，適合定期創作音樂、製作影片配樂的個人用戶。</p>
+        </div>
+        <div class="concept-card">
+          <div class="icon">&#127908;</div>
+          <h3>頻繁創作的 YouTuber</h3>
+          <p>推薦 <strong>AI Pro（$19.99/月）</strong>。每月 1,000 AI 點數、更多生成次數，適合需要大量配樂的內容創作者。</p>
+        </div>
+        <div class="concept-card">
+          <div class="icon">&#128188;</div>
+          <h3>專業工作者／商業團隊</h3>
+          <p>考慮 <strong>AI Ultra（$249.99/月）</strong>。25,000 AI 點數、最高優先級，適合每日大量使用的專業製作團隊。</p>
+        </div>
+      </div>
+
+      <div class="box info">
+        &#128161; <strong>建議策略：</strong>先用免費版體驗，確認符合需求後再升級。所有付費方案都可以隨時取消訂閱。
       </div>
     </div>
   </div>

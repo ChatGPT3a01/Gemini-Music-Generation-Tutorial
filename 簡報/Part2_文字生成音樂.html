@@ -186,82 +186,350 @@ tr:hover { background: #faf8ff; }
         <span class="highlight">自然語言</span>
         <span class="highlight">30秒音樂</span>
         <span class="highlight">即時生成</span>
+        <span class="highlight">5 步驟完成</span>
+        <span class="highlight">對話式調整</span>
       </div>
     </div>
   </div>
 
-  <!-- Slide 2 -->
+  <!-- Slide 2：Step 1 進入 Gemini 對話介面 -->
   <div class="slide">
     <div class="content-card">
-      <h2>Step 1-2：進入介面與輸入提示詞</h2>
-      <p style="margin-bottom:12px;">在 Gemini 聊天框中，直接輸入你的音樂需求即可。</p>
-      <h3>範例提示詞</h3>
-      <pre>幫我創作一首輕快的流行歌曲，主題是夏天去海邊玩的快樂心情，帶有吉他和鍵盤，節奏活潑，女聲演唱。</pre>
-      <div class="box warning">
-        &#9888;&#65039; 官方支援 8 種語言（暫不含中文），建議關鍵描述用英文效果更佳。
-      </div>
-<img src="../images/img02.jpg" alt="截圖 02" class="screenshot-img" style="max-width:48%; display:inline-block;">
-<img src="../images/img03.jpg" alt="截圖 03" class="screenshot-img" style="max-width:48%; display:inline-block;">
-    </div>
-  </div>
+      <h2><span class="step-num">1</span> 進入 Gemini 對話介面</h2>
+      <p style="margin-bottom:16px;">打開 <code>gemini.google.com</code>，登入 Google 帳號後，你會看到 Gemini 的聊天介面。音樂生成不需要額外的設定或開關——直接在<strong>聊天框</strong>中輸入音樂需求即可。</p>
 
-  <!-- Slide 3 -->
-  <div class="slide">
-    <div class="content-card">
-      <h2>Step 3-5：等待、試聽、調整</h2>
-      <ul style="margin-top:12px;">
-        <li><span class="step-num">3</span>生成等待約 <strong>10~30 秒</strong></li>
-        <li style="margin-top:8px;"><span class="step-num">4</span>生成完成後你會看到：
-          <ul style="margin-top:6px;">
-            <li><strong>30 秒播放器</strong> — 直接在頁面上試聽</li>
-            <li><strong>AI 封面藝術</strong> — 自動生成的專輯封面</li>
-            <li><strong>播放 / 下載 / 分享按鈕</strong></li>
+      <div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:16px;">
+        <div style="flex:1; min-width:280px;">
+          <h3>操作重點</h3>
+          <ul>
+            <li>確認已登入 Google 帳號</li>
+            <li>找到頁面底部的<strong>文字輸入框</strong></li>
+            <li>不需要切換任何模式，直接在對話中描述你的音樂需求</li>
+            <li>Gemini 會自動判斷你想要生成音樂</li>
           </ul>
-        </li>
-        <li style="margin-top:8px;"><span class="step-num">5</span>不滿意？可追加修改指令：</li>
-      </ul>
-      <pre>節奏再快一點，加入一段薩克斯風獨奏</pre>
-<img src="../images/img04.jpg" alt="截圖 04" class="screenshot-img" style="max-width:32%; display:inline-block;">
-<img src="../images/img05.jpg" alt="截圖 05" class="screenshot-img" style="max-width:32%; display:inline-block;">
-<img src="../images/img06-1.jpg" alt="截圖 06" class="screenshot-img" style="max-width:32%; display:inline-block;">
+
+          <div class="box info">
+            &#128161; <strong>小技巧：</strong>開始新對話時效果最佳，避免在已有大量對話的視窗中生成音樂。
+          </div>
+        </div>
+        <div style="flex:1; min-width:280px;">
+          <img src="../images/img02.jpg" alt="Gemini 對話介面" class="screenshot-img">
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Slide 4 -->
+  <!-- Slide 3：Step 2 輸入音樂提示詞 -->
   <div class="slide">
     <div class="content-card">
-      <h2>五個提示詞範例</h2>
-      <div class="concept-grid">
+      <h2><span class="step-num">2</span> 輸入音樂提示詞</h2>
+      <p style="margin-bottom:12px;">在輸入框中，用自然語言描述你想要的音樂。描述越具體，生成結果越符合預期。</p>
+
+      <h3>範例提示詞（中文）</h3>
+      <pre>幫我創作一首輕快的流行歌曲，主題是夏天去海邊玩的快樂心情，帶有吉他和鍵盤，節奏活潑，女聲演唱。</pre>
+
+      <h3 style="margin-top:16px;">你可以指定的元素</h3>
+      <table>
+        <thead>
+          <tr><th>元素</th><th>說明</th><th>範例</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>音樂風格</strong></td><td>想要什麼類型？</td><td>流行、爵士、古典、電子</td></tr>
+          <tr><td><strong>情緒氛圍</strong></td><td>想表達什麼感覺？</td><td>歡樂、憂傷、激昂、平靜</td></tr>
+          <tr><td><strong>樂器</strong></td><td>用什麼樂器？</td><td>鋼琴、吉他、鼓組、弦樂</td></tr>
+          <tr><td><strong>人聲</strong></td><td>需要歌手演唱嗎？</td><td>男聲、女聲、合唱、純器樂</td></tr>
+          <tr><td><strong>節奏速度</strong></td><td>快還是慢？</td><td>慢板、中板、快板、120 BPM</td></tr>
+        </tbody>
+      </table>
+
+      <img src="../images/img03.jpg" alt="輸入音樂提示詞" class="screenshot-img" style="max-width:70%; display:block; margin:12px auto;">
+    </div>
+  </div>
+
+  <!-- Slide 4：語言支援注意事項 -->
+  <div class="slide">
+    <div class="content-card">
+      <h2>語言支援注意事項</h2>
+      <p style="margin-bottom:16px;">Gemini 音樂生成目前官方支援 <strong>8 種語言</strong>，了解語言限制有助於獲得更好的生成效果：</p>
+
+      <div class="concept-grid" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="concept-card" style="text-align:center; padding:16px;">
+          <h3>English</h3>
+          <p>英文</p>
+        </div>
+        <div class="concept-card" style="text-align:center; padding:16px;">
+          <h3>Japanese</h3>
+          <p>日文</p>
+        </div>
+        <div class="concept-card" style="text-align:center; padding:16px;">
+          <h3>Korean</h3>
+          <p>韓文</p>
+        </div>
+        <div class="concept-card" style="text-align:center; padding:16px;">
+          <h3>German</h3>
+          <p>德文</p>
+        </div>
+        <div class="concept-card" style="text-align:center; padding:16px;">
+          <h3>Spanish</h3>
+          <p>西班牙文</p>
+        </div>
+        <div class="concept-card" style="text-align:center; padding:16px;">
+          <h3>French</h3>
+          <p>法文</p>
+        </div>
+        <div class="concept-card" style="text-align:center; padding:16px;">
+          <h3>Hindi</h3>
+          <p>印地文</p>
+        </div>
+        <div class="concept-card" style="text-align:center; padding:16px;">
+          <h3>Portuguese</h3>
+          <p>葡萄牙文</p>
+        </div>
+      </div>
+
+      <div class="box warning">
+        &#9888;&#65039; <strong>中文可以用，但英文效果更佳！</strong><br>
+        Gemini 能理解中文指令並生成音樂，但官方支援列表暫不含中文。如果生成效果不理想，建議將關鍵的音樂描述改用英文。
+      </div>
+
+      <div class="box success">
+        &#9989; <strong>建議做法：</strong>先用中文描述需求讓 Gemini 理解你的意圖，如果結果不滿意，再改用英文重新提示。也可以用後續教學中介紹的「音樂 Gem」來幫你翻譯和優化提示詞。
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5：Step 3 等待 AI 生成 -->
+  <div class="slide">
+    <div class="content-card">
+      <h2><span class="step-num">3</span> 等待 AI 生成</h2>
+      <p style="margin-bottom:16px;">按下送出後，Gemini 會開始生成音樂。這個過程通常需要等待 <strong>10 ~ 30 秒</strong>。</p>
+
+      <div style="display:flex; gap:20px; flex-wrap:wrap;">
+        <div style="flex:1; min-width:280px;">
+          <h3>生成過程中會發生什麼？</h3>
+          <ul>
+            <li>Gemini 分析你的提示詞，理解情緒、風格和樂器需求</li>
+            <li>Lyria 3 模型開始創作旋律、和弦進行與節奏架構</li>
+            <li>如果指定人聲，AI 會自動創作歌詞並生成演唱</li>
+            <li>同步生成封面藝術圖片</li>
+            <li>最終混音並輸出 <strong>30 秒</strong>的完整音樂</li>
+          </ul>
+
+          <div class="box info">
+            &#128161; <strong>等待時間取決於：</strong>目前的伺服器負載、你的訂閱方案（付費用戶有較高優先權）、以及提示詞的複雜程度。
+          </div>
+        </div>
+        <div style="flex:1; min-width:280px;">
+          <img src="../images/img04.jpg" alt="等待 AI 生成音樂" class="screenshot-img">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 6：Step 4 試聽與下載 -->
+  <div class="slide">
+    <div class="content-card">
+      <h2><span class="step-num">4</span> 試聽與下載</h2>
+      <p style="margin-bottom:16px;">生成完成後，你會看到一個完整的音樂播放介面：</p>
+
+      <div style="display:flex; gap:20px; flex-wrap:wrap;">
+        <div style="flex:1; min-width:320px;">
+          <div class="concept-grid" style="grid-template-columns: 1fr 1fr; gap:14px; margin:0 0 16px 0;">
+            <div class="concept-card" style="padding:16px;">
+              <h3>&#9654;&#65039; 播放按鈕</h3>
+              <p>直接在頁面上試聽 30 秒的完整音樂。</p>
+            </div>
+            <div class="concept-card" style="padding:16px;">
+              <h3>&#128190; 下載按鈕</h3>
+              <p>將音樂儲存到本機電腦，方便後續使用。</p>
+            </div>
+            <div class="concept-card" style="padding:16px;">
+              <h3>&#127912; AI 封面藝術</h3>
+              <p>由 Nano Banana 技術自動生成的專屬封面圖片。</p>
+            </div>
+            <div class="concept-card" style="padding:16px;">
+              <h3>&#128279; 分享連結</h3>
+              <p>產生分享連結，可以直接傳給朋友一起聆聽。</p>
+            </div>
+          </div>
+
+          <div class="box success">
+            &#9989; <strong>下載的音樂檔案</strong>可直接用於影片剪輯、Podcast、簡報等各種用途。所有檔案都會內嵌 SynthID 數位浮水印。
+          </div>
+        </div>
+        <div style="flex:1; min-width:280px;">
+          <img src="../images/img05.jpg" alt="音樂播放介面" class="screenshot-img">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 7：Step 5 追加修改 -->
+  <div class="slide">
+    <div class="content-card">
+      <h2><span class="step-num">5</span> 不滿意？追加修改！</h2>
+      <p style="margin-bottom:16px;">這是 Gemini 音樂生成的一大優勢——<strong>對話式追加修改</strong>。不需要重新開始，直接在同一個對話中提出調整需求。</p>
+
+      <div style="display:flex; gap:20px; flex-wrap:wrap;">
+        <div style="flex:1; min-width:320px;">
+          <h3>你可以這樣追加修改</h3>
+          <table>
+            <thead>
+              <tr><th>修改類型</th><th>範例指令</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>調整速度</strong></td><td>節奏再快一點</td></tr>
+              <tr><td><strong>更換樂器</strong></td><td>加入一段薩克斯風獨奏</td></tr>
+              <tr><td><strong>改變情緒</strong></td><td>讓整體感覺更歡樂一些</td></tr>
+              <tr><td><strong>加入/移除人聲</strong></td><td>改成純器樂版本，不要人聲</td></tr>
+              <tr><td><strong>調整風格</strong></td><td>風格偏向爵士一點</td></tr>
+            </tbody>
+          </table>
+
+          <h3 style="margin-top:16px;">範例追加指令</h3>
+          <pre>節奏再快一點，加入一段薩克斯風獨奏</pre>
+        </div>
+        <div style="flex:1; min-width:280px;">
+          <img src="../images/img06.jpg" alt="追加修改指令" class="screenshot-img">
+
+          <div class="box warning">
+            &#9888;&#65039; <strong>注意：</strong>每次追加修改都會重新生成一段全新的 30 秒音樂，不是在原有音樂上修改。建議先把滿意的版本下載保存。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 8：提示詞範例（上）三個 -->
+  <div class="slide">
+    <div class="content-card">
+      <h2>提示詞範例（上）</h2>
+      <p style="margin-bottom:16px;">以下是精心設計的音樂提示詞範例，可以直接複製貼上到 Gemini 使用：</p>
+
+      <div class="concept-grid" style="grid-template-columns: 1fr;">
         <div class="concept-card">
-          <div class="icon">&#127926;</div>
-          <h3>1. 輕鬆背景音樂</h3>
-          <p>適合讀書、工作時播放</p>
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+            <div class="icon" style="margin-bottom:0;">&#127926;</div>
+            <div>
+              <h3>範例 A — 輕鬆背景音樂</h3>
+              <p>適合讀書、工作、咖啡廳氛圍</p>
+            </div>
+          </div>
           <pre>Create a chill lo-fi hip hop track with soft piano and vinyl crackle, perfect for studying</pre>
         </div>
+
         <div class="concept-card">
-          <div class="icon">&#127947;&#65039;</div>
-          <h3>2. 激昂運動音樂</h3>
-          <p>健身、跑步的能量歌單</p>
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+            <div class="icon" style="margin-bottom:0;">&#127947;&#65039;</div>
+            <div>
+              <h3>範例 B — 激昂運動音樂</h3>
+              <p>健身、跑步的高能量歌單</p>
+            </div>
+          </div>
           <pre>Make an energetic EDM track with heavy bass drops and a fast tempo around 140 BPM for workout</pre>
         </div>
+
         <div class="concept-card">
-          <div class="icon">&#128149;</div>
-          <h3>3. 抒情情歌</h3>
-          <p>溫柔深情的男聲情歌</p>
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+            <div class="icon" style="margin-bottom:0;">&#128149;</div>
+            <div>
+              <h3>範例 C — 抒情情歌</h3>
+              <p>溫柔深情的男聲演唱情歌</p>
+            </div>
+          </div>
           <pre>Compose a slow romantic ballad with acoustic guitar, soft male vocals singing about missing someone</pre>
         </div>
+      </div>
+
+      <div class="box info">
+        &#128161; <strong>提示：</strong>英文提示詞的效果通常優於中文。描述越具體（包含情緒、樂器、速度），生成結果越精準。
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 9：提示詞範例（下）兩個 + 小結 -->
+  <div class="slide">
+    <div class="content-card">
+      <h2>提示詞範例（下）</h2>
+      <p style="margin-bottom:16px;">更多不同情境的提示詞範例：</p>
+
+      <div class="concept-grid" style="grid-template-columns: 1fr 1fr;">
         <div class="concept-card">
           <div class="icon">&#127880;</div>
-          <h3>4. 兒童歡樂曲</h3>
-          <p>適合小朋友的歡快旋律</p>
+          <h3>範例 D — 兒童歡樂曲</h3>
+          <p>適合小朋友的歡快旋律，活潑可愛</p>
           <pre>A playful and fun children's song with ukulele and hand claps, about animals in the zoo</pre>
         </div>
         <div class="concept-card">
           <div class="icon">&#127916;</div>
-          <h3>5. 電影配樂</h3>
-          <p>史詩感管弦樂章</p>
+          <h3>範例 E — 電影配樂風</h3>
+          <p>史詩感管弦樂章，氣勢磅礡</p>
           <pre>An epic cinematic orchestral piece with strings and brass, building tension then resolving triumphantly</pre>
         </div>
+      </div>
+
+      <h3 style="margin-top:24px;">寫出好提示詞的關鍵要素</h3>
+      <table>
+        <thead>
+          <tr><th>要素</th><th>說明</th><th>範例片段</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>風格 (Style)</strong></td><td>明確指定音樂類型</td><td><code>lo-fi hip hop</code>, <code>EDM</code>, <code>ballad</code></td></tr>
+          <tr><td><strong>情緒 (Mood)</strong></td><td>描述想要的感覺</td><td><code>chill</code>, <code>energetic</code>, <code>romantic</code></td></tr>
+          <tr><td><strong>樂器 (Instrument)</strong></td><td>列出主要樂器</td><td><code>piano</code>, <code>guitar</code>, <code>strings</code></td></tr>
+          <tr><td><strong>速度 (Tempo)</strong></td><td>指定 BPM 或快慢</td><td><code>120 BPM</code>, <code>slow</code>, <code>fast</code></td></tr>
+          <tr><td><strong>用途 (Purpose)</strong></td><td>說明使用場景</td><td><code>for studying</code>, <code>for workout</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Slide 10：流程總結 -->
+  <div class="slide">
+    <div class="content-card">
+      <h2>文字生成音樂 — 流程總結</h2>
+      <p style="margin-bottom:20px;">回顧完整的 5 步驟流程，從輸入到下載只需要不到 1 分鐘：</p>
+
+      <div class="concept-grid" style="grid-template-columns: repeat(5, 1fr); gap:12px;">
+        <div class="concept-card" style="text-align:center; padding:20px 12px;">
+          <div style="font-size:2.2rem; margin-bottom:8px;">&#128187;</div>
+          <h3 style="font-size:1.05rem;">Step 1</h3>
+          <p style="font-size:0.92rem;">進入 Gemini<br>對話介面</p>
+        </div>
+        <div class="concept-card" style="text-align:center; padding:20px 12px;">
+          <div style="font-size:2.2rem; margin-bottom:8px;">&#9997;&#65039;</div>
+          <h3 style="font-size:1.05rem;">Step 2</h3>
+          <p style="font-size:0.92rem;">輸入音樂<br>提示詞</p>
+        </div>
+        <div class="concept-card" style="text-align:center; padding:20px 12px;">
+          <div style="font-size:2.2rem; margin-bottom:8px;">&#9203;</div>
+          <h3 style="font-size:1.05rem;">Step 3</h3>
+          <p style="font-size:0.92rem;">等待 AI 生成<br>10~30 秒</p>
+        </div>
+        <div class="concept-card" style="text-align:center; padding:20px 12px;">
+          <div style="font-size:2.2rem; margin-bottom:8px;">&#127911;</div>
+          <h3 style="font-size:1.05rem;">Step 4</h3>
+          <p style="font-size:0.92rem;">試聽、下載<br>分享音樂</p>
+        </div>
+        <div class="concept-card" style="text-align:center; padding:20px 12px;">
+          <div style="font-size:2.2rem; margin-bottom:8px;">&#128257;</div>
+          <h3 style="font-size:1.05rem;">Step 5</h3>
+          <p style="font-size:0.92rem;">追加修改<br>持續優化</p>
+        </div>
+      </div>
+
+      <div class="box success" style="margin-top:20px;">
+        &#9989; <strong>重點回顧：</strong>
+        <ul style="margin-top:8px; margin-bottom:0;">
+          <li>提示詞越具體，生成效果越好（建議使用英文描述關鍵元素）</li>
+          <li>每次生成 30 秒完整音樂（含旋律、編曲、人聲）</li>
+          <li>不滿意可直接對話追加修改，不需要重新開始</li>
+          <li>所有生成的音樂都帶有 SynthID 數位浮水印</li>
+        </ul>
+      </div>
+
+      <div class="box info">
+        &#128161; <strong>下一步：</strong>接下來的 Part 3 將介紹更神奇的功能——上傳一張照片，讓 AI 自動「看圖作曲」！
       </div>
     </div>
   </div>

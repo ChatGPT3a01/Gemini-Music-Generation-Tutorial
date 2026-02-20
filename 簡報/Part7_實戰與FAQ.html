@@ -265,11 +265,35 @@
             font-weight: bold;
             color: #3b82f6;
             border: 1px solid #bfdbfe;
+            text-align: center;
         }
         .flow-arrow {
             font-size: 1.5rem;
             color: #7c3aed;
         }
+
+        /* 步驟 */
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+        .step-num {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+        .step-content { flex: 1; }
+        .step-content h3 { margin: 0 0 6px; }
 
         .screenshot-img {
             max-width: 100%; border-radius: 12px; margin: 12px 0;
@@ -294,10 +318,10 @@
 
 <!-- 導航列 -->
 <nav class="navbar">
-    <div class="nav-title">🎵 Part 7 - 實戰與 FAQ</div>
+    <div class="nav-title">&#127925; Part 7 - 實戰與 FAQ</div>
     <div class="nav-links">
-        <a href="index.html">🏠 首頁</a>
-        <a href="#" onclick="toggleFullscreen()">⛶ 全螢幕</a>
+        <a href="index.html">&#127968; 首頁</a>
+        <a href="#" onclick="toggleFullscreen()">&#9974; 全螢幕</a>
         <a href="https://www.facebook.com/?locale=zh_TW" target="_blank">FB</a>
         <a href="https://www.youtube.com/@Liang-yt02" target="_blank">YT</a>
     </div>
@@ -308,7 +332,7 @@
 <button class="arrow arrow-right" onclick="changeSlide(1)">&#10095;</button>
 
 <!-- 頁碼 -->
-<div class="page-indicator" id="pageIndicator">1 / 6</div>
+<div class="page-indicator" id="pageIndicator">1 / 9</div>
 
 <!-- 簡報內容 -->
 <div class="slides-container">
@@ -324,25 +348,29 @@
             <span class="highlight">五種情境</span>
             <span class="highlight">商用</span>
             <span class="highlight">版權</span>
+            <span class="highlight">延伸資源</span>
         </div>
     </div>
 
-    <!-- Slide 2: SynthID 浮水印 -->
+    <!-- Slide 2: SynthID 浮水印（詳細版） -->
     <div class="slide">
-        <h1>🔒 SynthID 浮水印</h1>
+        <h1>&#128274; SynthID 浮水印</h1>
         <h2>Google DeepMind 的數位浮水印技術</h2>
-        <p>SynthID 是由 Google DeepMind 開發的 AI 內容識別技術，能在 AI 生成的音樂中嵌入人耳無法察覺的數位浮水印，用於標記 AI 生成內容的來源。</p>
+        <p><strong>SynthID</strong> 是由 Google DeepMind 開發的 AI 內容識別技術，能在 AI 生成的音樂中嵌入人耳無法察覺的數位浮水印，用於標記 AI 生成內容的來源。所有透過 Gemini / Lyria 生成的音樂都會自動嵌入 SynthID。</p>
 
-        <h3>運作原理</h3>
+        <h3>完整運作流程</h3>
         <div class="flow-steps">
-            <div class="flow-step">🎵 音訊波形</div>
-            <span class="flow-arrow">→</span>
-            <div class="flow-step">📊 頻譜圖</div>
-            <span class="flow-arrow">→</span>
-            <div class="flow-step">🔐 嵌入浮水印</div>
-            <span class="flow-arrow">→</span>
-            <div class="flow-step">🎶 轉回波形</div>
+            <div class="flow-step">&#127925; AI 生成<br>原始音訊</div>
+            <span class="flow-arrow">&#10132;</span>
+            <div class="flow-step">&#128200; 轉換為<br>頻譜圖</div>
+            <span class="flow-arrow">&#10132;</span>
+            <div class="flow-step">&#128272; 在頻譜中<br>嵌入浮水印</div>
+            <span class="flow-arrow">&#10132;</span>
+            <div class="flow-step">&#127926; 轉回音訊<br>波形輸出</div>
+            <span class="flow-arrow">&#10132;</span>
+            <div class="flow-step">&#128266; 使用者聽到<br>正常音樂</div>
         </div>
+        <p style="text-align:center; color: #6b7280; font-size: 0.95rem;">（浮水印嵌入在頻譜層面，人耳完全無法感知差異）</p>
 
         <h3>核心特性</h3>
         <table>
@@ -350,194 +378,354 @@
                 <tr>
                     <th>特性</th>
                     <th>說明</th>
+                    <th>技術細節</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><strong>🔇 不可聽</strong></td>
-                    <td>浮水印嵌入在頻譜層面，人耳完全無法察覺，不影響聆聽體驗</td>
+                    <td><strong>&#128263; 不可聽</strong></td>
+                    <td>浮水印嵌入在頻譜層面，人耳完全無法察覺</td>
+                    <td>利用人耳聽覺遮蔽效應，在不敏感頻率區嵌入資訊</td>
                 </tr>
                 <tr>
-                    <td><strong>💪 高韌性</strong></td>
-                    <td>即使經過壓縮、剪輯、格式轉換、加速/減速等處理，浮水印仍可被偵測</td>
+                    <td><strong>&#128170; 高韌性</strong></td>
+                    <td>經過多種處理後仍可偵測</td>
+                    <td>MP3/AAC 壓縮、剪輯、加速/減速、格式轉換皆可存活</td>
                 </tr>
                 <tr>
-                    <td><strong>⚡ 強制性</strong></td>
-                    <td>所有透過 Gemini / Lyria 生成的音樂，都會自動嵌入 SynthID，無法關閉</td>
+                    <td><strong>&#9889; 強制性</strong></td>
+                    <td>所有 Gemini/Lyria 生成的音樂都會自動嵌入</td>
+                    <td>無法關閉、無法手動移除</td>
                 </tr>
                 <tr>
-                    <td><strong>🔍 可驗證</strong></td>
-                    <td>可透過專用工具或 API 驗證音訊是否包含 SynthID 浮水印</td>
+                    <td><strong>&#128269; 可驗證</strong></td>
+                    <td>可透過工具驗證音訊是否包含 SynthID</td>
+                    <td>上傳到 Gemini App 即可檢測</td>
                 </tr>
             </tbody>
         </table>
 
-        <img src="../images/img17.jpg" alt="截圖 17" class="screenshot-img">
-
         <div class="box warning">
-            ⚠️ <strong>注意：</strong>SynthID 標記的是「AI 生成」的身份，這意味著你的作品會被標記為 AI 內容。在某些平台上傳時需留意相關規範。
+            &#9888;&#65039; <strong>注意：</strong>SynthID 標記的是「AI 生成」的身份，這意味著你的作品會被標記為 AI 內容。在某些平台上傳時需留意相關規範。
         </div>
     </div>
 
-    <!-- Slide 3: 實戰情境 1-3 -->
+    <!-- Slide 3: 如何驗證 AI 音樂 -->
     <div class="slide">
-        <h1>🎬 實戰情境 1-3</h1>
-        <h2>常見使用場景</h2>
+        <h1>&#128269; 如何驗證 AI 音樂</h1>
+        <h2>SynthID 浮水印檢測步驟</h2>
+        <p>如果你想確認一段音樂是否由 AI 生成，可以透過 Gemini App 進行驗證。以下是操作步驟：</p>
+
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h3>準備音樂檔案</h3>
+                <p>將你想要驗證的音樂檔案準備好（支援 WAV、MP3 等常見格式）。</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h3>上傳到 Gemini App</h3>
+                <p>打開 <a href="https://gemini.google.com" target="_blank" style="color:#7c3aed;">gemini.google.com</a>，在對話框中點擊附件按鈕，上傳音樂檔案。</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h3>輸入驗證指令</h3>
+                <p>上傳音樂檔案後，在對話框輸入以下提示詞：</p>
+<pre>請幫我檢查這段音樂是否包含 SynthID 浮水印</pre>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+                <h3>查看驗證結果</h3>
+                <p>Gemini 會分析音訊並告訴你是否偵測到 SynthID 浮水印。如果有，代表這段音樂是由 AI 生成的。</p>
+            </div>
+        </div>
+
+        <img src="../images/img17.jpg" alt="上傳音樂進行 SynthID 驗證的畫面" class="screenshot-img">
+
+        <div class="box info">
+            &#128161; <strong>小知識：</strong>即使音樂經過 MP3 壓縮、剪輯、加速、減速等處理，SynthID 浮水印仍然可以被偵測到，韌性非常高。
+        </div>
+    </div>
+
+    <!-- Slide 4: 實戰情境 1-3（完整提示詞） -->
+    <div class="slide">
+        <h1>&#127916; 實戰情境 1-3</h1>
+        <h2>三種常見使用場景</h2>
+
         <div class="concept-grid">
             <div class="card">
-                <h3>🎥 情境 1：YouTube Vlog 配樂</h3>
-                <p>為旅遊 Vlog 製作輕快的背景音樂</p>
-                <pre><code>Create a cheerful and inspiring travel vlog background music. Acoustic guitar with light percussion. No vocals. 120 BPM.</code></pre>
+                <h3>&#127909; 情境 1：YouTube Vlog 配樂</h3>
+                <p><strong>需求：</strong>為 3 分鐘旅遊 Vlog 製作輕快背景音樂</p>
+<pre><code>Create a cheerful and inspiring travel vlog background music. Acoustic guitar with light percussion and soft synth pads. Feel-good and adventurous mood. No vocals. 120 BPM.</code></pre>
                 <div class="box success" style="margin-top: 0.8rem;">
-                    ✅ 重點：指定 No vocals，避免人聲干擾旁白
+                    &#9989; <strong>重點解析：</strong>指定 <code>No vocals</code> 避免人聲干擾旁白；<code>feel-good</code> 設定正面情緒；<code>light percussion</code> 讓節奏不搶鏡。多段 30 秒串接可覆蓋整支影片。
                 </div>
             </div>
             <div class="card">
-                <h3>🎙️ 情境 2：Podcast 開場</h3>
-                <p>製作科技類 Podcast 的開場音效</p>
-                <pre><code>Short tech podcast intro jingle. Modern electronic beat with futuristic synth sounds. 100 BPM.</code></pre>
+                <h3>&#127897; 情境 2：Podcast 開場</h3>
+                <p><strong>需求：</strong>科技 Podcast 的開場 jingle</p>
+<pre><code>Short tech podcast intro jingle. Modern electronic beat with futuristic synth sounds and a catchy melody hook. Energetic and professional. 100 BPM.</code></pre>
                 <div class="box success" style="margin-top: 0.8rem;">
-                    ✅ 重點：用 Short 和 jingle 暗示要簡短的片段
+                    &#9989; <strong>重點解析：</strong>用 <code>Short</code> 和 <code>jingle</code> 暗示要簡短片段；<code>futuristic synth</code> 營造科技感；<code>catchy melody hook</code> 確保記憶點。
                 </div>
             </div>
             <div class="card">
-                <h3>📊 情境 3：簡報背景音樂</h3>
-                <p>為企業簡報製作優雅的背景配樂</p>
-                <pre><code>Corporate presentation background music. Gentle piano with soft strings. 90 BPM. No vocals.</code></pre>
+                <h3>&#128202; 情境 3：簡報背景音樂</h3>
+                <p><strong>需求：</strong>企業簡報的優雅背景配樂</p>
+<pre><code>Corporate presentation background music. Gentle piano with soft strings. Clean, professional, and uplifting. Minimal and not distracting. 90 BPM. No vocals.</code></pre>
                 <div class="box success" style="margin-top: 0.8rem;">
-                    ✅ 重點：Corporate 風格 + 慢節奏，營造專業感
+                    &#9989; <strong>重點解析：</strong><code>Corporate</code> 設定商務調性；<code>Minimal and not distracting</code> 確保不搶簡報焦點；慢節奏 90 BPM 營造沉穩感。
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Slide 4: 實戰情境 4-5 -->
+    <!-- Slide 5: 實戰情境 4-5（完整提示詞） -->
     <div class="slide">
-        <h1>🎬 實戰情境 4-5</h1>
+        <h1>&#127916; 實戰情境 4-5</h1>
         <h2>進階應用場景</h2>
+
         <div class="concept-grid">
             <div class="card">
-                <h3>📱 情境 4：社群短影音</h3>
-                <p>為 TikTok / Reels / Shorts 製作洗腦配樂</p>
-                <pre><code>Trendy social media short video music. Catchy beat with bass and trap hi-hats. 130 BPM.</code></pre>
+                <h3>&#128241; 情境 4：社群短影音</h3>
+                <p><strong>需求：</strong>TikTok / Reels / Shorts 的洗腦配樂</p>
+<pre><code>Trendy social media short video music. Catchy beat with bass and trap hi-hats. Fun and energetic with a memorable drop. 130 BPM.</code></pre>
                 <div class="box success" style="margin-top: 0.8rem;">
-                    ✅ 重點：Catchy + Trendy，打造容易上癮的節奏
+                    &#9989; <strong>重點解析：</strong><code>Trendy</code> 追求流行感；<code>Catchy</code> + <code>memorable drop</code> 打造容易上癮的洗腦節奏；<code>trap hi-hats</code> 是當下短影音的標配音色。
                 </div>
             </div>
             <div class="card">
-                <h3>📸 情境 5：旅遊照片配樂</h3>
-                <p>上傳旅遊照片，讓 AI 感知情境自動配樂</p>
-                <pre><code>Look at this travel photo and compose a nostalgic, warm soundtrack. Use acoustic instruments. Bittersweet and beautiful.</code></pre>
+                <h3>&#128248; 情境 5：旅遊照片配樂</h3>
+                <p><strong>需求：</strong>上傳旅遊照片，讓 AI 感知情境自動配樂</p>
+<pre><code>Look at this travel photo and compose a nostalgic, warm soundtrack that captures the memory. Use acoustic instruments like guitar and light strings. Bittersweet and beautiful.</code></pre>
                 <div class="box info" style="margin-top: 0.8rem;">
-                    💡 重點：這是 Part 3 的圖片生成音樂功能，搭配文字提示效果更好
+                    &#128161; <strong>重點解析：</strong>這是圖片生成音樂功能。<code>nostalgic</code> 和 <code>bittersweet</code> 強調懷舊感；<code>captures the memory</code> 引導 AI 理解這是回憶場景。搭配照片上傳效果更好。
                 </div>
-                <img src="../images/img18.jpg" alt="截圖 18" class="screenshot-img">
+                <img src="../images/img18.jpg" alt="上傳旅遊照片並生成配樂的完整對話畫面" class="screenshot-img">
             </div>
         </div>
+
         <div class="box warning" style="margin-top: 1.5rem;">
-            ⚠️ <strong>提醒：</strong>目前每次生成約 30 秒。若需要更長的音樂，可以多段串接，或使用 Lyria RealTime API 即時生成。
+            &#9888;&#65039; <strong>提醒：</strong>目前 Gemini App 每次生成約 30 秒。若需要更長的音樂，可以：<strong>1)</strong> 多段串接，用 Audacity 等工具剪輯拼接；<strong>2)</strong> 使用 Lyria RealTime API 進行串流式持續生成；<strong>3)</strong> 保持一致的風格描述確保片段間的連貫性。
         </div>
     </div>
 
-    <!-- Slide 5: FAQ 常見問題 -->
+    <!-- Slide 6: FAQ Q1-Q3 -->
     <div class="slide">
-        <h1>❓ FAQ 常見問題</h1>
-        <h2>你可能想問的問題</h2>
+        <h1>&#10067; FAQ 常見問題（上）</h1>
+        <h2>Q1 - Q3</h2>
 
         <div class="faq-item">
-            <div class="question">Q1：只有 30 秒怎麼辦？</div>
+            <div class="question">Q1：生成的音樂只有 30 秒，怎麼做更長的？</div>
             <div class="answer">
-                <strong>A：</strong>目前 Gemini App 每次生成約 30 秒。解決方案：<br>
-                ① 多段串接：生成多段後用 Audacity 等工具剪輯拼接<br>
-                ② 使用 <code>Lyria RealTime API</code>，可以透過程式控制生成更長的音樂片段
+                <strong>A：</strong>目前 Gemini App 的 Lyria 3 限制為每次約 30 秒。以下是三種延長方案：
+                <ul>
+                    <li><strong>多段串接法：</strong>生成多段相同風格的片段，用免費軟體 <a href="https://www.audacityteam.org/" target="_blank" style="color:#7c3aed;">Audacity</a> 或 CapCut 剪輯拼接。記得在每段提示詞中保持一致的風格描述，確保片段間的連貫性。</li>
+                    <li><strong>API 串流法：</strong>使用 Lyria RealTime API（Part 5 教的），可以透過程式控制持續串流生成，理論上沒有時間限制。</li>
+                    <li><strong>循環使用法：</strong>30 秒的片段如果首尾銜接順暢，可以設定循環播放，適合背景音樂使用。</li>
+                </ul>
             </div>
         </div>
 
         <div class="faq-item">
-            <div class="question">Q2：可以商用嗎？</div>
+            <div class="question">Q2：生成的音樂可以商用嗎？</div>
             <div class="answer">
-                <strong>A：</strong>Google 尚未明確公佈 Lyria 3 生成音樂的完整商用授權條款。建議持續關注 <a href="https://ai.google.dev/" target="_blank" style="color: #7c3aed;">Google AI 官方網站</a> 的最新公告與服務條款更新。
+                <strong>A：</strong>Google 目前尚未明確公佈 Lyria 3 生成音樂的完整商業授權條款。使用建議：
+                <ul>
+                    <li><strong>個人使用：</strong>學習、練習、個人影片等基本上沒問題</li>
+                    <li><strong>商業用途：</strong>請持續關注 <a href="https://ai.google.dev/" target="_blank" style="color: #7c3aed;">Google AI 官方網站</a> 的最新使用條款更新</li>
+                    <li><strong>注意事項：</strong>所有生成的音樂都帶有 SynthID 浮水印，會被識別為 AI 生成內容</li>
+                </ul>
             </div>
         </div>
 
         <div class="faq-item">
-            <div class="question">Q3：可以指定歌手聲音嗎？</div>
+            <div class="question">Q3：可以指定特定歌手的聲音嗎？</div>
             <div class="answer">
-                <strong>A：</strong>不行。Lyria 3 不支援模仿特定歌手的聲音，這是為了保護藝人的聲音權益。系統鼓勵用戶創造原創的音樂風格，而非複製他人聲音。
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="question">Q4：中文提示效果好嗎？</div>
-            <div class="answer">
-                <strong>A：</strong>建議使用英文提示詞，效果最佳。如果不擅長英文，可以搭配 Part 4 的 <code>Gem 機器人</code> 來翻譯與優化你的中文描述。
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="question">Q5：會侵權嗎？</div>
-            <div class="answer">
-                <strong>A：</strong>Google 有內建過濾系統，會盡量避免生成與現有歌曲過於相似的內容。但此系統並非 100% 完美，建議重要作品發布前自行檢查。
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="question">Q6：手機可以用嗎？</div>
-            <div class="answer">
-                <strong>A：</strong>目前建議優先使用桌面版 Gemini App（網頁版），功能最完整。手機版 Gemini App 的音樂生成功能會隨後推出。
+                <strong>A：</strong>不行。Gemini 的設計原則是鼓勵<strong>原創表達</strong>，不會模仿特定藝術家的聲音，這是為了保護藝人的聲音權益。你可以做的是：
+                <ul>
+                    <li>描述聲音<strong>特質</strong>：例如「沙啞的男聲」「高亢清亮的女聲」「溫暖低沉的嗓音」</li>
+                    <li>描述聲音<strong>類型</strong>：例如 <code>breathy female vocals</code>、<code>deep baritone male vocals</code></li>
+                    <li>但絕對<strong>不能</strong>要求「像某某歌手的聲音」</li>
+                </ul>
             </div>
         </div>
     </div>
 
-    <!-- Slide 6: 延伸資源 -->
+    <!-- Slide 7: FAQ Q4-Q6 -->
     <div class="slide">
-        <h1>🔗 延伸資源</h1>
+        <h1>&#10067; FAQ 常見問題（下）</h1>
+        <h2>Q4 - Q6</h2>
+
+        <div class="faq-item">
+            <div class="question">Q4：中文提示詞效果好嗎？</div>
+            <div class="answer">
+                <strong>A：</strong>目前官方支援 8 種語言（英文、日文、韓文、德文、西班牙文、法文、印地文、葡萄牙文），暫不含中文。實際使用建議：
+                <ul>
+                    <li><strong>中文可以用：</strong>Gemini 會理解中文意思，基本的音樂生成沒問題</li>
+                    <li><strong>英文效果更佳：</strong>關鍵的音樂描述（風格、樂器、情緒）建議用英文，AI 對英文音樂術語的理解最精確</li>
+                    <li><strong>搭配 Gem 機器人：</strong>可以用 Part 4 介紹的「音樂提示詞大師」Gem 來翻譯和優化你的中文描述</li>
+                    <li><strong>混合使用：</strong>中文說明需求 + 英文關鍵字，例如「幫我做一首 upbeat pop song with acoustic guitar」</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Q5：生成的音樂是原創的嗎？會不會侵權？</div>
+            <div class="answer">
+                <strong>A：</strong>Lyria 3 具備過濾系統，會盡量避免生成與現有歌曲過於相似的內容。但需注意：
+                <ul>
+                    <li>Google 承認過濾器<strong>不是 100% 完美</strong></li>
+                    <li>如果你發現生成結果與某首歌非常相似，建議<strong>不要使用</strong>該段音樂</li>
+                    <li>重要作品發布前建議自行檢查，可使用 Shazam 等工具初步比對</li>
+                    <li>避免在提示詞中直接寫「像 XX 歌手的 XX 歌」，這會增加相似風險</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="question">Q6：手機上可以使用嗎？</div>
+            <div class="answer">
+                <strong>A：</strong>音樂生成功能目前的支援情況：
+                <ul>
+                    <li><strong>桌面版網頁：</strong>功能最完整，建議優先使用（gemini.google.com）</li>
+                    <li><strong>手機版 App：</strong>Gemini App 的音樂生成功能會隨後推出，請確認更新到最新版本</li>
+                    <li><strong>Lyria RealTime API：</strong>不限裝置，任何能執行 Python 的環境都可使用</li>
+                    <li><strong>Prompt DJ 等網頁工具：</strong>手機瀏覽器可開啟，但操作體驗較差，建議用桌面版</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="box info">
+            &#128161; <strong>持續關注：</strong>AI 音樂生成是快速發展的領域，功能和限制可能隨時更新。建議定期查看 Google 官方公告。
+        </div>
+    </div>
+
+    <!-- Slide 8: 延伸資源（詳細版） -->
+    <div class="slide">
+        <h1>&#128279; 延伸資源</h1>
         <h2>官方資源</h2>
         <div class="concept-grid">
             <div class="card">
-                <h3>🌐 Gemini App</h3>
-                <p>Google 的 AI 助手，整合 Lyria 3 音樂生成功能。</p>
+                <h3>&#127760; Gemini App</h3>
+                <p>Google 的 AI 助手，整合 Lyria 3 音樂生成功能。免費版也能使用音樂生成。</p>
                 <p><a href="https://gemini.google.com/" target="_blank" style="color: #7c3aed;">gemini.google.com</a></p>
             </div>
             <div class="card">
-                <h3>🛠️ Google AI Studio</h3>
-                <p>開發者工具，可測試 Gemini API 與 Lyria RealTime API。</p>
+                <h3>&#128736; Google AI Studio</h3>
+                <p>開發者工具，可取得 API 金鑰、測試 Gemini API 與 Lyria RealTime API。</p>
                 <p><a href="https://aistudio.google.com/" target="_blank" style="color: #7c3aed;">aistudio.google.com</a></p>
             </div>
             <div class="card">
-                <h3>📖 Lyria RealTime API 文件</h3>
-                <p>官方 API 文件，適合開發者深入研究。</p>
-                <p><a href="https://ai.google.dev/" target="_blank" style="color: #7c3aed;">ai.google.dev</a></p>
+                <h3>&#128214; Lyria RealTime API 文件</h3>
+                <p>官方 API 文件，包含完整的參數說明、範例程式碼與最佳實踐。</p>
+                <p><a href="https://ai.google.dev/gemini-api/docs/music-generation?hl=zh-tw" target="_blank" style="color: #7c3aed;">ai.google.dev/.../music-generation</a></p>
             </div>
             <div class="card">
-                <h3>🎵 DeepMind Lyria 3</h3>
-                <p>Google DeepMind 的音樂生成模型技術介紹。</p>
-                <p><a href="https://deepmind.google/" target="_blank" style="color: #7c3aed;">deepmind.google</a></p>
+                <h3>&#127925; DeepMind Lyria 3</h3>
+                <p>Google DeepMind 的音樂生成模型技術介紹與研究論文。</p>
+                <p><a href="https://deepmind.google/models/lyria/" target="_blank" style="color: #7c3aed;">deepmind.google/models/lyria</a></p>
             </div>
             <div class="card">
-                <h3>🔒 SynthID</h3>
-                <p>Google DeepMind 的 AI 內容浮水印技術。</p>
-                <p><a href="https://deepmind.google/technologies/synthid/" target="_blank" style="color: #7c3aed;">SynthID 官方頁面</a></p>
+                <h3>&#128274; SynthID</h3>
+                <p>Google DeepMind 的 AI 內容浮水印技術說明。</p>
+                <p><a href="https://deepmind.google/models/synthid/" target="_blank" style="color: #7c3aed;">deepmind.google/models/synthid</a></p>
             </div>
         </div>
 
-        <h2>搭配工具推薦</h2>
+        <h2>參考文章與影片</h2>
+        <table>
+            <thead>
+                <tr><th>資源</th><th>來源</th><th>說明</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="https://www.koc.com.tw/archives/631603" target="_blank" style="color:#7c3aed;">Gemini 正式加入音樂生成功能</a></td>
+                    <td>KocPC</td>
+                    <td>Lyria 3 功能介紹與實測</td>
+                </tr>
+                <tr>
+                    <td><a href="https://technews.tw/2026/02/19/gemini-app-now-features-lyria-3/" target="_blank" style="color:#7c3aed;">Gemini 導入 Lyria 3 模型</a></td>
+                    <td>TechNews</td>
+                    <td>技術新聞報導</td>
+                </tr>
+                <tr>
+                    <td><a href="https://vocus.cc/article/69966db9fd89780001725740" target="_blank" style="color:#7c3aed;">Gemini 可以創作音樂啦</a></td>
+                    <td>方格子</td>
+                    <td>附提示詞指南的詳細教學</td>
+                </tr>
+                <tr>
+                    <td><a href="https://youtu.be/DHz0cYd_xlI" target="_blank" style="color:#7c3aed;">Gemini 音樂模型生成配樂</a></td>
+                    <td>YouTube</td>
+                    <td>影片示範教學</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Slide 9: 搭配工具 + 總結 -->
+    <div class="slide">
+        <h1>&#128736; 搭配工具推薦</h1>
+        <h2>讓 AI 音樂發揮最大價值</h2>
+
         <div class="concept-grid">
             <div class="card">
-                <h3>🎧 Audacity</h3>
-                <p>免費開源的音訊編輯軟體，適合剪輯、拼接 AI 生成的音樂片段。</p>
+                <h3>&#127911; Audacity</h3>
+                <p><strong>免費開源</strong>的音訊編輯軟體，最適合剪輯、拼接多段 AI 生成的音樂片段。</p>
+                <ul>
+                    <li>串接多段 30 秒音樂</li>
+                    <li>淡入淡出效果</li>
+                    <li>調整音量、速度</li>
+                    <li>匯出 MP3 / WAV 格式</li>
+                </ul>
                 <p><a href="https://www.audacityteam.org/" target="_blank" style="color: #7c3aed;">audacityteam.org</a></p>
             </div>
             <div class="card">
-                <h3>🎬 CapCut</h3>
-                <p>免費影片剪輯工具，可將 AI 音樂搭配影片使用。</p>
+                <h3>&#127916; CapCut</h3>
+                <p><strong>免費</strong>影片剪輯工具，可將 AI 音樂與影片完美搭配。</p>
+                <ul>
+                    <li>匯入 AI 音樂作為配樂</li>
+                    <li>自動踩點節奏對齊</li>
+                    <li>豐富的轉場與特效</li>
+                    <li>直接輸出到社群平台</li>
+                </ul>
                 <p><a href="https://www.capcut.com/" target="_blank" style="color: #7c3aed;">capcut.com</a></p>
             </div>
             <div class="card">
-                <h3>🎨 Canva</h3>
-                <p>線上設計工具，適合製作搭配音樂的社群圖文內容。</p>
+                <h3>&#127912; Canva</h3>
+                <p><strong>免費/付費</strong>線上設計工具，適合製作搭配音樂的社群圖文內容。</p>
+                <ul>
+                    <li>製作 AI 音樂的封面圖</li>
+                    <li>設計音樂分享的社群貼文</li>
+                    <li>製作搭配音樂的影片</li>
+                    <li>豐富的模板與素材庫</li>
+                </ul>
                 <p><a href="https://www.canva.com/" target="_blank" style="color: #7c3aed;">canva.com</a></p>
             </div>
+        </div>
+
+        <h2 style="margin-top: 2rem;">&#127775; 課程總結</h2>
+        <div class="box success">
+            <p><strong>恭喜你完成了 Gemini 音樂生成術的完整學習！</strong></p>
+            <p>你已經學會了：</p>
+            <ul>
+                <li>&#9989; 用文字和圖片生成 AI 音樂</li>
+                <li>&#9989; 建立 Gem 機器人作為音樂顧問</li>
+                <li>&#9989; 使用 Lyria RealTime API 進行程式化音樂生成</li>
+                <li>&#9989; 掌握 MIDST 提示詞公式</li>
+                <li>&#9989; 了解 SynthID 浮水印機制</li>
+                <li>&#9989; 五種實戰情境的應用</li>
+            </ul>
+            <p style="margin-top: 1rem; font-size: 1.1rem;"><strong>現在就去 Gemini 試試看吧！記住：好的提示詞 = 好的音樂。多嘗試、多實驗，找到屬於你的 AI 音樂風格！</strong></p>
         </div>
     </div>
 

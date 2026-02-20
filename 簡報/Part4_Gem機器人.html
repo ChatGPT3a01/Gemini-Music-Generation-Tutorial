@@ -392,9 +392,17 @@ th {
 
 tr:hover { background: #faf5ff; }
 
+ul, ol { padding-left: 1.5em; margin-bottom: 12px; }
+li { margin-bottom: 4px; line-height: 1.8; font-size: 1.05em; }
+
 .screenshot-img {
   max-width: 100%; border-radius: 12px; margin: 12px 0;
   box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+/* 兩欄佈局 */
+.two-col {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 16px 0;
 }
 
 @media (max-width: 768px) {
@@ -403,6 +411,7 @@ tr:hover { background: #faf5ff; }
   .cover h1 { font-size: 2em; }
   .navbar-title { font-size: 14px; }
   .concept-grid { grid-template-columns: 1fr; }
+  .two-col { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -425,11 +434,12 @@ tr:hover { background: #faf5ff; }
     <div class="content-card cover">
       <div class="subtitle">Part 4 Gem Bot</div>
       <h1>Gem 機器人——打造專屬作曲助手</h1>
-      <p class="desc">建立「音樂提示詞大師」Gem，讓 AI 幫你寫出完美提示詞</p>
+      <p class="desc">建立「音樂提示詞大師」Gem，讓 AI 幫你寫出完美提示詞，再一鍵生成音樂</p>
       <div>
         <span class="highlight">自訂機器人</span>
         <span class="highlight">提示詞產生器</span>
         <span class="highlight">MIDST 公式</span>
+        <span class="highlight">靈感顧問</span>
       </div>
     </div>
   </div>
@@ -438,145 +448,247 @@ tr:hover { background: #faf5ff; }
   <div class="slide" data-index="1">
     <div class="content-card">
       <h2>為什麼要建立音樂 Gem？</h2>
+      <p>Gems 是 Gemini 的自訂 AI 機器人功能。你可以為特定用途打造專屬 Gem，讓它成為你的<strong>音樂創作助手</strong>。</p>
       <div class="concept-grid">
         <div class="card">
           <div class="icon">&#127912;</div>
           <h3>統一風格</h3>
-          <p>設定好一次，之後每次生成都維持一致的音樂風格與品質標準。</p>
+          <p>設定好一次，Gem 會記住你偏好的音樂風格，每次都產出一致風格的提示詞，維持品牌調性。</p>
         </div>
         <div class="card">
           <div class="icon">&#128161;</div>
           <h3>降低門檻</h3>
-          <p>不需要記住複雜的提示詞公式，Gem 會引導你一步步完成。</p>
+          <p>不需要記住複雜的提示詞公式，Gem 會用對話引導你一步步完成，即使完全不懂音樂也能用。</p>
         </div>
         <div class="card">
           <div class="icon">&#128640;</div>
           <h3>批量創作</h3>
-          <p>快速產出多種風格變化的提示詞，大幅提升創作效率。</p>
+          <p>快速為不同場景（Vlog、Podcast、簡報）產出多種風格變化的提示詞，大幅提升效率。</p>
         </div>
         <div class="card">
           <div class="icon">&#127911;</div>
           <h3>學習樂理</h3>
-          <p>Gem 會解釋每個選擇背後的音樂理論，邊做邊學。</p>
+          <p>Gem 會解釋每個選擇背後的音樂理論，讓你邊做邊學，提示詞越寫越專業。</p>
         </div>
       </div>
       <div class="box warning">
-        &#9888;&#65039; <strong>注意：</strong>Gem 本身不能直接生成音樂，但可以作為「提示詞產生器」和「音樂靈感顧問」，幫你組織出最有效的提示詞，再拿去 Gemini 主介面生成音樂。
+        &#9888;&#65039; <strong>重要觀念：</strong>Gem 本身<strong>不能直接呼叫音樂生成工具</strong>，但它是最佳的「提示詞產生器」和「音樂靈感顧問」——幫你構思出完美提示詞，再拿去 Gemini 主介面生成音樂。
       </div>
     </div>
   </div>
 
-  <!-- Slide 3: 建立步驟 1-4 -->
+  <!-- Slide 3: Step 1 & 2 — 找到 Gems 並建立新 Gem -->
   <div class="slide" data-index="2">
     <div class="content-card">
-      <h2>建立你的音樂 Gem：步驟 1-4</h2>
-
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-content">
-          <h3>找到 Gems 功能</h3>
-          <p>在 Gemini 左側面板找到 <code>Gems</code> 選項。</p>
-          <img src="../images/img10.jpg" alt="截圖 10" class="screenshot-img">
+      <h2>建立音樂 Gem：Step 1 & 2</h2>
+      <div class="two-col">
+        <div>
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h3>進入 Gems 管理頁面</h3>
+              <p>打開 Gemini App，在<strong>左側面板</strong>中找到「Gems」或「我的 Gem」選項，點擊進入管理頁面。</p>
+              <img src="../images/img10.jpg" alt="Gemini 左側面板中 Gems 入口位置" class="screenshot-img">
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h3>點擊「建立新 Gem」</h3>
+              <p>在 Gems 頁面中，點擊<strong>「建立新 Gem」</strong>按鈕，進入 Gem 設定頁面。</p>
+              <p>你會看到兩個主要欄位：</p>
+              <ul>
+                <li><strong>名稱</strong>——Gem 的顯示名稱</li>
+                <li><strong>指令</strong>——定義 Gem 的行為與專長</li>
+              </ul>
+              <img src="../images/img11.jpg" alt="點擊建立新 Gem 的按鈕" class="screenshot-img">
+            </div>
+          </div>
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-content">
-          <h3>建立新 Gem</h3>
-          <p>點擊「建立新 Gem」按鈕，進入設定頁面。</p>
-          <img src="../images/img11.jpg" alt="截圖 11" class="screenshot-img">
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-content">
-          <h3>輸入 Gem 指令</h3>
-          <p>將以下指令完整貼入 Gem 的系統指令欄位：</p>
-<pre>你是一位專業的 AI 音樂提示詞大師。你的工作是幫助使用者創作出高品質的音樂生成提示詞，讓 Gemini 的 Lyria 3 模型能生成最好的音樂。
+  <!-- Slide 4: Step 3 — 設定 Gem 指令（完整內容） -->
+  <div class="slide" data-index="3">
+    <div class="content-card">
+      <h2>建立音樂 Gem：Step 3 — 設定指令</h2>
+      <p>在 Gem 的「指令」欄位中，貼上以下完整的系統指令。這段指令定義了 Gem 的角色、工作流程與輸出格式：</p>
+      <pre>你是一位專業的 AI 音樂提示詞大師。你的工作是幫助使用者創作出
+高品質的音樂生成提示詞，讓 Gemini 的 Lyria 3 模型能生成最好的音樂。
 
 你的工作流程：
 1. 先詢問使用者想要什麼類型的音樂（用途、情境、心情）
-2. 根據回答，用 MIDST 公式組織提示詞
+2. 根據回答，用 MIDST 公式組織提示詞：
+   - M（Mood 情緒）：歡樂、憂傷、激昂、平靜...
+   - I（Instrument 樂器）：鋼琴、吉他、鼓組、弦樂...
+   - D（Dynamic 動態）：漸強、漸弱、爆發...
+   - S（Style 風格）：流行、爵士、古典、電子...
+   - T（Tempo 節奏）：BPM、快慢描述
 3. 產出「英文版」和「中文版」兩種提示詞
-4. 解釋為什麼這樣寫</pre>
-          <img src="../images/img12.jpg" alt="截圖 12" class="screenshot-img">
-        </div>
-      </div>
+4. 解釋為什麼這樣寫，讓使用者學到東西
 
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-content">
-          <h3>命名並儲存</h3>
-          <p>將 Gem 命名為「<strong>音樂提示詞大師</strong>」，然後點擊儲存。</p>
-          <img src="../images/img13.jpg" alt="截圖 13" class="screenshot-img">
+注意事項：
+- 提示詞要具體、有畫面感
+- 可以建議加入人聲或純器樂
+- 如果使用者提供圖片，也要能根據圖片構思配樂提示
+- 每次產出 2-3 個不同版本供選擇</pre>
+      <img src="../images/img12.jpg" alt="在 Gem 指令欄位中輸入設定" class="screenshot-img">
+      <div class="box info">
+        &#128161; <strong>客製化建議：</strong>你可以根據自己的需求修改指令，例如加入「只產出純器樂版本」、「偏好 Lo-fi 風格」等個人偏好，讓 Gem 更貼合你的使用習慣。
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5: Step 4 — 命名並儲存 -->
+  <div class="slide" data-index="4">
+    <div class="content-card">
+      <h2>建立音樂 Gem：Step 4 — 命名並儲存</h2>
+      <div class="two-col">
+        <div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <h3>命名你的 Gem</h3>
+              <p>在名稱欄位輸入一個好記的名字：</p>
+              <ul>
+                <li><strong>中文名：</strong><code>音樂提示詞大師</code></li>
+                <li><strong>英文名：</strong><code>Music Prompt Master</code></li>
+              </ul>
+              <p style="margin-top:12px;">確認名稱與指令都填好後，點擊右上角的<strong>「儲存」</strong>按鈕。</p>
+              <div class="box success">
+                &#9989; 儲存成功後，你的音樂 Gem 就會出現在左側面板的 Gems 清單中，隨時可以開啟使用。
+              </div>
+            </div>
+          </div>
+          <img src="../images/img13.jpg" alt="命名並儲存 Gem" class="screenshot-img">
+        </div>
+        <div>
+          <h3>MIDST 公式速查表</h3>
+          <p>Gem 內建的 MIDST 公式是組織提示詞的核心框架：</p>
+          <table>
+            <thead>
+              <tr><th>字母</th><th>全稱</th><th>說明</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>M</strong></td><td>Mood 情緒</td><td>歡樂、憂傷、激昂、平靜</td></tr>
+              <tr><td><strong>I</strong></td><td>Instrument 樂器</td><td>鋼琴、吉他、鼓、弦樂</td></tr>
+              <tr><td><strong>D</strong></td><td>Dynamic 動態</td><td>漸強、漸弱、爆發</td></tr>
+              <tr><td><strong>S</strong></td><td>Style 風格</td><td>流行、爵士、古典、電子</td></tr>
+              <tr><td><strong>T</strong></td><td>Tempo 節奏</td><td>BPM 數值、快慢描述</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Slide 4: 使用工作流程 -->
-  <div class="slide" data-index="3">
+  <!-- Slide 6: 使用工作流程 -->
+  <div class="slide" data-index="5">
     <div class="content-card">
-      <h2>使用工作流程</h2>
+      <h2>Gem 的使用工作流程</h2>
       <p>建立好 Gem 之後，按照以下流程使用，就能快速產出高品質音樂：</p>
       <div class="flow">
-        <div class="flow-item">&#129302; 打開 Gem<br><small>音樂提示詞大師</small></div>
+        <div class="flow-item">&#129302; 打開音樂 Gem<br><small>音樂提示詞大師</small></div>
         <div class="flow-arrow">&#10132;</div>
-        <div class="flow-item">&#128172; 告訴 Gem 需求<br><small>描述想要的音樂</small></div>
+        <div class="flow-item">&#128172; 描述你的需求<br><small>用途、情境、心情</small></div>
         <div class="flow-arrow">&#10132;</div>
-        <div class="flow-item">&#10024; Gem 產出提示詞<br><small>英文 + 中文版本</small></div>
+        <div class="flow-item">&#10024; Gem 產出提示詞<br><small>英文 + 中文 2-3 版</small></div>
         <div class="flow-arrow">&#10132;</div>
-        <div class="flow-item">&#128203; 複製提示詞<br><small>選擇最適合的版本</small></div>
+        <div class="flow-item">&#128203; 複製最佳版本<br><small>選擇最適合的</small></div>
         <div class="flow-arrow">&#10132;</div>
-        <div class="flow-item">&#127925; 回 Gemini 生成<br><small>貼上提示詞生成音樂</small></div>
+        <div class="flow-item">&#127925; 回 Gemini 生成<br><small>貼上提示詞生成</small></div>
       </div>
-      <div style="text-align:center; margin-top: 20px;">
+      <div style="text-align:center; margin-top: 16px;">
         <div class="flow">
-          <div class="flow-item" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">&#128260; 不滿意？回 Gem 調整<br><small>修改風格 / 參數 / 情緒</small></div>
+          <div class="flow-item" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">&#128260; 不滿意？回 Gem 調整提示詞<br><small>修改風格 / 參數 / 情緒 / 樂器</small></div>
         </div>
       </div>
       <div class="box info">
-        &#128161; <strong>小技巧：</strong>Gem 會記住你的對話脈絡，你可以持續在同一個對話中微調提示詞，不需要每次重新描述需求。
+        &#128161; <strong>小技巧：</strong>Gem 會記住你的對話脈絡，可以在同一個對話中持續微調提示詞。不需要每次重新描述需求，直接說「再快一點」「換成爵士風」就好。
+      </div>
+      <div class="box success">
+        &#9989; <strong>效率比較：</strong>自己從零寫提示詞可能要花 5-10 分鐘反覆嘗試，用 Gem 只需 30 秒對話就能取得專業級提示詞。
       </div>
     </div>
   </div>
 
-  <!-- Slide 5: Gem 對話範例 -->
-  <div class="slide" data-index="4">
+  <!-- Slide 7: Gem 對話範例（詳細多版本） -->
+  <div class="slide" data-index="6">
     <div class="content-card">
-      <h2>Gem 對話範例</h2>
+      <h2>Gem 對話範例：咖啡廳背景音樂</h2>
       <div class="chat">
         <div class="chat-bubble user">
           <div class="label">&#128100; 使用者</div>
-          我想要一首咖啡廳背景音樂，放鬆的氛圍，適合閱讀或工作時聽。
+          我想要一首適合在咖啡廳播放的背景音樂，放鬆的氛圍，適合閱讀或工作時聽。
         </div>
         <div class="chat-bubble bot">
           <div class="label">&#129302; 音樂提示詞大師 Gem</div>
-          好的！根據你的需求，我幫你準備了三種風格的提示詞：<br><br>
+          好的！讓我根據 MIDST 公式幫你構思。先確認幾個方向：<br>
+          1. 偏好什麼風格？（爵士、Bossa Nova、Lo-fi...）<br>
+          2. 需要人聲嗎？<br>
+          3. 早晨 / 午後 / 晚間的氛圍？<br><br>
+          以下先給你三個版本：<br><br>
           <strong>A. 爵士風 &#127927;</strong><br>
-          <code>Smooth jazz cafe music with brushed drums, upright bass, and mellow saxophone. 80 BPM. Warm, relaxing, and intimate atmosphere.</code>
+          <code>Smooth jazz cafe music with brushed drums, upright bass, and mellow saxophone. Relaxed and warm, perfect for a cozy afternoon coffee shop. Tempo around 80 BPM.</code>
           <br><br>
           <strong>B. Lo-fi 風 &#127911;</strong><br>
-          <code>Lo-fi chill hop with soft piano chords, vinyl crackle, and gentle drum beats. 70 BPM. Cozy, nostalgic, and perfect for studying.</code>
+          <code>Lo-fi chill hop with soft piano chords, vinyl crackle, and gentle drum beats. Dreamy and mellow atmosphere, like studying in a rainy day cafe. 70 BPM.</code>
           <br><br>
           <strong>C. Bossa Nova 風 &#127940;</strong><br>
-          <code>Bossa nova instrumental with nylon guitar, soft percussion, and light flute melody. 110 BPM. Breezy, elegant, and soothing.</code>
+          <code>Bossa nova instrumental with nylon guitar, soft percussion, and light flute melody. Brazilian cafe vibes, warm and breezy. 110 BPM.</code>
         </div>
         <div class="chat-bubble user">
           <div class="label">&#128100; 使用者</div>
-          我喜歡 B 方案！但可以加一點雨聲嗎？
+          我喜歡 B 方案！但可以加一點雨聲的感覺嗎？
         </div>
         <div class="chat-bubble bot">
           <div class="label">&#129302; 音樂提示詞大師 Gem</div>
           沒問題！更新版本：<br><br>
-          <code>Lo-fi chill hop with soft piano chords, vinyl crackle, gentle drum beats, and subtle rain ambience. 70 BPM. Cozy, nostalgic rainy day cafe atmosphere.</code>
+          <code>Lo-fi chill hop with soft piano chords, vinyl crackle, gentle drum beats, and subtle rain ambience. 70 BPM. Cozy, nostalgic rainy day cafe atmosphere. Instrumental only.</code><br><br>
+          &#128218; <strong>解釋：</strong>加入 <code>rain ambience</code> 讓 AI 產生雨聲背景層次，<code>nostalgic</code> 強化懷舊溫暖感。
         </div>
       </div>
-      <img src="../images/img14.jpg" alt="截圖 14" class="screenshot-img">
+      <img src="../images/img14.jpg" alt="與音樂 Gem 對話的畫面" class="screenshot-img">
+    </div>
+  </div>
+
+  <!-- Slide 8: 更多對話範例 + 總結 -->
+  <div class="slide" data-index="7">
+    <div class="content-card">
+      <h2>更多 Gem 對話範例</h2>
+      <h3>範例二：YouTube 開場音樂</h3>
+      <div class="chat">
+        <div class="chat-bubble user">
+          <div class="label">&#128100; 使用者</div>
+          我需要一段科技頻道的 YouTube 開場音樂，大約 10 秒，要有未來感。
+        </div>
+        <div class="chat-bubble bot">
+          <div class="label">&#129302; 音樂提示詞大師 Gem</div>
+          <strong>推薦版本：</strong><br>
+          <code>Short tech intro jingle, futuristic synth arpeggios with punchy electronic drums and a rising build-up. Energetic, modern, and professional. 120 BPM. No vocals.</code><br><br>
+          &#128218; 用了 <code>arpeggios</code>（琶音）營造科技感，<code>rising build-up</code> 讓短短 10 秒也有起承轉合。
+        </div>
+      </div>
+
+      <h3 style="margin-top:24px;">範例三：婚禮進場音樂</h3>
+      <div class="chat">
+        <div class="chat-bubble user">
+          <div class="label">&#128100; 使用者</div>
+          我朋友下週結婚，想要一段浪漫的進場音樂，有弦樂和鋼琴。
+        </div>
+        <div class="chat-bubble bot">
+          <div class="label">&#129302; 音樂提示詞大師 Gem</div>
+          <strong>推薦版本：</strong><br>
+          <code>Romantic wedding entrance music with elegant piano melody and lush string quartet. Gentle, graceful, and heartfelt. Starts soft and builds to a beautiful crescendo. 76 BPM. No vocals.</code><br><br>
+          &#128218; <code>crescendo</code>（漸強）讓進場有由遠而近的儀式感，<code>string quartet</code>（弦樂四重奏）比大編制管弦樂更溫馨。
+        </div>
+      </div>
+
       <div class="box success">
-        &#9989; <strong>重點：</strong>像這樣與 Gem 對話式互動，就能快速產出精準的提示詞，比自己從零開始寫更有效率！
+        &#9989; <strong>重點回顧：</strong>Gem 機器人是你的音樂創作「軍師」——它不直接作曲，但能幫你想出最好的指令。建立一次，終身受用，越對話越了解你的品味！
       </div>
     </div>
   </div>

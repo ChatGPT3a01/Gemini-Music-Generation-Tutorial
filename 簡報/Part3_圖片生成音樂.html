@@ -153,6 +153,26 @@ tr:hover { background: #faf8ff; }
   background: linear-gradient(135deg, #7c3aed, #a855f7);
   color: #fff; font-weight: 700; font-size: 0.95rem; margin-right: 8px;
 }
+
+/* 流程圖 */
+.flow {
+  display: flex; align-items: center; justify-content: center;
+  flex-wrap: wrap; gap: 8px; margin: 24px 0;
+}
+.flow-item {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff; padding: 14px 22px; border-radius: 14px;
+  font-weight: 600; font-size: 0.95em; text-align: center; min-width: 130px;
+}
+.flow-arrow { font-size: 1.6em; color: #a855f7; font-weight: 700; }
+
+/* 兩欄佈局 */
+.two-col {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 16px 0;
+}
+@media (max-width: 900px) {
+  .two-col { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
@@ -180,116 +200,228 @@ tr:hover { background: #faf8ff; }
     <div class="content-card cover">
       <div class="subtitle">Part 3 Image to Music</div>
       <h1>圖片生成音樂</h1>
-      <p class="desc">Lyria 3 最令人驚豔的功能——看圖作曲</p>
+      <p class="desc">Lyria 3 最令人驚豔的功能——看圖作曲，上傳一張照片就能自動配樂</p>
       <div class="tags">
         <span class="highlight">視覺分析</span>
         <span class="highlight">情緒感知</span>
         <span class="highlight">自動配樂</span>
+        <span class="highlight">多模態 AI</span>
       </div>
     </div>
   </div>
 
-  <!-- Slide 2 運作原理 -->
+  <!-- Slide 2 運作原理（詳細版） -->
   <div class="slide">
     <div class="content-card">
-      <h2>運作原理</h2>
-      <p style="margin-bottom:16px;">Gemini 會從三個面向分析你上傳的圖片，然後自動生成與圖片情緒相符的 <strong>30 秒音樂</strong>。</p>
+      <h2>運作原理：AI 如何「看圖聽音」？</h2>
+      <p style="margin-bottom:16px;">Gemini 運用多模態理解能力，從三個維度深度分析你上傳的圖片，再由 Lyria 3 模型將分析結果轉化為 <strong>30 秒的完整音樂</strong>。</p>
       <div class="concept-grid">
         <div class="concept-card">
           <div class="icon">&#128065;&#65039;</div>
-          <h3>視覺元素</h3>
-          <p>辨識圖片中的物體、場景、人物，例如海灘、森林、城市、動物等。</p>
+          <h3>視覺元素辨識</h3>
+          <p>偵測圖片中的場景（海灘、森林、城市）、人物表情、動物、天氣狀況等具體物件，建立「畫面語意」。</p>
         </div>
         <div class="concept-card">
           <div class="icon">&#127912;</div>
-          <h3>色彩氛圍</h3>
-          <p>分析色調與光線——暖色調傾向歡快，冷色調傾向沉靜，高對比則偏向戲劇性。</p>
+          <h3>色彩與光線分析</h3>
+          <p>暖色調（橙、紅、黃）傾向歡快溫暖；冷色調（藍、灰、黑）傾向沉靜憂鬱；高對比則偏向戲劇性與張力。</p>
         </div>
         <div class="concept-card">
           <div class="icon">&#128156;</div>
-          <h3>情緒感受</h3>
-          <p>綜合判斷圖片傳達的情緒：寧靜、興奮、浪漫、神秘、壯闊等，以此決定曲風與節奏。</p>
+          <h3>情緒綜合判斷</h3>
+          <p>結合場景語意與色彩資訊，判定圖片傳達的情緒：寧靜、興奮、浪漫、神秘、壯闊等，以此決定曲風、節奏與配器。</p>
+        </div>
+      </div>
+      <div class="flow">
+        <div class="flow-item">&#128247; 上傳圖片</div>
+        <div class="flow-arrow">&#10132;</div>
+        <div class="flow-item">&#129504; Gemini 視覺分析</div>
+        <div class="flow-arrow">&#10132;</div>
+        <div class="flow-item">&#127926; 情緒 &#8594; 音樂參數</div>
+        <div class="flow-arrow">&#10132;</div>
+        <div class="flow-item">&#127925; Lyria 3 生成 30 秒音樂</div>
+      </div>
+      <div class="box info">
+        &#128161; Gemini 不只是辨識「圖片裡有什麼」，更能理解整張圖的<strong>構圖美學</strong>與<strong>敘事氛圍</strong>，因此同樣是海灘照，夕陽和正午會產出截然不同的配樂。
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3 步驟 1 & 2：準備與上傳 -->
+  <div class="slide">
+    <div class="content-card">
+      <h2>Step 1 & 2：準備圖片並上傳</h2>
+      <div class="two-col">
+        <div>
+          <h3><span class="step-num">1</span> 準備一張圖片</h3>
+          <p>選擇你想要配樂的圖片，以下類型都可以：</p>
+          <ul>
+            <li>風景照片（山、海、草原、城市）</li>
+            <li>旅遊照、生活紀錄</li>
+            <li>寵物照片、人物肖像</li>
+            <li>藝術作品、插畫</li>
+            <li>任何有情緒感的照片</li>
+          </ul>
+          <div class="box warning">
+            &#9888;&#65039; <strong>圖片建議：</strong>選擇情緒明確、主題清晰的圖片，效果會比雜亂的截圖或低解析度照片好很多。
+          </div>
+        </div>
+        <div>
+          <h3><span class="step-num">2</span> 上傳到 Gemini</h3>
+          <p>在 Gemini 對話介面中，點擊輸入框旁的<strong>「附件」或「+」按鈕</strong>，選擇你的圖片上傳。</p>
+          <img src="../images/img07.jpg" alt="上傳按鈕位置示意" class="screenshot-img">
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Slide 3 操作步驟 -->
+  <!-- Slide 4 步驟 3 & 4：指令與結果 -->
   <div class="slide">
     <div class="content-card">
-      <h2>操作步驟</h2>
-      <ul style="margin-top:12px; list-style: none; padding-left: 0;">
-        <li style="margin-bottom:14px;">
-          <span class="step-num">1</span><strong>準備圖片</strong>
-          <p style="margin-left:40px;">風景照、旅遊照、寵物照、藝術作品皆可</p>
-        </li>
-        <li style="margin-bottom:14px;">
-          <span class="step-num">2</span><strong>上傳到 Gemini</strong>
-          <p style="margin-left:40px;">在聊天框點擊附件按鈕，選擇圖片上傳</p>
-        </li>
-        <li style="margin-bottom:14px;">
-          <span class="step-num">3</span><strong>加上音樂指令</strong>
-          <p style="margin-left:40px;">上傳圖片後，搭配文字指令一起送出</p>
-        </li>
-      </ul>
-      <h3 style="margin-top:16px;">中文提示</h3>
-      <pre>根據這張圖片的氛圍，幫我創作一首配樂</pre>
-      <h3>英文提示（推薦）</h3>
-      <pre>Look at this photo and create a music track that captures its mood and atmosphere</pre>
-<img src="../images/img07.jpg" alt="截圖 07" class="screenshot-img" style="max-width:32%; display:inline-block;">
-<img src="../images/img08.jpg" alt="截圖 08" class="screenshot-img" style="max-width:32%; display:inline-block;">
-<img src="../images/img09.jpg" alt="截圖 09" class="screenshot-img" style="max-width:32%; display:inline-block;">
+      <h2>Step 3 & 4：輸入指令並取得結果</h2>
+      <div class="two-col">
+        <div>
+          <h3><span class="step-num">3</span> 加上音樂指令</h3>
+          <p>上傳圖片後，在輸入框中搭配音樂相關的提示文字，然後一起送出。</p>
+          <h3 style="margin-top:14px;">中文提示</h3>
+          <pre>根據這張圖片的氛圍，幫我創作一首配樂</pre>
+          <h3>英文提示（效果更佳）</h3>
+          <pre>Look at this photo and create a music track that captures its mood and atmosphere</pre>
+          <img src="../images/img08.jpg" alt="上傳圖片後加上文字指令" class="screenshot-img">
+        </div>
+        <div>
+          <h3><span class="step-num">4</span> 試聽結果</h3>
+          <p>Gemini 分析圖片後，會自動生成一段 30 秒的配樂。你可以：</p>
+          <ul>
+            <li>&#9654;&#65039; <strong>播放試聽</strong>——確認是否符合期待</li>
+            <li>&#128229; <strong>下載儲存</strong>——保存到本機使用</li>
+            <li>&#128279; <strong>分享連結</strong>——傳給朋友一起聽</li>
+            <li>&#128260; <strong>重新生成</strong>——不滿意可以繼續調整</li>
+          </ul>
+          <img src="../images/img09.jpg" alt="圖片音樂生成完成的結果" class="screenshot-img">
+          <div class="box success">
+            &#9989; 如果對結果不滿意，可以追加文字修改需求，例如：<code>節奏再慢一點，換成鋼琴為主</code>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Slide 4 情境對照表 -->
+  <!-- Slide 5 情境對照表（加入典型樂器） -->
   <div class="slide">
     <div class="content-card">
       <h2>圖片配樂情境對照表</h2>
-      <p style="margin-bottom:12px;">不同類型的圖片，Gemini 會自動匹配不同的音樂風格：</p>
+      <p style="margin-bottom:12px;">不同類型的圖片，Gemini 會自動匹配不同的音樂風格與樂器配置：</p>
       <table>
         <thead>
-          <tr><th>圖片類型</th><th>可能生成的音樂風格</th><th>典型樂器</th></tr>
+          <tr><th>圖片類型</th><th>可能的音樂風格</th><th>典型樂器</th><th>情緒關鍵字</th></tr>
         </thead>
         <tbody>
-          <tr><td>&#127749; 海邊夕陽</td><td>環境音樂 (Ambient)</td><td>合成器、海浪音效、輕柔鋼琴</td></tr>
-          <tr><td>&#127874; 生日派對</td><td>流行舞曲 (Pop/Dance)</td><td>電子鼓、合成器、歡快人聲</td></tr>
-          <tr><td>&#127794; 森林小徑</td><td>民謠吉他 (Folk)</td><td>木吉他、口琴、自然音效</td></tr>
-          <tr><td>&#127747; 城市夜景</td><td>電子爵士 (Electro Jazz)</td><td>薩克斯風、電子節拍、貝斯</td></tr>
-          <tr><td>&#127956;&#65039; 雪山壯景</td><td>管弦樂 (Orchestral)</td><td>弦樂、銅管、定音鼓</td></tr>
-          <tr><td>&#128054; 可愛寵物</td><td>小品音樂 (Light Music)</td><td>烏克麗麗、木琴、口哨</td></tr>
+          <tr><td>&#127749; 海邊夕陽</td><td>環境音樂 (Ambient)</td><td>合成器、海浪音效、輕柔鋼琴</td><td>平靜、遼闊、治癒</td></tr>
+          <tr><td>&#127874; 生日派對</td><td>流行舞曲 (Pop/Dance)</td><td>電子鼓、合成器、歡快人聲</td><td>歡樂、活力、慶祝</td></tr>
+          <tr><td>&#127794; 森林小徑</td><td>民謠 (Folk)</td><td>木吉他、口琴、長笛、自然音效</td><td>清新、寧靜、自在</td></tr>
+          <tr><td>&#127747; 城市夜景</td><td>電子爵士 (Electro Jazz)</td><td>薩克斯風、電子節拍、貝斯</td><td>都會、時尚、微醺</td></tr>
+          <tr><td>&#127956;&#65039; 雪山壯景</td><td>管弦樂 (Orchestral)</td><td>弦樂、銅管、定音鼓、豎琴</td><td>壯闊、磅礡、史詩</td></tr>
+          <tr><td>&#128054; 可愛寵物</td><td>小品音樂 (Light Music)</td><td>烏克麗麗、木琴、口哨、手拍</td><td>俏皮、溫馨、可愛</td></tr>
+          <tr><td>&#127745; 秋天楓葉</td><td>古典鋼琴 (Classical)</td><td>鋼琴、大提琴、小提琴</td><td>懷舊、溫暖、詩意</td></tr>
+          <tr><td>&#127878; 跨年煙火</td><td>電子舞曲 (EDM)</td><td>合成器、電子鼓、低音</td><td>興奮、熱烈、震撼</td></tr>
         </tbody>
       </table>
+      <div class="box info">
+        &#128161; 以上只是 AI 的「常見傾向」，實際結果會因圖片細節（光線、構圖、色彩飽和度）而有所不同。你也可以透過文字指令來覆蓋 AI 的判斷。
+      </div>
     </div>
   </div>
 
-  <!-- Slide 5 進階技巧 -->
+  <!-- Slide 6 進階技巧：混合提示 -->
   <div class="slide">
     <div class="content-card">
-      <h2>進階技巧：圖片 + 文字混合</h2>
-      <p style="margin-bottom:12px;">除了單純上傳圖片，你還可以<strong>同時加上詳細的文字描述</strong>，讓生成結果更符合你的需求。</p>
-      <h3>範例指令</h3>
-      <pre>根據這張秋天楓葉的照片，創作一首帶有鋼琴和大提琴的輕柔古典風配樂，速度慢一些，情緒偏向溫暖懷舊</pre>
-      <div class="box info">
-        &#128161; 圖片 + 文字混合模式下，Gemini 會同時參考圖片的視覺情緒和你的文字描述，結果更精準！
-      </div>
-      <h3 style="margin-top:20px;">混合提示的建議結構</h3>
+      <h2>進階技巧：圖片 + 文字混合提示</h2>
+      <p style="margin-bottom:12px;">只上傳圖片時，AI 會「自由發揮」；加上文字描述後，你可以<strong>精確控制</strong>輸出的風格、樂器、節奏。</p>
       <div class="concept-grid">
         <div class="concept-card">
           <div class="icon">&#128247;</div>
           <h3>圖片提供</h3>
-          <p>場景氛圍、色彩基調、情緒方向</p>
+          <p>場景氛圍、色彩基調、整體情緒方向——讓 AI 知道「感覺」。</p>
         </div>
         <div class="concept-card">
           <div class="icon">&#9997;&#65039;</div>
           <h3>文字補充</h3>
-          <p>指定曲風、樂器、速度、人聲偏好</p>
+          <p>指定曲風、樂器、速度、人聲偏好——讓 AI 知道「要求」。</p>
         </div>
         <div class="concept-card">
           <div class="icon">&#127929;</div>
           <h3>結果產出</h3>
-          <p>AI 綜合兩者資訊，產出更精確的 30 秒音樂</p>
+          <p>AI 綜合兩者資訊，產出更精確、更符合需求的 30 秒音樂。</p>
         </div>
+      </div>
+      <h3 style="margin-top:18px;">範例指令 A — 秋天楓葉照</h3>
+      <pre>根據這張秋天楓葉的照片，創作一首帶有鋼琴和大提琴的輕柔古典風配樂，速度慢一些，情緒偏向溫暖懷舊</pre>
+      <h3>範例指令 B — 海邊旅遊照（英文，效果更佳）</h3>
+      <pre>Based on this beach photo, create an upbeat tropical pop track with ukulele, steel drums, and hand claps. Cheerful and carefree summer vibes. 110 BPM.</pre>
+      <div class="box success">
+        &#9989; <strong>秘訣：</strong>混合模式的效果通常比「純圖片」或「純文字」都更好，因為圖片提供了文字難以描述的氛圍細節。
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 7 更多混合提示範例 & 注意事項 -->
+  <div class="slide">
+    <div class="content-card">
+      <h2>混合提示的進階範例</h2>
+      <p style="margin-bottom:16px;">不同的文字描述會讓同一張圖片產出完全不同的音樂。以下以「城市夜景照」為例：</p>
+      <table>
+        <thead>
+          <tr><th>附加文字指令</th><th>預期風格</th><th>主要差異</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>Jazz piano, smooth and mellow</code></td><td>爵士鋼琴</td><td>慢節奏、溫暖、微醺感</td></tr>
+          <tr><td><code>Energetic EDM with heavy bass</code></td><td>電子舞曲</td><td>快節奏、激昂、派對感</td></tr>
+          <tr><td><code>Cinematic orchestral, dramatic</code></td><td>電影配樂</td><td>壯闊、史詩、有張力</td></tr>
+          <tr><td><code>Lo-fi beats, cozy and chill</code></td><td>Lo-fi</td><td>慢拍、放鬆、有溫度</td></tr>
+        </tbody>
+      </table>
+      <div class="box warning">
+        &#9888;&#65039; <strong>注意事項：</strong>
+        <ul style="margin-top:8px; margin-bottom:0;">
+          <li>圖片解析度越高、主題越明確，AI 分析越準確</li>
+          <li>含有大量文字的截圖（如網頁截圖）效果較差，AI 可能會誤讀</li>
+          <li>帶有強烈情緒的照片（夕陽、暴風雨、嬰兒微笑）效果最好</li>
+          <li>如果生成結果偏離預期，嘗試用英文提示詞獲取更佳效果</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 8 實戰應用場景 -->
+  <div class="slide">
+    <div class="content-card">
+      <h2>實戰應用場景</h2>
+      <p style="margin-bottom:16px;">圖片生成音樂功能在以下場景中特別實用：</p>
+      <div class="concept-grid">
+        <div class="concept-card">
+          <div class="icon">&#127909;</div>
+          <h3>旅遊 Vlog 配樂</h3>
+          <p>上傳旅行照片，為每一段旅程自動生成符合當地氛圍的背景音樂，無需苦惱配樂選擇。</p>
+        </div>
+        <div class="concept-card">
+          <div class="icon">&#128247;</div>
+          <h3>社群貼文配樂</h3>
+          <p>Instagram、TikTok 短影音搭配照片生成的原創音樂，讓內容更有個人風格。</p>
+        </div>
+        <div class="concept-card">
+          <div class="icon">&#127979;</div>
+          <h3>教學簡報配樂</h3>
+          <p>為課堂簡報的每個章節頁面配上對應情緒的背景音樂，讓教學更有感染力。</p>
+        </div>
+        <div class="concept-card">
+          <div class="icon">&#128218;</div>
+          <h3>電子相簿</h3>
+          <p>為家庭相簿、婚禮回憶、畢業紀念等製作專屬配樂，讓回憶更有溫度。</p>
+        </div>
+      </div>
+      <div class="box success">
+        &#9989; <strong>小結：</strong>圖片生成音樂讓「不會形容音樂」的人也能輕鬆配樂——選張照片就好，其餘交給 AI！想要更精準的結果，就加上文字補充說明。
       </div>
     </div>
   </div>

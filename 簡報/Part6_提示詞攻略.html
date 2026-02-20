@@ -244,8 +244,44 @@
         .level-block .level-title { font-weight: bold; font-size: 1.1rem; margin-bottom: 0.3rem; }
         .level-block pre { margin-top: 0.5rem; }
 
+        /* MIDST 字母卡片 */
+        .midst-card {
+            background: linear-gradient(135deg, #f5f3ff 0%, #fdf2f8 100%);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #e9d5ff;
+            margin-bottom: 16px;
+        }
+        .midst-card .letter {
+            display: inline-block;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-align: center;
+            line-height: 48px;
+            margin-right: 14px;
+            vertical-align: middle;
+        }
+        .midst-card .card-title {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #4c1d95;
+        }
+        .midst-card p { margin-top: 10px; color: #555; }
+
         /* 大表格滾動 */
         .table-scroll { overflow-x: auto; }
+
+        .screenshot-img {
+            max-width: 100%; border-radius: 12px; margin: 12px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
 
         /* RWD */
         @media (max-width: 768px) {
@@ -263,10 +299,10 @@
 
 <!-- 導航列 -->
 <nav class="navbar">
-    <div class="nav-title">🎵 Part 6 - 提示詞攻略大全</div>
+    <div class="nav-title">&#127925; Part 6 - 提示詞攻略大全</div>
     <div class="nav-links">
-        <a href="index.html">🏠 首頁</a>
-        <a href="#" onclick="toggleFullscreen()">⛶ 全螢幕</a>
+        <a href="index.html">&#127968; 首頁</a>
+        <a href="#" onclick="toggleFullscreen()">&#9974; 全螢幕</a>
         <a href="https://www.facebook.com/?locale=zh_TW" target="_blank">FB</a>
         <a href="https://www.youtube.com/@Liang-yt02" target="_blank">YT</a>
     </div>
@@ -277,7 +313,7 @@
 <button class="arrow arrow-right" onclick="changeSlide(1)">&#10095;</button>
 
 <!-- 頁碼 -->
-<div class="page-indicator" id="pageIndicator">1 / 6</div>
+<div class="page-indicator" id="pageIndicator">1 / 9</div>
 
 <!-- 簡報內容 -->
 <div class="slides-container">
@@ -293,14 +329,15 @@
             <span class="highlight">風格</span>
             <span class="highlight">樂器</span>
             <span class="highlight">進化</span>
+            <span class="highlight">實戰</span>
         </div>
     </div>
 
-    <!-- Slide 2: MIDST 公式 -->
+    <!-- Slide 2: MIDST 公式總覽 -->
     <div class="slide">
-        <h1>🎯 MIDST 公式</h1>
-        <h2>五大核心要素</h2>
-        <p>撰寫音樂提示詞時，只要掌握 <span class="highlight">MIDST</span> 五大核心要素，就能精準描述你想要的音樂。</p>
+        <h1>&#127919; MIDST 公式</h1>
+        <h2>五大核心要素總覽</h2>
+        <p>撰寫音樂提示詞時，只要掌握 <span class="highlight">MIDST</span> 五大核心要素，就能精準描述你想要的音樂。記住口訣：<strong>MIDST = 在音樂的「中間」掌握所有細節！</strong></p>
         <table>
             <thead>
                 <tr>
@@ -350,94 +387,152 @@
             </tbody>
         </table>
         <div class="box info">
-            💡 <strong>記憶口訣：</strong>MIDST = 在音樂的「中間」掌握所有細節！
+            &#128161; <strong>核心觀念：</strong>不需要每次都寫滿五個要素，但至少包含 <strong>S（風格）+ M（情緒）+ I（樂器）</strong>三項，生成效果就會明顯提升！
         </div>
     </div>
 
-    <!-- Slide 3: 額外可加入的元素 -->
+    <!-- Slide 3: MIDST 每個字母詳細展開 -->
     <div class="slide">
-        <h1>➕ 額外可加入的元素</h1>
-        <h2>讓提示詞更完整</h2>
-        <p>除了 MIDST 五大要素，你還可以加入以下元素讓生成的音樂更符合需求：</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>元素</th>
-                    <th>說明</th>
-                    <th>範例</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>人聲</strong></td>
-                    <td>指定人聲類型</td>
-                    <td>Male vocals, Female vocals, Choir, No vocals</td>
-                </tr>
-                <tr>
-                    <td><strong>音域</strong></td>
-                    <td>聲音的特質與音域</td>
-                    <td>高亢 (High-pitched), 低沉 (Deep), 沙啞 (Husky/Raspy)</td>
-                </tr>
-                <tr>
-                    <td><strong>歌詞主題</strong></td>
-                    <td>歌詞要表達的內容</td>
-                    <td>About love, About adventure, About heartbreak</td>
-                </tr>
-                <tr>
-                    <td><strong>年代感</strong></td>
-                    <td>模仿特定年代的音樂風格</td>
-                    <td>80s synth-pop, 90s grunge, 2000s R&B, Modern</td>
-                </tr>
-                <tr>
-                    <td><strong>參考情境</strong></td>
-                    <td>音樂使用的場景</td>
-                    <td>For a wedding video, For studying, For workout, For meditation</td>
-                </tr>
-            </tbody>
-        </table>
+        <h1>&#127919; MIDST 五要素詳解</h1>
+        <h2>逐一拆解每個字母</h2>
+
+        <div class="midst-card">
+            <span class="letter">M</span>
+            <span class="card-title">Mood 情緒 -- 音樂的靈魂</span>
+            <p>情緒決定了音樂給人的第一印象。<strong>建議優先決定情緒</strong>，再搭配其他要素。常用情緒詞彙：<code>happy</code>、<code>sad</code>、<code>melancholic</code>、<code>energetic</code>、<code>peaceful</code>、<code>epic</code>、<code>mysterious</code>、<code>nostalgic</code>、<code>romantic</code>、<code>dark</code>。</p>
+        </div>
+
+        <div class="midst-card">
+            <span class="letter">I</span>
+            <span class="card-title">Instrument 樂器 -- 音色的基礎</span>
+            <p>樂器決定了音樂的音色和質感。可以指定單一樂器或多種組合。<strong>越具體越好</strong>，例如用 <code>nylon guitar</code> 取代 <code>guitar</code>，用 <code>brushed drums</code> 取代 <code>drums</code>。</p>
+        </div>
+
+        <div class="midst-card">
+            <span class="letter">D</span>
+            <span class="card-title">Dynamic 動態 -- 音樂的呼吸</span>
+            <p>動態描述音量和力度的變化，讓音樂有起伏。常用描述：<code>starts soft then builds up</code>（由弱漸強）、<code>crescendo</code>（漸強）、<code>gentle verse, powerful chorus</code>（柔和主歌、強力副歌）。</p>
+        </div>
+
+        <div class="midst-card">
+            <span class="letter">S</span>
+            <span class="card-title">Style 風格 -- 音樂的 DNA</span>
+            <p>風格是最關鍵的要素，決定音樂的整體方向。可以單一風格或混搭，例如 <code>indie pop</code>、<code>jazz fusion</code>、<code>lo-fi hip hop</code>、<code>cinematic orchestral</code>。</p>
+        </div>
+
+        <div class="midst-card">
+            <span class="letter">T</span>
+            <span class="card-title">Tempo 節奏 -- 音樂的心跳</span>
+            <p>節奏用 BPM（每分鐘拍數）表示。參考值：<strong>60 BPM</strong>（冥想/抒情）、<strong>80 BPM</strong>（Lo-fi/R&B）、<strong>100 BPM</strong>（流行）、<strong>120 BPM</strong>（舞曲）、<strong>140+ BPM</strong>（EDM/Drum&Bass）。也可以用描述詞如 <code>slow</code>、<code>moderate</code>、<code>fast</code>。</p>
+        </div>
+    </div>
+
+    <!-- Slide 4: 額外可加入的元素 -->
+    <div class="slide">
+        <h1>&#10133; 額外可加入的元素</h1>
+        <h2>讓提示詞更完整的五大加分項</h2>
+        <p>除了 MIDST 五大要素，加入以下元素可以讓生成的音樂更貼近你的需求：</p>
+
+        <div class="concept-grid">
+            <div class="card">
+                <h3>&#127908; 人聲 Vocal</h3>
+                <p><strong>指定是否要歌聲以及人聲類型。</strong></p>
+                <ul>
+                    <li><code>No vocals</code> / <code>Instrumental</code> -- 純器樂</li>
+                    <li><code>Female vocals, soprano</code> -- 女高音</li>
+                    <li><code>Male vocals, baritone</code> -- 男中音</li>
+                    <li><code>Breathy female vocals</code> -- 氣息感女聲</li>
+                    <li><code>Choir harmonies</code> -- 合唱和聲</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>&#127897; 音域 Vocal Range</h3>
+                <p><strong>進一步描述歌手聲音的特質。</strong></p>
+                <ul>
+                    <li><code>High-pitched, airy</code> -- 高亢空靈</li>
+                    <li><code>Deep, warm</code> -- 低沉溫暖</li>
+                    <li><code>Husky, raspy</code> -- 沙啞磁性</li>
+                    <li><code>Sweet, smooth</code> -- 甜美柔順</li>
+                    <li><code>Powerful belting</code> -- 強力飆高音</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>&#128221; 歌詞主題 Lyrics Theme</h3>
+                <p><strong>告訴 AI 歌詞要唱什麼內容。</strong></p>
+                <ul>
+                    <li><code>About summer road trips</code></li>
+                    <li><code>About heartbreak and moving on</code></li>
+                    <li><code>About friendship and memories</code></li>
+                    <li><code>About chasing dreams</code></li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>&#128197; 年代感 Era</h3>
+                <p><strong>模仿特定年代的經典音樂風格。</strong></p>
+                <ul>
+                    <li><code>80s synth-pop</code> -- 80 年代合成器流行</li>
+                    <li><code>90s grunge</code> -- 90 年代油漬搖滾</li>
+                    <li><code>2000s R&B</code> -- 千禧年 R&B</li>
+                    <li><code>70s disco</code> -- 70 年代迪斯可</li>
+                    <li><code>Modern contemporary</code> -- 當代現代</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>&#127916; 參考情境 Scene</h3>
+                <p><strong>描述音樂使用的場景，AI 會自動推斷適合的風格。</strong></p>
+                <ul>
+                    <li><code>For a cozy coffee shop</code> -- 咖啡廳</li>
+                    <li><code>For an action movie trailer</code> -- 動作片預告</li>
+                    <li><code>For a wedding ceremony</code> -- 婚禮</li>
+                    <li><code>For studying late at night</code> -- 深夜讀書</li>
+                    <li><code>For a sunrise meditation</code> -- 日出冥想</li>
+                </ul>
+            </div>
+        </div>
+
         <div class="box success">
-            ✅ <strong>小技巧：</strong>不需要每次都用上所有元素，選擇對你的需求最重要的來描述即可。
+            &#9989; <strong>小技巧：</strong>不需要每次都用上所有元素，選擇對你的需求最重要的 2-3 項來描述即可。過多的描述反而可能讓 AI 混淆。
         </div>
     </div>
 
-    <!-- Slide 4: 提示詞進化四等級 -->
+    <!-- Slide 5: 提示詞進化四等級（詳細版） -->
     <div class="slide">
-        <h1>📈 提示詞進化四等級</h1>
+        <h1>&#128200; 提示詞進化四等級</h1>
         <h2>從模糊到專業</h2>
 
         <div class="level-block bad">
-            <div class="level-title">等級 1：太模糊 ❌</div>
+            <div class="level-title">等級 1：太模糊 &#10060;</div>
             <pre><code>幫我做一首歌</code></pre>
-            <p>❌ AI 完全不知道你要什麼風格、情緒、樂器...</p>
+            <p><strong>&#10060; 為什麼不好：</strong>AI 完全不知道你要什麼風格、情緒、樂器，只能隨機生成。結果就像去餐廳只說「給我食物」一樣，你完全無法預期會得到什麼。</p>
         </div>
 
         <div class="level-block meh">
-            <div class="level-title">等級 2：有方向 △</div>
+            <div class="level-title">等級 2：有方向 &#9651;</div>
             <pre><code>做一首快樂的歌</code></pre>
-            <p>⚠️ 有基本方向，但缺少細節，結果不可預期。</p>
+            <p><strong>&#9888;&#65039; 為什麼還不夠：</strong>「快樂」是一個情緒方向，但缺少風格（流行？爵士？電子？）、樂器（鋼琴？吉他？）、節奏（快還是慢？）等關鍵資訊。AI 可能生成快樂的搖滾，也可能是快樂的兒歌，結果不穩定。</p>
         </div>
 
         <div class="level-block good">
-            <div class="level-title">等級 3：具體 ✓</div>
-            <pre><code>Create an upbeat pop song with acoustic guitar and piano, female vocals, about enjoying a sunny day at the beach. 120 BPM.</code></pre>
-            <p>✅ 包含風格、樂器、人聲、主題、節奏，結果明確。</p>
+            <div class="level-title">等級 3：具體描述 &#9989;</div>
+            <pre><code>Create an upbeat pop song with acoustic guitar and piano, female vocals, about enjoying a sunny day at the beach. Tempo around 120 BPM.</code></pre>
+            <p><strong>&#9989; 為什麼好：</strong>包含了 <strong>S</strong>（pop）、<strong>M</strong>（upbeat）、<strong>I</strong>（acoustic guitar, piano）、<strong>T</strong>（120 BPM），加上人聲和主題。AI 能清楚理解你的需求，生成結果高度符合預期。</p>
         </div>
 
         <div class="level-block great">
-            <div class="level-title">等級 4：專業 ✓✓</div>
+            <div class="level-title">等級 4：專業級 &#9989;&#9989;</div>
             <pre><code>Compose a feel-good indie pop track featuring bright acoustic guitar strumming, layered with soft synth pads and a groovy bass line. Sweet female vocals with airy harmonies singing about spontaneous road trips and summer freedom. Start with a gentle verse, build into an anthemic chorus with hand claps. 120 BPM, key of G major.</code></pre>
-            <p>🌟 完整的音樂藍圖：風格、樂器細節、人聲特質、歌詞主題、曲式結構、速度、調性。</p>
+            <p><strong>&#127775; 為什麼最佳：</strong>這是一份完整的「音樂藍圖」，包含風格（indie pop）、樂器細節（bright acoustic guitar strumming, soft synth pads, groovy bass line）、人聲特質（sweet female vocals, airy harmonies）、歌詞主題（road trips, summer freedom）、曲式結構（gentle verse &#8594; anthemic chorus）、速度（120 BPM）和調性（G major）。AI 幾乎能 100% 照你的想像生成。</p>
         </div>
 
         <div class="box info">
-            💡 <strong>目標：</strong>至少達到等級 3，挑戰等級 4！
+            &#128161; <strong>目標：</strong>日常使用至少達到等級 3，重要作品挑戰等級 4！
         </div>
     </div>
 
-    <!-- Slide 5: 音樂風格中英對照表 -->
+    <!-- Slide 6: 音樂風格中英對照表 -->
     <div class="slide">
-        <h1>🎶 音樂風格中英對照表</h1>
-        <h2>16 種常見風格</h2>
+        <h1>&#127926; 音樂風格中英對照表</h1>
+        <h2>16 種常見風格 + 代表場景</h2>
         <div class="table-scroll">
             <table>
                 <thead>
@@ -449,34 +544,34 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td>流行</td><td>Pop</td><td>旋律朗朗上口，節奏明快</td><td>日常、Vlog</td></tr>
-                    <tr><td>搖滾</td><td>Rock</td><td>電吉他為主，力量感強</td><td>運動、激勵</td></tr>
-                    <tr><td>嘻哈</td><td>Hip Hop</td><td>節拍感強，Rap 說唱</td><td>街頭、潮流</td></tr>
-                    <tr><td>電子舞曲</td><td>EDM</td><td>合成器與電子節拍</td><td>派對、健身</td></tr>
-                    <tr><td>爵士</td><td>Jazz</td><td>即興演奏，和弦豐富</td><td>咖啡廳、晚餐</td></tr>
-                    <tr><td>古典</td><td>Classical</td><td>管弦樂器，結構嚴謹</td><td>正式場合、閱讀</td></tr>
-                    <tr><td>節奏藍調</td><td>R&B</td><td>靈魂唱腔，節奏柔和</td><td>浪漫、夜晚</td></tr>
-                    <tr><td>鄉村</td><td>Country</td><td>木吉他與口琴，溫暖質樸</td><td>公路旅行</td></tr>
-                    <tr><td>雷鬼</td><td>Reggae</td><td>輕鬆律動，Island 風情</td><td>度假、放鬆</td></tr>
-                    <tr><td>低傳真</td><td>Lo-fi</td><td>復古質感，舒適慵懶</td><td>讀書、工作</td></tr>
-                    <tr><td>巴薩諾瓦</td><td>Bossa Nova</td><td>巴西風情，浪漫輕柔</td><td>咖啡、午後</td></tr>
-                    <tr><td>民謠</td><td>Folk</td><td>木吉他為主，敘事感強</td><td>旅行、自然</td></tr>
-                    <tr><td>金屬</td><td>Metal</td><td>重型失真吉他，激烈</td><td>極限運動</td></tr>
-                    <tr><td>環境音樂</td><td>Ambient</td><td>氛圍營造，空靈飄渺</td><td>冥想、睡眠</td></tr>
-                    <tr><td>放克</td><td>Funk</td><td>強烈節拍，貝斯突出</td><td>跳舞、派對</td></tr>
-                    <tr><td>藍調</td><td>Blues</td><td>情感深沉，即興為主</td><td>酒吧、深夜</td></tr>
+                    <tr><td>流行</td><td>Pop</td><td>旋律朗朗上口，節奏明快</td><td>日常 Vlog、社群短影音、背景音樂</td></tr>
+                    <tr><td>搖滾</td><td>Rock</td><td>電吉他為主，力量感強</td><td>運動影片、激勵演說、遊戲配樂</td></tr>
+                    <tr><td>嘻哈</td><td>Hip Hop</td><td>節拍感強，Rap 說唱</td><td>街頭紀錄、潮流品牌、社群挑戰</td></tr>
+                    <tr><td>電子舞曲</td><td>EDM</td><td>合成器與電子節拍</td><td>派對、健身房、電競直播</td></tr>
+                    <tr><td>爵士</td><td>Jazz</td><td>即興演奏，和弦豐富</td><td>咖啡廳、高級餐廳、深夜播客</td></tr>
+                    <tr><td>古典</td><td>Classical</td><td>管弦樂器，結構嚴謹</td><td>正式場合、閱讀時光、頒獎典禮</td></tr>
+                    <tr><td>節奏藍調</td><td>R&B</td><td>靈魂唱腔，節奏柔和</td><td>浪漫約會、夜晚氛圍、美妝影片</td></tr>
+                    <tr><td>鄉村</td><td>Country</td><td>木吉他與口琴，溫暖質樸</td><td>公路旅行、田園風光、家庭影片</td></tr>
+                    <tr><td>雷鬼</td><td>Reggae</td><td>輕鬆律動，Island 風情</td><td>海島度假、夏日派對、放鬆時刻</td></tr>
+                    <tr><td>低傳真</td><td>Lo-fi</td><td>復古質感，舒適慵懶</td><td>讀書、工作、深夜直播、學習影片</td></tr>
+                    <tr><td>巴薩諾瓦</td><td>Bossa Nova</td><td>巴西風情，浪漫輕柔</td><td>咖啡午後、文青空間、旅遊回憶</td></tr>
+                    <tr><td>民謠</td><td>Folk</td><td>木吉他為主，敘事感強</td><td>旅行紀錄、自然風光、獨立短片</td></tr>
+                    <tr><td>金屬</td><td>Metal</td><td>重型失真吉他，激烈</td><td>極限運動、電競高光、動作場面</td></tr>
+                    <tr><td>環境音樂</td><td>Ambient</td><td>氛圍營造，空靈飄渺</td><td>冥想、睡眠引導、SPA、展覽空間</td></tr>
+                    <tr><td>放克</td><td>Funk</td><td>強烈節拍，貝斯突出</td><td>跳舞影片、復古派對、廣告配樂</td></tr>
+                    <tr><td>藍調</td><td>Blues</td><td>情感深沉，即興為主</td><td>酒吧場景、深夜獨白、紀錄片</td></tr>
                 </tbody>
             </table>
         </div>
         <div class="box info">
-            💡 <strong>提示：</strong>可以混搭風格，例如「Jazz Pop」、「Lo-fi Hip Hop」、「Indie Folk」等！
+            &#128161; <strong>混搭建議：</strong>可以混合風格創造獨特效果，例如「Jazz Pop」、「Lo-fi Hip Hop」、「Indie Folk」、「Cinematic Electronic」！
         </div>
     </div>
 
-    <!-- Slide 6: 常用樂器中英對照表 -->
+    <!-- Slide 7: 常用樂器中英對照表 -->
     <div class="slide">
-        <h1>🎸 常用樂器中英對照表</h1>
-        <h2>14 種常見樂器</h2>
+        <h1>&#127928; 常用樂器中英對照表</h1>
+        <h2>14 種常見樂器 + 搭配風格建議</h2>
         <div class="table-scroll">
             <table>
                 <thead>
@@ -488,25 +583,131 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td>鋼琴</td><td>Piano</td><td>溫暖、優雅、表現力強</td><td>古典、流行、爵士</td></tr>
-                    <tr><td>木吉他</td><td>Acoustic Guitar</td><td>溫暖、自然、清新</td><td>民謠、鄉村、流行</td></tr>
-                    <tr><td>電吉他</td><td>Electric Guitar</td><td>力量感、多變、失真效果</td><td>搖滾、藍調、金屬</td></tr>
-                    <tr><td>貝斯</td><td>Bass</td><td>低沉、節奏骨幹</td><td>放克、搖滾、嘻哈</td></tr>
-                    <tr><td>鼓組</td><td>Drums</td><td>節奏核心、力度控制</td><td>所有風格</td></tr>
-                    <tr><td>小提琴</td><td>Violin</td><td>高亢、情感豐富</td><td>古典、電影配樂</td></tr>
-                    <tr><td>大提琴</td><td>Cello</td><td>深沉、渾厚、感性</td><td>古典、環境音樂</td></tr>
-                    <tr><td>薩克斯風</td><td>Saxophone</td><td>性感、爵士感</td><td>爵士、R&B、藍調</td></tr>
-                    <tr><td>長笛</td><td>Flute</td><td>輕盈、空靈、通透</td><td>古典、新世紀</td></tr>
-                    <tr><td>小號</td><td>Trumpet</td><td>明亮、嘹亮、振奮</td><td>爵士、古典、拉丁</td></tr>
-                    <tr><td>合成器</td><td>Synthesizer</td><td>電子音色、無限可能</td><td>EDM、流行、環境</td></tr>
-                    <tr><td>烏克麗麗</td><td>Ukulele</td><td>可愛、輕快、夏日感</td><td>流行、夏威夷</td></tr>
-                    <tr><td>口琴</td><td>Harmonica</td><td>質樸、懷舊、藍調感</td><td>藍調、鄉村、民謠</td></tr>
-                    <tr><td>豎琴</td><td>Harp</td><td>夢幻、優雅、天使感</td><td>古典、新世紀、電影</td></tr>
+                    <tr><td>鋼琴</td><td>Piano</td><td>溫暖、優雅、表現力強</td><td>古典、流行、爵士、電影配樂</td></tr>
+                    <tr><td>木吉他</td><td>Acoustic Guitar</td><td>溫暖、自然、清新</td><td>民謠、鄉村、流行、Bossa Nova</td></tr>
+                    <tr><td>電吉他</td><td>Electric Guitar</td><td>力量感、多變、失真效果</td><td>搖滾、藍調、金屬、放克</td></tr>
+                    <tr><td>貝斯</td><td>Bass</td><td>低沉、節奏骨幹</td><td>放克、搖滾、嘻哈、R&B</td></tr>
+                    <tr><td>鼓組</td><td>Drums</td><td>節奏核心、力度控制</td><td>幾乎所有風格的節奏基礎</td></tr>
+                    <tr><td>小提琴</td><td>Violin</td><td>高亢、情感豐富</td><td>古典、電影配樂、民謠、流行</td></tr>
+                    <tr><td>大提琴</td><td>Cello</td><td>深沉、渾厚、感性</td><td>古典、環境音樂、電影配樂</td></tr>
+                    <tr><td>薩克斯風</td><td>Saxophone</td><td>性感、爵士感</td><td>爵士、R&B、藍調、Bossa Nova</td></tr>
+                    <tr><td>長笛</td><td>Flute</td><td>輕盈、空靈、通透</td><td>古典、新世紀、民謠、環境音樂</td></tr>
+                    <tr><td>小號</td><td>Trumpet</td><td>明亮、嘹亮、振奮</td><td>爵士、古典、拉丁、放克</td></tr>
+                    <tr><td>合成器</td><td>Synthesizer</td><td>電子音色、無限可能</td><td>EDM、流行、環境、80s Synth-pop</td></tr>
+                    <tr><td>烏克麗麗</td><td>Ukulele</td><td>可愛、輕快、夏日感</td><td>流行、夏威夷風、兒童音樂</td></tr>
+                    <tr><td>口琴</td><td>Harmonica</td><td>質樸、懷舊、藍調感</td><td>藍調、鄉村、民謠、懷舊風格</td></tr>
+                    <tr><td>豎琴</td><td>Harp</td><td>夢幻、優雅、天使感</td><td>古典、新世紀、電影、奇幻風格</td></tr>
                 </tbody>
             </table>
         </div>
         <div class="box success">
-            ✅ <strong>組合建議：</strong>Piano + Strings = 電影感 ｜ Acoustic Guitar + Ukulele = 夏日感 ｜ Synth + Drums = 電子感
+            &#9989; <strong>組合建議：</strong>Piano + Strings = 電影感 &#65372; Guitar + Ukulele = 夏日感 &#65372; Synth + Drums = 電子感 &#65372; Sax + Piano = 爵士感 &#65372; Cello + Piano = 深情感
+        </div>
+    </div>
+
+    <!-- Slide 8: 提示詞組合實戰範例 -->
+    <div class="slide">
+        <h1>&#128296; 提示詞組合實戰範例</h1>
+        <h2>六種場景的完整提示詞示範</h2>
+
+        <div class="concept-grid" style="grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));">
+            <div class="card">
+                <h3>&#9749; 咖啡廳午後</h3>
+                <p><strong>MIDST 分析：</strong>M=放鬆 / I=吉他+鋼琴 / D=穩定柔和 / S=Bossa Nova / T=100 BPM</p>
+<pre><code>Smooth bossa nova with nylon guitar, soft piano, and light percussion. Warm and relaxing cafe atmosphere. Gentle and steady dynamics. 100 BPM. No vocals.</code></pre>
+            </div>
+            <div class="card">
+                <h3>&#127916; 電影預告片</h3>
+                <p><strong>MIDST 分析：</strong>M=史詩 / I=弦樂+銅管 / D=漸強爆發 / S=Cinematic / T=90 BPM</p>
+<pre><code>Epic cinematic orchestral piece with strings, brass, and timpani. Starts mysterious and quiet, builds tension with rising strings, then explodes into a triumphant climax. 90 BPM.</code></pre>
+            </div>
+            <div class="card">
+                <h3>&#127939; 健身房運動</h3>
+                <p><strong>MIDST 分析：</strong>M=激昂 / I=合成器+鼓 / D=持續高能 / S=EDM / T=140 BPM</p>
+<pre><code>High-energy EDM workout track with heavy bass drops, pumping synth leads, and driving drum beats. Intense and powerful throughout. 140 BPM. No vocals.</code></pre>
+            </div>
+            <div class="card">
+                <h3>&#127769; 深夜讀書</h3>
+                <p><strong>MIDST 分析：</strong>M=平靜 / I=鋼琴 / D=極度柔和 / S=Lo-fi / T=70 BPM</p>
+<pre><code>Lo-fi chill hop with soft piano chords, vinyl crackle texture, and gentle muffled drum beats. Dreamy, mellow, perfect for late-night studying. 70 BPM. No vocals.</code></pre>
+            </div>
+            <div class="card">
+                <h3>&#128144; 婚禮進場</h3>
+                <p><strong>MIDST 分析：</strong>M=浪漫 / I=弦樂+鋼琴 / D=優美漸強 / S=Classical / T=80 BPM</p>
+<pre><code>Romantic classical piece with elegant piano melody and lush string arrangement. Tender and beautiful, gradually building to an emotional crescendo. 80 BPM. No vocals.</code></pre>
+            </div>
+            <div class="card">
+                <h3>&#127754; 旅遊 Vlog</h3>
+                <p><strong>MIDST 分析：</strong>M=歡樂 / I=吉他+烏克麗麗 / D=輕快穩定 / S=Indie Pop / T=120 BPM</p>
+<pre><code>Cheerful indie pop with bright acoustic guitar, ukulele strumming, and light hand claps. Feel-good and adventurous vibes. 120 BPM. No vocals.</code></pre>
+            </div>
+        </div>
+
+        <div class="box info">
+            &#128161; <strong>實戰技巧：</strong>先用 MIDST 公式在腦中組織架構，再將各要素串成一段自然的英文描述。多練幾次就會越來越順手！
+        </div>
+    </div>
+
+    <!-- Slide 9: 小結 + 進階技巧 -->
+    <div class="slide">
+        <h1>&#127775; 提示詞攻略小結</h1>
+        <h2>關鍵要點回顧</h2>
+
+        <div class="concept-grid">
+            <div class="card">
+                <h3>&#128273; 核心公式</h3>
+                <p>永遠記住 <strong>MIDST</strong>：Mood、Instrument、Dynamic、Style、Tempo。至少包含 3 個要素就能大幅提升品質。</p>
+            </div>
+            <div class="card">
+                <h3>&#127468;&#127463; 用英文撰寫</h3>
+                <p>關鍵的音樂描述建議使用<strong>英文</strong>，AI 對英文音樂術語的理解最精確。可搭配 Gem 機器人翻譯。</p>
+            </div>
+            <div class="card">
+                <h3>&#127912; 具體勝過模糊</h3>
+                <p><code>bright acoustic guitar strumming</code> 遠比 <code>guitar</code> 有效。加上形容詞和演奏方式的描述。</p>
+            </div>
+            <div class="card">
+                <h3>&#128260; 善用混搭</h3>
+                <p>混合風格往往能產出獨特作品，例如「Lo-fi Jazz」、「Cinematic Pop」、「Folk Electronic」。</p>
+            </div>
+        </div>
+
+        <h3>進階提示詞技巧</h3>
+        <table>
+            <thead>
+                <tr><th>技巧</th><th>說明</th><th>範例</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>描述曲式結構</strong></td>
+                    <td>告訴 AI 音樂的段落安排</td>
+                    <td><code>Start with a quiet intro, build into a powerful chorus</code></td>
+                </tr>
+                <tr>
+                    <td><strong>使用否定描述</strong></td>
+                    <td>明確排除不想要的元素</td>
+                    <td><code>No vocals, no heavy bass, no distortion</code></td>
+                </tr>
+                <tr>
+                    <td><strong>指定調性</strong></td>
+                    <td>控制音樂的調性色彩</td>
+                    <td><code>Key of C major</code>（明亮）、<code>Key of A minor</code>（憂傷）</td>
+                </tr>
+                <tr>
+                    <td><strong>加入質感描述</strong></td>
+                    <td>用形容詞增加音色細節</td>
+                    <td><code>Warm, fuzzy, vintage, crispy, ethereal</code></td>
+                </tr>
+                <tr>
+                    <td><strong>參考場景</strong></td>
+                    <td>描述使用情境讓 AI 推斷</td>
+                    <td><code>Background music for a rainy day coffee shop scene</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="box success">
+            &#9989; <strong>最終心法：</strong>多嘗試、多比較、多迭代。同一個概念用不同方式描述，找出最能打動 AI 的表達方式！
         </div>
     </div>
 
