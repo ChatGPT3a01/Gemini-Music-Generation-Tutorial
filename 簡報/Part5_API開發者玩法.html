@@ -434,7 +434,7 @@ li { margin-bottom: 4px; }
           <tr><td><strong>取樣率</strong></td><td>48,000 Hz（48kHz）</td><td>CD 音質為 44.1kHz</td></tr>
           <tr><td><strong>聲道</strong></td><td>立體聲（Stereo）</td><td>左右雙聲道</td></tr>
           <tr><td><strong>延遲</strong></td><td>控制變更到效果 &#8804; 2 秒</td><td>近乎即時反應</td></tr>
-          <tr><td><strong>音樂類型</strong></td><td>以純器樂為主</td><td>可選人聲哼唱模式</td></tr>
+          <tr><td><strong>音樂類型</strong></td><td>僅支援純器樂</td><td>人聲功能尚未開放給 API</td></tr>
           <tr><td><strong>最長串流</strong></td><td>持續生成（無硬性上限）</td><td>免費工具限 10 分鐘</td></tr>
         </tbody>
       </table>
@@ -539,15 +539,27 @@ li { margin-bottom: 4px; }
   <div class="slide" data-index="4">
     <div class="content-card">
       <h2>程式碼結構概覽</h2>
-      <p>我們要建立的 Python 程式 <code>generate_music.py</code>，執行後會出現 <strong>MIDST 互動選單</strong>，讓使用者逐步選擇音樂參數，最終自動組合提示詞並呼叫 API 生成音樂。</p>
+      <p>我們要建立的 Python 程式 <code>generate_music.py</code>，提供<strong>兩種模式</strong>：「推薦組合」快速生成，或「自訂設定」依 MIDST 公式逐步選擇音樂參數，最終自動組合提示詞並呼叫 API 生成音樂。</p>
 
-      <h3>互動流程</h3>
+      <h3>程式主選單</h3>
+      <div class="concept-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="card">
+          <div class="icon">&#9889;</div>
+          <h3>推薦組合（快速模式）</h3>
+          <p>提供 6 組經典搭配（咖啡廳 Lo-fi、歡樂流行、史詩配樂、深夜爵士、派對 EDM、浪漫民謠），選一個就能直接生成，<strong>適合新手</strong>。</p>
+        </div>
+        <div class="card">
+          <div class="icon">&#127911;</div>
+          <h3>自訂設定（MIDST 公式）</h3>
+          <p>依照 MIDST 公式逐步設定各項參數，自由搭配風格與樂器，<strong>適合進階玩家</strong>。</p>
+        </div>
+      </div>
+
+      <h3>自訂模式互動流程</h3>
       <div class="flow">
         <div class="flow-item">M &#127928;<br>情緒</div>
         <div class="flow-arrow">&#10132;</div>
         <div class="flow-item">I &#127929;<br>樂器</div>
-        <div class="flow-arrow">&#10132;</div>
-        <div class="flow-item">V &#127908;<br>人聲</div>
         <div class="flow-arrow">&#10132;</div>
         <div class="flow-item">D &#127911;<br>動態</div>
         <div class="flow-arrow">&#10132;</div>
@@ -568,28 +580,27 @@ li { margin-bottom: 4px; }
         <div class="card">
           <div class="icon">&#127929;</div>
           <h3>I - Instrument 樂器</h3>
-          <p><strong>10 種選項（可多選）：</strong>鋼琴、木吉他、電吉他、弦樂、薩克斯風、合成器、鼓組、貝斯、長笛、烏克麗麗</p>
-        </div>
-        <div class="card">
-          <div class="icon">&#127908;</div>
-          <h3>V - Vocal 人聲</h3>
-          <p><strong>10 種選項：</strong>純器樂、男低音、男中音、男高音、沙啞男聲、女低音、女中音、女高音、氣息感女聲、合唱團</p>
+          <p><strong>10 種選項（可多選，最多 3 個）：</strong>鋼琴、木吉他、電吉他、弦樂、薩克斯風、合成器、鼓組、貝斯、長笛、烏克麗麗</p>
         </div>
         <div class="card">
           <div class="icon">&#127911;</div>
           <h3>D - Dynamic 動態</h3>
-          <p><strong>4 種選項：</strong>保守（0.5）、適中（1.0）、大膽（1.5）、瘋狂（2.5）</p>
+          <p><strong>4 種選項：</strong>保守（0.5）、適中（1.0）、大膽（1.5）、極端（2.0）。新手建議選「適中」。</p>
         </div>
         <div class="card">
           <div class="icon">&#127926;</div>
           <h3>S - Style 風格</h3>
-          <p><strong>10 種選項：</strong>流行、搖滾、爵士、EDM、古典、Lo-fi、嘻哈、R&amp;B、民謠、環境音樂</p>
+          <p><strong>10 種選項：</strong>流行、搖滾、爵士、EDM、古典、Lo-fi、嘻哈、R&amp;B、民謠、環境音樂（附建議 BPM 與情緒搭配）</p>
         </div>
         <div class="card">
           <div class="icon">&#9201;</div>
           <h3>T - Tempo 節奏</h3>
           <p><strong>7 種預設 + 自訂：</strong>60/75/90/110/120/140/170 BPM，或自訂 60-200 之間</p>
         </div>
+      </div>
+
+      <div class="box warning">
+        &#9888;&#65039; <strong>關於人聲：</strong>Lyria RealTime API 目前僅支援純器樂生成。人聲演唱功能僅在 Gemini App 的 Lyria 3 對話介面中可使用，尚未開放給 API。程式中提供「人聲功能說明」選項可查看詳細對照。
       </div>
     </div>
   </div>
@@ -621,7 +632,6 @@ li { margin-bottom: 4px; }
         </thead>
         <tbody>
           <tr><td><strong>Style 風格</strong></td><td><code>1.0</code></td><td>最重要，決定音樂的整體方向</td></tr>
-          <tr><td><strong>Vocal 人聲</strong></td><td><code>0.9</code></td><td>有無人聲影響很大，給予高權重</td></tr>
           <tr><td><strong>Mood 情緒</strong></td><td><code>0.8</code></td><td>情緒氛圍是次要核心</td></tr>
           <tr><td><strong>Instrument 樂器</strong></td><td><code>0.6</code></td><td>輔助角色，微調音色搭配</td></tr>
         </tbody>
@@ -758,42 +768,52 @@ li { margin-bottom: 4px; }
   <div class="slide" data-index="8">
     <div class="content-card">
       <h2>完整執行流程展示</h2>
-      <p>以下是程式從選單到生成完成的完整互動過程：</p>
+      <p>以下是程式從主選單到生成完成的完整互動過程：</p>
 <pre>*********************************************
 *                                           *
 *     Gemini Lyria RealTime 音樂生成器      *
 *     依照 MIDST 公式，一步步設定你的音樂   *
 *                                           *
+*     作者：曾慶良（阿亮老師）              *
+*     © 2026 僅供課程學員學習使用           *
+*                                           *
 *********************************************
 
-==================================================
-  M -- Mood 情緒：你想要什麼感覺？
-==================================================
-  [ 1] Happy 歡樂
-  [ 2] Sad 憂傷
-  [ 3] Relaxed 放鬆
-  [ 4] Energetic 激昂
-  ...
-  請輸入編號：3
+  注意：RealTime API 僅支援純器樂生成。
 
-==================================================
-  I -- Instrument 樂器：用什麼樂器？
-==================================================
-  (可多選，用逗號分隔，例如：1,3,5)
-  請輸入編號：1,5
+==========================================================
+  請選擇模式
+==========================================================
+  [1] 推薦組合（快速模式，適合新手）
+  [2] 自訂設定（MIDST 公式，進階玩家）
+  [3] 人聲功能說明
+  [4] 關於作者 / 版權聲明
+==========================================================
 
-==================================================
-  你的音樂設定總覽
-==================================================
-  M 情緒：Relaxed 放鬆
-  I 樂器：Piano 鋼琴, Saxophone 薩克斯風
-  D 動態：創意程度 1.0
-  S 風格：Jazz 爵士
-  T 節奏：90 BPM
-  長  度：30 秒
-==================================================
+  請輸入編號：1
 
-  確認以上設定，開始生成？(y/n)：y
+==========================================================
+  推薦組合（選一個直接生成，適合新手）
+==========================================================
+  [1] 咖啡廳 Lo-fi    — 放鬆的低保真音樂，適合讀書、工作
+  [2] 歡樂流行曲      — 開朗愉快的流行風格，適合日常背景
+  [3] 史詩電影配樂    — 壯闘的管弦樂，適合影片、簡報開場
+  [4] 深夜爵士        — 慵懶的爵士風情，適合夜晚放鬆
+  [5] 派對電子舞曲    — 高能量 EDM，適合運動、派對
+  [6] 浪漫民謠        — 溫暖柔和的民謠吉他，適合旅遊 Vlog
+==========================================================
+
+  請輸入編號：4
+
+==========================================================
+  已選擇：深夜爵士
+==========================================================
+  風格：jazz / 情緒：relaxed calm peaceful
+  樂器：piano, saxophone, bass
+  BPM：90 / 創意程度：1.0 / 長度：30 秒
+==========================================================
+
+  確認開始生成？(y/n)：y
   正在連接 Lyria RealTime...
   開始生成音樂，請稍候...
   生成進度：#################### 100%
